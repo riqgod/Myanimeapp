@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0FFFFFFF"
+    android:textAlignment="center"
+    tools:context=".ui.main.PlaceholderFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/watchlist_feed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/watching_message_rect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_message_rectangle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.492"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/watching_message_rect_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Watching"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/watching_message_rect"
+                    app:layout_constraintEnd_toEndOf="@+id/watching_message_rect"
+                    app:layout_constraintStart_toStartOf="@+id/watching_message_rect"
+                    app:layout_constraintTop_toTopOf="@+id/watching_message_rect" />
+
+                <TableLayout
+                    android:id="@+id/watching_table"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/watching_message_rect">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp">
+
+                        <ImageView
+                            android:id="@+id/imageView24"
+                            android:layout_width="120dp"
+                            android:layout_height="196dp"
+                            android:layout_marginRight="15dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@tools:sample/avatars" />
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="120dp"
+                            android:layout_height="196dp"
+                            android:layout_marginRight="15dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@tools:sample/avatars" />
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="120dp"
+                            android:layout_height="196dp"
+                            android:layout_marginRight="15dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@tools:sample/avatars" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+                <ImageView
+                    android:id="@+id/unwatched_message_rect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_message_rectangle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/watching_table" />
+
+                <TextView
+                    android:id="@+id/unwatched_message_rect_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unwatched"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/unwatched_message_rect"
+                    app:layout_constraintEnd_toEndOf="@+id/unwatched_message_rect"
+                    app:layout_constraintStart_toStartOf="@+id/unwatched_message_rect"
+                    app:layout_constraintTop_toTopOf="@+id/unwatched_message_rect" />
+
+                <TableLayout
+                    android:id="@+id/unwatched_table"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/unwatched_message_rect">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp">
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="120dp"
+                            android:layout_height="196dp"
+                            android:layout_marginRight="15dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@tools:sample/avatars" />
+
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_width="120dp"
+                            android:layout_height="196dp"
+                            android:layout_marginRight="15dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@tools:sample/avatars" />
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="120dp"
+                            android:layout_height="196dp"
+                            android:layout_marginRight="15dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@tools:sample/avatars" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <ImageView
+                    android:id="@+id/finished_message_rect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_message_rectangle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/unwatched_table" />
+
+                <TextView
+                    android:id="@+id/finished_message_rect_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Finished"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    app:layout_constraintBottom_toBottomOf="@+id/finished_message_rect"
+                    app:layout_constraintEnd_toEndOf="@+id/finished_message_rect"
+                    app:layout_constraintStart_toStartOf="@+id/finished_message_rect"
+                    app:layout_constraintTop_toTopOf="@+id/finished_message_rect" />
+
+                <TableLayout
+                    android:id="@+id/1unwatched_table"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/finished_message_rect">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp">
+
+                        <ImageView
+                            android:id="@+id/imageView6"
+                            android:layout_width="120dp"
+                            android:layout_height="196dp"
+                            android:layout_marginRight="15dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@tools:sample/avatars" />
+
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="120dp"
+                            android:layout_height="196dp"
+                            android:layout_marginRight="15dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@tools:sample/avatars" />
+
+                        <ImageView
+                            android:id="@+id/imageView8"
+                            android:layout_width="120dp"
+                            android:layout_height="196dp"
+                            android:layout_marginRight="15dp"
+                            android:scaleType="centerCrop"
+                            tools:src="@tools:sample/avatars" />
+
+                        <ImageView
+                            android:id="@+id/imageView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_rectangleend" />
+                    </TableRow>
+
+                </TableLayout>
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/watching"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="watching_message_rect_text,watching_table,watching_message_rect" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/unwatched"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="unwatched_table,unwatched_message_rect_text,unwatched_message_rect" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/finished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="finished_message_rect_text,finished_message_rect,1unwatched_table" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_rectangleend"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/watchlist_feed" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/border_button"
+                android:src="@drawable/border_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+            <TextView
+                android:id="@+id/button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DISCOVER ANIMES"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageButton"
+                app:layout_constraintStart_toStartOf="@+id/imageButton"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

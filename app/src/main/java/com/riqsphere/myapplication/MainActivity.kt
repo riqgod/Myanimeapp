@@ -1,5 +1,7 @@
 package com.riqsphere.myapplication
 
+import android.graphics.drawable.Drawable
+import android.media.Image
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -26,20 +28,8 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = this.findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
-        val fab: FloatingActionButton = findViewById(R.id.fab)
 
-        fab.setOnClickListener { view ->
-            val anise = AnimeSearch()
-            anise.setQuery("lain")
-            val futureAni = anise.first
-            Snackbar.make(view, "HELLO", Snackbar.LENGTH_LONG).setAction("Action", null).show()
-            Thread(Runnable {
-                val lain = futureAni.get()
-                val themes = lain.opening_themes.joinToString()
-                this@MainActivity.runOnUiThread {
-                    Snackbar.make(view, themes, Snackbar.LENGTH_LONG).setAction("Action", null).show()
-                }
-            }).start()
-        }
     }
+
+
 }
