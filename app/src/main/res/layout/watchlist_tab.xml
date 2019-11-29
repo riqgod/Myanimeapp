@@ -23,8 +23,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/emptyListText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="140dp"
+                android:text="Empty List."
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/endLine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_rectangleend"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/watchlist_feed_constraint"
+                app:layout_goneMarginTop="300dp" />
+
+            <ImageButton
+                android:id="@+id/discover_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/border_button"
+                android:src="@drawable/border_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/endLine" />
+
+            <TextView
+                android:id="@+id/discover_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DISCOVER ANIMES"
+                app:layout_constraintBottom_toBottomOf="@+id/discover_button"
+                app:layout_constraintEnd_toEndOf="@+id/discover_button"
+                app:layout_constraintHorizontal_bias="0.48"
+                app:layout_constraintStart_toStartOf="@+id/discover_button"
+                app:layout_constraintTop_toTopOf="@+id/discover_button" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/watchlist_feed"
+                android:id="@+id/watchlist_feed_constraint"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -35,12 +81,12 @@
                     android:id="@+id/watching_message_rect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/ic_message_rectangle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.492"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_goneMarginTop="10dp" />
 
                 <TextView
                     android:id="@+id/watching_message_rect_text"
@@ -75,6 +121,7 @@
                             android:layout_width="120dp"
                             android:layout_height="196dp"
                             android:layout_marginRight="15dp"
+                            android:foreground="@drawable/gradient_effect"
                             android:scaleType="centerCrop"
                             tools:src="@tools:sample/avatars" />
 
@@ -83,6 +130,7 @@
                             android:layout_width="120dp"
                             android:layout_height="196dp"
                             android:layout_marginRight="15dp"
+                            android:foreground="@drawable/gradient_effect"
                             android:scaleType="centerCrop"
                             tools:src="@tools:sample/avatars" />
 
@@ -91,6 +139,7 @@
                             android:layout_width="120dp"
                             android:layout_height="196dp"
                             android:layout_marginRight="15dp"
+                            android:foreground="@drawable/gradient_effect"
                             android:scaleType="centerCrop"
                             tools:src="@tools:sample/avatars" />
 
@@ -102,11 +151,11 @@
                     android:id="@+id/unwatched_message_rect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:src="@drawable/ic_message_rectangle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/watching_table" />
+                    app:layout_constraintTop_toBottomOf="@+id/watching_table"
+                    app:layout_goneMarginTop="10dp" />
 
                 <TextView
                     android:id="@+id/unwatched_message_rect_text"
@@ -141,6 +190,7 @@
                             android:layout_width="120dp"
                             android:layout_height="196dp"
                             android:layout_marginRight="15dp"
+                            android:foreground="@drawable/gradient_effect"
                             android:scaleType="centerCrop"
                             tools:src="@tools:sample/avatars" />
 
@@ -149,6 +199,7 @@
                             android:layout_width="120dp"
                             android:layout_height="196dp"
                             android:layout_marginRight="15dp"
+                            android:foreground="@drawable/gradient_effect"
                             android:scaleType="centerCrop"
                             tools:src="@tools:sample/avatars" />
 
@@ -157,6 +208,7 @@
                             android:layout_width="120dp"
                             android:layout_height="196dp"
                             android:layout_marginRight="15dp"
+                            android:foreground="@drawable/gradient_effect"
                             android:scaleType="centerCrop"
                             tools:src="@tools:sample/avatars" />
                     </TableRow>
@@ -167,11 +219,11 @@
                     android:id="@+id/finished_message_rect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:src="@drawable/ic_message_rectangle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/unwatched_table" />
+                    app:layout_constraintTop_toBottomOf="@id/unwatched_table"
+                    app:layout_goneMarginTop="10dp" />
 
                 <TextView
                     android:id="@+id/finished_message_rect_text"
@@ -186,7 +238,7 @@
                     app:layout_constraintTop_toTopOf="@+id/finished_message_rect" />
 
                 <TableLayout
-                    android:id="@+id/1unwatched_table"
+                    android:id="@+id/finished_table"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -206,6 +258,7 @@
                             android:layout_width="120dp"
                             android:layout_height="196dp"
                             android:layout_marginRight="15dp"
+                            android:foreground="@drawable/gradient_effect"
                             android:scaleType="centerCrop"
                             tools:src="@tools:sample/avatars" />
 
@@ -214,6 +267,7 @@
                             android:layout_width="120dp"
                             android:layout_height="196dp"
                             android:layout_marginRight="15dp"
+                            android:foreground="@drawable/gradient_effect"
                             android:scaleType="centerCrop"
                             tools:src="@tools:sample/avatars" />
 
@@ -222,6 +276,7 @@
                             android:layout_width="120dp"
                             android:layout_height="196dp"
                             android:layout_marginRight="15dp"
+                            android:foreground="@drawable/gradient_effect"
                             android:scaleType="centerCrop"
                             tools:src="@tools:sample/avatars" />
 
@@ -238,55 +293,39 @@
                     android:id="@+id/watching"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:constraint_referenced_ids="watching_message_rect_text,watching_table,watching_message_rect" />
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="watching_message_rect_text,watching_table,watching_message_rect"
+                    tools:visibility="visible" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/unwatched"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="unwatched_table,unwatched_message_rect_text,unwatched_message_rect" />
+                    app:constraint_referenced_ids="unwatched_table,unwatched_message_rect_text,unwatched_message_rect"
+                    tools:visibility="gone" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/finished"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="finished_message_rect_text,finished_message_rect,1unwatched_table" />
+                    app:constraint_referenced_ids="finished_message_rect_text,finished_message_rect,finished_table"
+                    tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/imageView10"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/ic_rectangleend"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/watchlist_feed" />
-
-            <ImageButton
-                android:id="@+id/imageButton"
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/watchlist_feed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/border_button"
-                android:src="@drawable/border_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                app:constraint_referenced_ids="watchlist_feed_constraint"
+                tools:visibility="visible" />
 
-            <TextView
-                android:id="@+id/button_text"
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/emptyList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DISCOVER ANIMES"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton"
-                app:layout_constraintStart_toStartOf="@+id/imageButton"
-                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+                app:constraint_referenced_ids="emptyListText"
+                tools:visibility="gone" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
