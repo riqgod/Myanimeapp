@@ -116,32 +116,89 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp">
 
-                        <ImageView
-                            android:id="@+id/imageView24"
-                            android:layout_width="120dp"
-                            android:layout_height="196dp"
-                            android:layout_marginRight="15dp"
-                            android:foreground="@drawable/gradient_effect"
-                            android:scaleType="centerCrop"
-                            tools:src="@tools:sample/avatars" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp">
 
-                        <ImageView
-                            android:id="@+id/imageView"
-                            android:layout_width="120dp"
-                            android:layout_height="196dp"
-                            android:layout_marginRight="15dp"
-                            android:foreground="@drawable/gradient_effect"
-                            android:scaleType="centerCrop"
-                            tools:src="@tools:sample/avatars" />
+                            <ImageView
+                                android:id="@+id/imageView"
+                                android:layout_width="120dp"
+                                android:layout_height="196dp"
+                                android:foreground="@drawable/gradient_effect"
+                                android:scaleType="centerCrop"
+                                tools:src="@tools:sample/avatars" />
 
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            android:layout_width="120dp"
-                            android:layout_height="196dp"
-                            android:layout_marginRight="15dp"
-                            android:foreground="@drawable/gradient_effect"
-                            android:scaleType="centerCrop"
-                            tools:src="@tools:sample/avatars" />
+                            <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left|bottom"
+                                android:layout_marginRight="10dp"
+                                android:maxWidth="110dp"
+                                android:paddingLeft="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Boku no hero 4th season"
+                                android:textAlignment="viewStart"
+                                android:textColor="#ffffff"
+                                android:textDirection="firstStrongRtl" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageView24"
+                                android:layout_width="120dp"
+                                android:layout_height="196dp"
+                                android:foreground="@drawable/gradient_effect"
+                                android:scaleType="centerCrop"
+                                tools:src="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left|bottom"
+                                android:layout_marginRight="10dp"
+                                android:maxWidth="110dp"
+                                android:paddingLeft="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Boku no hero 4th season"
+                                android:textAlignment="viewStart"
+                                android:textColor="#ffffff"
+                                android:textDirection="firstStrongRtl" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="120dp"
+                                android:layout_height="196dp"
+                                android:foreground="@drawable/gradient_effect"
+                                android:scaleType="centerCrop"
+                                tools:src="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/textView6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left|bottom"
+                                android:layout_marginRight="10dp"
+                                android:maxWidth="110dp"
+                                android:paddingLeft="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Boku no hero 4th season"
+                                android:textAlignment="viewStart"
+                                android:textColor="#ffffff"
+                                android:textDirection="firstStrongRtl" />
+                        </FrameLayout>
 
                     </TableRow>
 
@@ -185,32 +242,90 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp">
 
-                        <ImageView
-                            android:id="@+id/imageView3"
-                            android:layout_width="120dp"
-                            android:layout_height="196dp"
-                            android:layout_marginRight="15dp"
-                            android:foreground="@drawable/gradient_effect"
-                            android:scaleType="centerCrop"
-                            tools:src="@tools:sample/avatars" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp">
 
-                        <ImageView
-                            android:id="@+id/imageView4"
-                            android:layout_width="120dp"
-                            android:layout_height="196dp"
-                            android:layout_marginRight="15dp"
-                            android:foreground="@drawable/gradient_effect"
-                            android:scaleType="centerCrop"
-                            tools:src="@tools:sample/avatars" />
+                            <ImageView
+                                android:id="@+id/imageView3"
+                                android:layout_width="120dp"
+                                android:layout_height="196dp"
+                                android:foreground="@drawable/gradient_effect"
+                                android:scaleType="centerCrop"
+                                tools:src="@tools:sample/avatars" />
 
-                        <ImageView
-                            android:id="@+id/imageView5"
-                            android:layout_width="120dp"
-                            android:layout_height="196dp"
-                            android:layout_marginRight="15dp"
-                            android:foreground="@drawable/gradient_effect"
-                            android:scaleType="centerCrop"
-                            tools:src="@tools:sample/avatars" />
+                            <TextView
+                                android:id="@+id/textView7"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left|bottom"
+                                android:layout_marginRight="10dp"
+                                android:maxWidth="110dp"
+                                android:paddingLeft="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Boku no hero 4th season"
+                                android:textAlignment="viewStart"
+                                android:textColor="#ffffff"
+                                android:textDirection="firstStrongRtl" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageView4"
+                                android:layout_width="120dp"
+                                android:layout_height="196dp"
+                                android:foreground="@drawable/gradient_effect"
+                                android:scaleType="centerCrop"
+                                tools:src="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/textView8"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left|bottom"
+                                android:layout_marginRight="10dp"
+                                android:maxWidth="110dp"
+                                android:paddingLeft="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Boku no hero 4th season"
+                                android:textAlignment="viewStart"
+                                android:textColor="#ffffff"
+                                android:textDirection="firstStrongRtl" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageView5"
+                                android:layout_width="120dp"
+                                android:layout_height="196dp"
+                                android:foreground="@drawable/gradient_effect"
+                                android:scaleType="centerCrop"
+                                tools:src="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/textView9"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left|bottom"
+                                android:layout_marginRight="10dp"
+                                android:maxWidth="110dp"
+                                android:paddingLeft="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Boku no hero 4th season"
+                                android:textAlignment="viewStart"
+                                android:textColor="#ffffff"
+                                android:textDirection="firstStrongRtl" />
+                        </FrameLayout>
+
                     </TableRow>
 
                 </TableLayout>
@@ -253,38 +368,90 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp">
 
-                        <ImageView
-                            android:id="@+id/imageView6"
-                            android:layout_width="120dp"
-                            android:layout_height="196dp"
-                            android:layout_marginRight="15dp"
-                            android:foreground="@drawable/gradient_effect"
-                            android:scaleType="centerCrop"
-                            tools:src="@tools:sample/avatars" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp">
 
-                        <ImageView
-                            android:id="@+id/imageView7"
-                            android:layout_width="120dp"
-                            android:layout_height="196dp"
-                            android:layout_marginRight="15dp"
-                            android:foreground="@drawable/gradient_effect"
-                            android:scaleType="centerCrop"
-                            tools:src="@tools:sample/avatars" />
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="120dp"
+                                android:layout_height="196dp"
+                                android:foreground="@drawable/gradient_effect"
+                                android:scaleType="centerCrop"
+                                tools:src="@tools:sample/avatars" />
 
-                        <ImageView
-                            android:id="@+id/imageView8"
-                            android:layout_width="120dp"
-                            android:layout_height="196dp"
-                            android:layout_marginRight="15dp"
-                            android:foreground="@drawable/gradient_effect"
-                            android:scaleType="centerCrop"
-                            tools:src="@tools:sample/avatars" />
+                            <TextView
+                                android:id="@+id/textView10"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left|bottom"
+                                android:layout_marginRight="10dp"
+                                android:maxWidth="110dp"
+                                android:paddingLeft="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Boku no hero 4th season"
+                                android:textAlignment="viewStart"
+                                android:textColor="#ffffff"
+                                android:textDirection="firstStrongRtl" />
+                        </FrameLayout>
 
-                        <ImageView
-                            android:id="@+id/imageView9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_rectangleend" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageView10"
+                                android:layout_width="120dp"
+                                android:layout_height="196dp"
+                                android:foreground="@drawable/gradient_effect"
+                                android:scaleType="centerCrop"
+                                tools:src="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/textView11"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left|bottom"
+                                android:layout_marginRight="10dp"
+                                android:maxWidth="110dp"
+                                android:paddingLeft="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Boku no hero 4th season"
+                                android:textAlignment="viewStart"
+                                android:textColor="#ffffff"
+                                android:textDirection="firstStrongRtl" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageView11"
+                                android:layout_width="120dp"
+                                android:layout_height="196dp"
+                                android:foreground="@drawable/gradient_effect"
+                                android:scaleType="centerCrop"
+                                tools:src="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/textView12"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left|bottom"
+                                android:layout_marginRight="10dp"
+                                android:maxWidth="110dp"
+                                android:paddingLeft="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Boku no hero 4th season"
+                                android:textAlignment="viewStart"
+                                android:textColor="#ffffff"
+                                android:textDirection="firstStrongRtl" />
+                        </FrameLayout>
+
                     </TableRow>
 
                 </TableLayout>
