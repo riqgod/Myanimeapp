@@ -12,7 +12,6 @@ android {
         minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
     }
     buildTypes {
         release {
@@ -36,6 +35,14 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'com.github.Doomsdayrs:Jikan4java:v1.3.1'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
+    implementation 'androidx.room:room-runtime:2.2.2'
+    annotationProcessor 'androidx.room:room-compiler:2.2.2'
+
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+    annotationProcessor 'androidx.lifecycle:lifecycle-common-java8:2.1.0'
+
+    implementation "com.google.code.gson:gson:2.8.5"
 }
 
 configurations {
