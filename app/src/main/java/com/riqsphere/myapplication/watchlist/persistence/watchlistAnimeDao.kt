@@ -14,6 +14,12 @@ interface watchlistAnimeDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(watchlistAnime: watchlistAnime)
 
+    @Query("update watchlist_anime set episodesWatched = :eps where id = :id")
+    suspend fun updateEpisodes(eps: Array<Int>, id: Int)
+
+    @Query("select episodesWatched from watchlist_anime where id = :id")
+    suspend fun episodesWatched(id: Int): Array<Int>
+
     @Query("delete from watchlist_anime")
     suspend fun deleteAll()
 }

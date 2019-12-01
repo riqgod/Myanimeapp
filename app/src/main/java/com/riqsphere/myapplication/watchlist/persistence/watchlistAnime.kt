@@ -18,7 +18,8 @@ data class watchlistAnime (
     val title_english: String,
     val title_japanese: String,
     val episodes: Int,
-    val episodesWatched: Array<Int>
+    val episodesWatched: Array<Int>,
+    val imageURL: String
 ){
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -45,7 +46,7 @@ data class watchlistAnime (
         return result
     }
 
-    constructor(anime: Anime) : this(anime.mal_id, anime.title, anime.title_english, anime.title_japanese, anime.episodes, arrayOf())
+    constructor(anime: Anime) : this(anime.mal_id, anime.title, anime.title_english, anime.title_japanese, anime.episodes, arrayOf(), anime.imageURL)
 
     //TODO: this is a really dirty hack, find a better way to do this
     fun toAnime() : CompletableFuture<Anime> {

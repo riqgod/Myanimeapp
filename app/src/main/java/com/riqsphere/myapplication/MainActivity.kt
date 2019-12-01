@@ -13,6 +13,7 @@ import android.view.MenuItem
 import androidx.annotation.MainThread
 import com.github.doomsdayrs.jikan4java.core.search.animemanga.AnimeSearch
 import com.github.doomsdayrs.jikan4java.enums.search.animemanga.orderby.AnimeOrderBy
+import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.riqsphere.myapplication.ui.main.SectionsPagerAdapter
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
