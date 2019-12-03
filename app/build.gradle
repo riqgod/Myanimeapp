@@ -45,6 +45,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
 
     implementation "com.google.code.gson:gson:2.8.5"
+
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }
 
 configurations {
