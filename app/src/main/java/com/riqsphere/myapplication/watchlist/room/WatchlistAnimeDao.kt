@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.watchlist.persistence
+package com.riqsphere.myapplication.watchlist.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -7,12 +7,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface watchlistAnimeDao {
+interface WatchlistAnimeDao {
     @Query("select * from watchlist_anime")
-    fun getUnorderedWatchlistAnimes(): LiveData<List<watchlistAnime>>
+    fun getUnorderedWatchlistAnime(): LiveData<List<WatchlistAnime>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(watchlistAnime: watchlistAnime)
+    suspend fun insert(watchlistAnime: WatchlistAnime)
 
     @Query("update watchlist_anime set episodesWatched = :eps where id = :id")
     suspend fun updateEpisodes(eps: Array<Int>, id: Int)

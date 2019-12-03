@@ -1,11 +1,11 @@
-package com.riqsphere.myapplication.watchlist.persistence
+package com.riqsphere.myapplication.watchlist.room
 
 import androidx.lifecycle.LiveData
 
-class watchlistAnimeRepository(private val watchlistAnimeDao: watchlistAnimeDao){
-    val allwatchlistAnimes: LiveData<List<watchlistAnime>> = watchlistAnimeDao.getUnorderedWatchlistAnimes()
+class WatchlistAnimeRepository(private val watchlistAnimeDao: WatchlistAnimeDao){
+    val allWatchlistAnime: LiveData<List<WatchlistAnime>> = watchlistAnimeDao.getUnorderedWatchlistAnime()
 
-    suspend fun insertWatchlistAnime(watchlistAnime: watchlistAnime) {
+    suspend fun insert(watchlistAnime: WatchlistAnime) {
         watchlistAnimeDao.insert(watchlistAnime)
     }
 

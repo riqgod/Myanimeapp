@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.watchlist.persistence
+package com.riqsphere.myapplication.watchlist.room
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,21 +11,20 @@ import java.util.concurrent.CompletableFuture
 
 @Entity(tableName = "watchlist_anime")
 @TypeConverters(EpisodeConverter::class)
-data class watchlistAnime (
+data class WatchlistAnime (
     @PrimaryKey
     var id: Int,
     val title: String,
     val title_english: String,
     val title_japanese: String,
     val episodes: Int,
-    val episodesWatched: Array<Int>,
-    val imageURL: String
+    val episodesWatched: Array<Int>
 ){
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as watchlistAnime
+        other as WatchlistAnime
 
         if (id != other.id) return false
         if (title != other.title) return false
@@ -46,7 +45,7 @@ data class watchlistAnime (
         return result
     }
 
-    constructor(anime: Anime) : this(anime.mal_id, anime.title, anime.title_english, anime.title_japanese, anime.episodes, arrayOf(), anime.imageURL)
+    constructor(anime: Anime) : this(anime.mal_id, anime.title, anime.title_english, anime.title_japanese, anime.episodes, arrayOf())
 
     //TODO: this is a really dirty hack, find a better way to do this
     fun toAnime() : CompletableFuture<Anime> {
