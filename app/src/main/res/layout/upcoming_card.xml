@@ -24,7 +24,7 @@
 
             <com.makeramen.roundedimageview.RoundedImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/up_image"
+                android:id="@+id/uc_image"
                 android:layout_width="0dp"
                 android:layout_height="128dp"
                 android:scaleType="centerCrop"
@@ -59,7 +59,7 @@
                 android:textColor="#ffffff"
                 android:textSize="14dp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/up_image"
+                app:layout_constraintStart_toEndOf="@+id/uc_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -80,9 +80,9 @@
                 android:layout_marginBottom="40dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="S04 | E06"
-                android:textSize="20"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/up_image" />
+                app:layout_constraintStart_toEndOf="@+id/uc_image" />
 
             <TextView
                 android:id="@+id/uc_ep_tittle"
@@ -92,7 +92,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="An Unpleasant Talk"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/up_image" />
+                app:layout_constraintStart_toEndOf="@+id/uc_image" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
