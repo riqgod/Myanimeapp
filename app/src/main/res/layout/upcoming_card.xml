@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:cardCornerRadius="4dp"
-        app:cardPreventCornerOverlap="true"
         app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,31 +21,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.makeramen.roundedimageview.RoundedImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/uc_image"
                 android:layout_width="0dp"
                 android:layout_height="128dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/a102113"
-                app:riv_corner_radius="4dip"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:riv_corner_radius="4dip" />
 
             <ImageView
                 android:id="@+id/uc_image_tittle"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="-50dp"
-                app:layout_constraintBottom_toBottomOf="@+id/up_anime_tittle"
-                app:layout_constraintEnd_toEndOf="@+id/up_anime_tittle"
-                app:layout_constraintStart_toStartOf="@+id/up_anime_tittle"
-                app:layout_constraintTop_toTopOf="@+id/up_anime_tittle"
+                app:layout_constraintBottom_toBottomOf="@+id/uc_anime_tittle"
+                app:layout_constraintEnd_toEndOf="@+id/uc_anime_tittle"
+                app:layout_constraintStart_toStartOf="@+id/uc_anime_tittle"
+                app:layout_constraintTop_toTopOf="@+id/uc_anime_tittle"
                 app:srcCompat="@drawable/tittle_upcoming_anime_shape" />
 
             <TextView
-                android:id="@+id/up_anime_tittle"
+                android:id="@+id/uc_anime_tittle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -63,7 +61,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/up_time"
+                android:id="@+id/uc_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -73,7 +71,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/up_ep_num"
+                android:id="@+id/uc_ep_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

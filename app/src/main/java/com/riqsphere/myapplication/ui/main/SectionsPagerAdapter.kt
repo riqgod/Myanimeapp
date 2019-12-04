@@ -1,6 +1,7 @@
 package com.riqsphere.myapplication.ui.main
 
 import android.content.Context
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -20,9 +21,17 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
 
 
     override fun getItem(position: Int): Fragment {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1)
+        var fragment:Fragment? = null
+
+        if(position == 0){
+            fragment = WatchlistFragment()
+            Log.d("debugg","position 0")
+        }else{
+            fragment = UpcomingFragment()
+            Log.d("debugg","position 1")
+        }
+
+        return fragment;
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
@@ -31,6 +40,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
 
     override fun getCount(): Int {
         // Show 2 total pages.
+        Log.d("debugg","total 2")
         return 2
     }
 

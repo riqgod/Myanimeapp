@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#0FFFFFFF"
     android:textAlignment="center"
-    tools:context=".ui.main.PlaceholderFragment">
+    >
 
     <ScrollView
         android:layout_width="match_parent"

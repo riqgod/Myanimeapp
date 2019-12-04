@@ -11,10 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.MainThread
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.doomsdayrs.jikan4java.core.search.animemanga.AnimeSearch
 import com.github.doomsdayrs.jikan4java.enums.search.animemanga.orderby.AnimeOrderBy
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.riqsphere.myapplication.ui.main.SectionsPagerAdapter
+import com.riqsphere.myapplication.upcoming.UpcomingAdapter
+import com.riqsphere.myapplication.upcoming.UpcomingModel
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
@@ -31,6 +35,5 @@ class MainActivity : AppCompatActivity() {
         tabs.setupWithViewPager(viewPager)
 
     }
-
 
 }

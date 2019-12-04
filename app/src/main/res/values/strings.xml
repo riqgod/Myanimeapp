@@ -2,4 +2,7 @@
     <string name="app_name">My Application</string>
     <string name="tab_text_1">WATCH LIST</string>
     <string name="tab_text_2">UPCOMING</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
