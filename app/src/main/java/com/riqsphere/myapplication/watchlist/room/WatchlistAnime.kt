@@ -4,10 +4,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
+import com.github.doomsdayrs.jikan4java.core.Connector
+import com.github.doomsdayrs.jikan4java.core.Retriever
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.github.doomsdayrs.jikan4java.types.main.anime.animePage.AnimePageAnime
 import com.google.gson.Gson
 import java.util.concurrent.CompletableFuture
+import java.util.concurrent.TimeUnit
 
 @Entity(tableName = "watchlist_anime")
 data class WatchlistAnime(
@@ -18,7 +21,7 @@ data class WatchlistAnime(
     val title_japanese: String,
     val imgURL: String,
     val episodes: Int,
-    val episodesOut: Int,
+    var episodesOut: Int,
     val broadcast: String
 ){
     constructor() : this(0, "", "", "", "", 0, 0, "")
@@ -30,14 +33,33 @@ data class WatchlistAnime(
         title_japanese = anime.title_japanese,
         imgURL = anime.imageURL,
         episodes = anime.episodes,
-        episodesOut = anime.episode.get().episodes.size,
+        episodesOut = 0,
         broadcast = anime.broadcast
-    )
+    ) {
+        episodesOut = updatedEpsOut(anime)
+    }
 
-    //TODO: this is a really dirty hack, find a better way to do this
-    fun toAnime() : CompletableFuture<Anime> {
-        val apa = AnimePageAnime()
-        apa.mal_id = id
-        return apa.anime
+    fun updatedEpsOut(anime: Anime): Int {
+        return if (anime.mal_id != id) {
+            -1
+        } else {
+            var eps = anime.getEpisodes().get()
+            val lastPage = eps.episodes_last_page
+            if (lastPage != 1) {
+                eps = anime.getEpisodes(lastPage).get()
+                val previousPagesCount = (lastPage - 1) * 100
+                eps.episodes.size + previousPagesCount
+            } else {
+                eps.episodes.size
+            }
+        }
+    }
+
+    fun updatedEpsOut() = updatedEpsOut(toAnime().get())
+
+    fun toAnime() = connector.retrieveAnime(id)
+
+    companion object {
+        private val connector = Connector()
     }
 }
