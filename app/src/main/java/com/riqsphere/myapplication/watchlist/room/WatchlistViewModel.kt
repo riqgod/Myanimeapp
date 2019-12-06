@@ -27,7 +27,7 @@ class WatchlistViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun updateEpisodesOut(anime: Anime) = viewModelScope.launch {
-        val eps = anime.episode.get().episodes.size
+        val eps = anime.getEpisodes().get().episodes.size
     }
 
     fun deleteAll() = viewModelScope.launch {
