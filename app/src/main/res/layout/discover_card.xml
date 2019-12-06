@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="4dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/dc_image"
+                android:layout_width="175dp"
+                android:layout_height="250dp"
+                android:foreground="@drawable/gradient_effect_corner"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src ="@drawable/a102113"
+                app:riv_corner_radius="4dip"/>
+
+
+            <ImageView
+                android:id="@+id/dc_rectangle_score"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/dc_score"
+                app:layout_constraintEnd_toEndOf="@+id/dc_score"
+                app:layout_constraintStart_toStartOf="@+id/dc_score"
+                app:layout_constraintTop_toTopOf="@+id/dc_score"
+                app:srcCompat="@drawable/rectangle_score" />
+
+            <ImageView
+                android:id="@+id/dc_star"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/dc_rectangle_score"
+                app:layout_constraintStart_toStartOf="@+id/dc_rectangle_score"
+                app:layout_constraintTop_toTopOf="@+id/dc_rectangle_score"
+                app:srcCompat="@drawable/ic_star_1" />
+
+            <ImageView
+                android:id="@+id/dc_add_to_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dc_rectangle_score"
+                app:srcCompat="@drawable/ic_add_to_list" />
+
+            <TextView
+                android:id="@+id/dc_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:paddingLeft="24dp"
+                android:paddingEnd="10dp"
+                android:text="8,00"
+                android:textColor="#ffffff"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dc_anime_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Boku no Hero Academia 4th Season"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="8dp"
+                android:maxLines="2"
+                android:paddingLeft="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
