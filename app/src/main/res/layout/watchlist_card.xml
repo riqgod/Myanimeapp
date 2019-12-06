@@ -21,6 +21,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/wl_image"
                 android:layout_width="120dp"
                 android:layout_height="190dp"
                 android:foreground="@drawable/gradient_effect"
@@ -30,7 +31,7 @@
                 app:srcCompat="@drawable/a102113"></ImageView>
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/wl_anime_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -45,7 +46,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ProgressBar
-                android:id="@+id/progressBar7"
+                android:id="@+id/wl_progress_bar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
                 android:layout_height="6dp"
