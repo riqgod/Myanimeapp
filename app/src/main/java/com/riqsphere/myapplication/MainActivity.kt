@@ -17,8 +17,10 @@ import com.github.doomsdayrs.jikan4java.core.search.animemanga.AnimeSearch
 import com.github.doomsdayrs.jikan4java.enums.search.animemanga.orderby.AnimeOrderBy
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.riqsphere.myapplication.ui.main.SectionsPagerAdapter
+import com.riqsphere.myapplication.ui.main.WatchlistFragment
 import com.riqsphere.myapplication.upcoming.UpcomingAdapter
 import com.riqsphere.myapplication.upcoming.UpcomingModel
+import com.riqsphere.myapplication.watchlist.room.WatchlistViewModel
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
@@ -36,4 +38,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun setWatchlistViewModel () {
+        watchlistViewModel = WatchlistViewModel(this.application)
+    }
+
+    companion object {
+        var watchlistViewModel: WatchlistViewModel? = null
+    }
 }

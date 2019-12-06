@@ -37,14 +37,14 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="-50dp"
-                app:layout_constraintBottom_toBottomOf="@+id/uc_anime_tittle"
-                app:layout_constraintEnd_toEndOf="@+id/uc_anime_tittle"
-                app:layout_constraintStart_toStartOf="@+id/uc_anime_tittle"
-                app:layout_constraintTop_toTopOf="@+id/uc_anime_tittle"
+                app:layout_constraintBottom_toBottomOf="@+id/uc_anime_title"
+                app:layout_constraintEnd_toEndOf="@+id/uc_anime_title"
+                app:layout_constraintStart_toStartOf="@+id/uc_anime_title"
+                app:layout_constraintTop_toTopOf="@+id/uc_anime_title"
                 app:srcCompat="@drawable/tittle_upcoming_anime_shape" />
 
             <TextView
-                android:id="@+id/uc_anime_tittle"
+                android:id="@+id/uc_anime_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -83,7 +83,7 @@
                 app:layout_constraintStart_toEndOf="@+id/uc_image" />
 
             <TextView
-                android:id="@+id/uc_ep_tittle"
+                android:id="@+id/uc_ep_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

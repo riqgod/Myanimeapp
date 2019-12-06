@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -36,12 +35,14 @@ dependencies {
     implementation 'com.github.Doomsdayrs:Jikan4java:v1.3.1'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
+
     implementation 'androidx.room:room-runtime:2.2.2'
+    implementation 'androidx.room:room-ktx:2.2.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    annotationProcessor 'androidx.room:room-compiler:2.2.2'
+    kapt 'androidx.room:room-compiler:2.2.2'
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
-    annotationProcessor 'androidx.lifecycle:lifecycle-common-java8:2.1.0'
+    kapt 'androidx.lifecycle:lifecycle-common-java8:2.1.0'
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
 
@@ -51,6 +52,7 @@ dependencies {
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
 configurations {

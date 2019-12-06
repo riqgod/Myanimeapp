@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 class WatchlistViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repo: WatchlistAnimeRepository
-    private val allWatchlistAnime: LiveData<List<WatchlistAnime>>
+    val allWatchlistAnime: LiveData<List<WatchlistAnime>>
 
     init {
         val watchlistAnimeDao = WatchlistAnimeDatabase.getDatabase(application).watchlistAnimeDao()
@@ -22,13 +22,13 @@ class WatchlistViewModel(application: Application) : AndroidViewModel(applicatio
         repo.insert(watchlistAnime)
     }
 
-    fun addEpisodeWatched(episode: Int, id: Int) = viewModelScope.launch {
-        repo.addEpisodeWatched(episode, id)
+    fun updateEpisodesOut(episodes: Int, id: Int) = viewModelScope.launch {
+        repo.updateEpisodesOut(episodes, id)
     }
 
-    fun addEpisodeWatched(episode: Int, anime: WatchlistAnime) = addEpisodeWatched(episode, anime.id)
-
-    fun addEpisodeWatched(episode: Int, anime: Anime) = addEpisodeWatched(episode, anime.mal_id)
+    fun updateEpisodesOut(anime: Anime) = viewModelScope.launch {
+        val eps = anime.episode.get().episodes.size
+    }
 
     fun deleteAll() = viewModelScope.launch {
         repo.deleteAll()

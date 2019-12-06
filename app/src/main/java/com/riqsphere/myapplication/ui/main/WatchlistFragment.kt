@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.riqsphere.myapplication.R
+import com.riqsphere.myapplication.watchlist.room.WatchlistViewModel
 
 
 class WatchlistFragment : Fragment() {
@@ -22,5 +23,4 @@ class WatchlistFragment : Fragment() {
         Log.d("debugg","watchhhh")
         return inflater.inflate(R.layout.fragment_watchlist, container, false)
     }
-
 }
