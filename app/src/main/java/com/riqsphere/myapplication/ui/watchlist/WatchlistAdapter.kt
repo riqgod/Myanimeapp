@@ -17,39 +17,33 @@ class WatchlistAdapter (private val context: Context) : RecyclerView.Adapter<Wat
     private val inflater = LayoutInflater.from(context)
     private var watchlistAnimes = emptyList<WatchlistAnime>()
 
-    inner class WatchlistAnimeViewHolder(itemView: View):
-        RecyclerView.ViewHolder(itemView) {
-        @SuppressLint("ResourceType")
-       private val cardAnimeImage: ImageView = itemView.findViewById(R.id.wl_image)
-        private val cardAnimeTitle :TextView = itemView.findViewById(R.id.wl_anime_title)
-        private val cardAnimeProgress: ProgressBar = itemView.findViewById(R.id.wl_progress_bar)
-
-        fun bindView(wlCard: WatchlistAnime){
-            ImageHandler.getInstance(this@WatchlistAdapter.context).load(wlCard.imgURL).into(cardAnimeImage)
-            cardAnimeTitle.text = wlCard.title
-            cardAnimeProgress.max = wlCard.episodes
-            cardAnimeProgress.progress = wlCard.episodesOut // just a placeholder.
-        }
-
-    }
-
     @SuppressLint("ResourceType")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchlistAnimeViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.watchlist_card,parent,false)
+            LayoutInflater.from(parent.context).inflate(R.layout.watchlist_card, parent, false)
         return WatchlistAnimeViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: WatchlistAnimeViewHolder, position: Int) {
-        val current = watchlistAnimes[position]
-        //manipulate holder using values from current
-        holder.bindView(current)
-    }
-
-    internal fun setWatchlistAnime(watchlistAnimes: List<WatchlistAnime>) {
+    fun setData(watchlistAnimes: List<WatchlistAnime>) {
         this.watchlistAnimes = watchlistAnimes
         notifyDataSetChanged()
     }
 
+    override fun onBindViewHolder(holder: WatchlistAnimeViewHolder, position: Int) = holder.bindView(position)
+
     override fun getItemCount() = watchlistAnimes.size
+
+    inner class WatchlistAnimeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        private val cardAnimeImage: ImageView = itemView.findViewById(R.id.wl_image)
+        private val cardAnimeTitle :TextView = itemView.findViewById(R.id.wl_anime_title)
+        private val cardAnimeProgress: ProgressBar = itemView.findViewById(R.id.wl_progress_bar)
+
+        fun bindView(position: Int) {
+            val watchlistAnime = watchlistAnimes[position]
+            ImageHandler.getInstance(this@WatchlistAdapter.context).load(watchlistAnime.imgURL).into(cardAnimeImage)
+            cardAnimeTitle.text = watchlistAnime.title
+            cardAnimeProgress.max = watchlistAnime.episodes
+            cardAnimeProgress.progress = watchlistAnime.episodesOut // just a placeholder.
+        }
+    }
 }
