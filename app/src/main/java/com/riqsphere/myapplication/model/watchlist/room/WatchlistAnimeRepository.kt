@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.watchlist.room
+package com.riqsphere.myapplication.model.watchlist.room
 
 import androidx.lifecycle.LiveData
 
@@ -9,8 +9,8 @@ class WatchlistAnimeRepository(private val watchlistAnimeDao: WatchlistAnimeDao)
         watchlistAnimeDao.insert(watchlistAnime)
     }
 
-    suspend fun updateEpisodesOut(episodes: Int, id: Int) {
-        watchlistAnimeDao.updateEpisodesOut(episodes, id)
+    suspend fun updateEpisodesOut(id: Int, episodes: Int) {
+        watchlistAnimeDao.updateEpisodesOut(id, episodes)
     }
 
     suspend fun deleteAll() {

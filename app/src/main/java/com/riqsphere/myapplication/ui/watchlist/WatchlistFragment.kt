@@ -1,10 +1,6 @@
-package com.riqsphere.myapplication.ui.main
+package com.riqsphere.myapplication.ui.watchlist
 
-import android.content.Context
-import android.graphics.ColorSpace
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,15 +12,14 @@ import com.github.doomsdayrs.jikan4java.core.Connector
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 
 import com.riqsphere.myapplication.R
-import com.riqsphere.myapplication.watchlist.room.WatchlistAnime
-import com.riqsphere.myapplication.watchlist.room.WatchlistAnimeAdapter
-import com.riqsphere.myapplication.watchlist.room.WatchlistViewModel
+import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
+import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
 
 
 class WatchlistFragment : Fragment() {
 
     private lateinit var recyclerView:RecyclerView
-    private lateinit var viewAdapter: WatchlistAnimeAdapter
+    private lateinit var viewAdapter: WatchlistAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var watchlistViewModel: WatchlistViewModel
 
@@ -36,11 +31,16 @@ class WatchlistFragment : Fragment() {
         // Inflate the layout for this fragment
 
         watchlistViewModel = WatchlistViewModel(this.activity!!.application)
-        val temporaryAnime = WatchlistAnime(temporaryFetch(20))
-        watchlistViewModel.insert(temporaryAnime) //naruto
+        val naruto = WatchlistAnime(temporaryFetch(20))
+        watchlistViewModel.insert(naruto) //naruto
+        val hero4 = WatchlistAnime(temporaryFetch(38408))
+        watchlistViewModel.insert(hero4) //boku no hero academia 4
 
         val view = inflater.inflate(R.layout.fragment_watchlist,container,false)
-        val watchlistAdapter = WatchlistAnimeAdapter(activity!!.applicationContext)
+        val watchlistAdapter =
+            WatchlistAdapter(
+                activity!!.applicationContext
+            )
 
 
         viewManager = GridLayoutManager(activity,3)

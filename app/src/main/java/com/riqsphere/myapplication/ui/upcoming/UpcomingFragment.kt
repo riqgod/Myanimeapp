@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.ui.main
+package com.riqsphere.myapplication.ui.upcoming
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,15 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.doomsdayrs.jikan4java.core.Connector
 import com.github.doomsdayrs.jikan4java.types.main.schedule.Schedule
 import com.github.doomsdayrs.jikan4java.types.main.schedule.SubAnime
-import com.riqsphere.myapplication.MainActivity
 
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.utils.addWeekday
 import com.riqsphere.myapplication.utils.nthWeekday
-import com.riqsphere.myapplication.upcoming.UpcomingAdapter
-import com.riqsphere.myapplication.upcoming.UpcomingModel
-import com.riqsphere.myapplication.watchlist.room.WatchlistAnime
-import com.riqsphere.myapplication.watchlist.room.WatchlistViewModel
+import com.riqsphere.myapplication.model.upcoming.UpcomingModel
+import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
+import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -39,7 +37,8 @@ class UpcomingFragment : Fragment() {
         })
 
         val view = inflater.inflate(R.layout.fragment_upcoming, container, false)
-        val upcomingAdapter = UpcomingAdapter(activity!!.applicationContext)
+        val upcomingAdapter =
+            UpcomingAdapter(activity!!.applicationContext)
 
         viewManager = LinearLayoutManager(activity)
         viewAdapter = upcomingAdapter
@@ -57,17 +56,17 @@ class UpcomingFragment : Fragment() {
         val schedule = Connector().currentSchedule.get() //TODO: parallelize this
         val upcomingPairs = filteredUpcoming(schedule, allWatchlistAnime)
         return upcomingPairs.mapTo(ArrayList()) {
-            UpcomingModel(it.first, it.second)
+            UpcomingModel(it)
         }
     }
 
 
-    private fun filteredUpcoming(schedule: Schedule, watchlistAnimes: List<WatchlistAnime>): ArrayList<Pair<SubAnime, WatchlistAnime>> {
-        val nestedUpcoming = nestedUpcoming(schedule)
-        return filterPairSpread(nestedUpcoming, watchlistAnimes)
+    private fun filteredUpcoming(schedule: Schedule, watchlistAnimes: List<WatchlistAnime>): ArrayList<WatchlistAnime> {
+        val nestedUpcoming = nestedAndOrderedUpcoming(schedule)
+        return spreadAndFilter(nestedUpcoming, watchlistAnimes)
     }
 
-    private fun nestedUpcoming(schedule: Schedule): ArrayList<ArrayList<SubAnime>> {
+    private fun nestedAndOrderedUpcoming(schedule: Schedule): ArrayList<ArrayList<SubAnime>> {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
         val result: ArrayList<ArrayList<SubAnime>> = arrayListOf()
         for (x in 0..6) {
@@ -77,18 +76,19 @@ class UpcomingFragment : Fragment() {
         return result
     }
 
-    private fun filterPairSpread (nestedUpcoming: ArrayList<ArrayList<SubAnime>>, watchlistAnimes: List<WatchlistAnime>): ArrayList<Pair<SubAnime, WatchlistAnime>> {
-        val result: ArrayList<Pair<SubAnime, WatchlistAnime>> = arrayListOf()
-        for (upcomingDay in nestedUpcoming) {
-            upcomingDay.mapNotNull {
-                val watchlistAnime = watchlistAnimes.firstOrNull { wa -> wa.id == it.mal_id }
-                if (watchlistAnime == null) {
-                    null
-                } else {
-                    Pair(it, watchlistAnime)
-                }
+    private fun spreadAndFilter (nestedSchedule: ArrayList<ArrayList<SubAnime>>, watchlistAnimes: List<WatchlistAnime>): ArrayList<WatchlistAnime> {
+        //spread the arrays held within nestedUpcoming
+        return nestedSchedule.fold(
+            initial = ArrayList(),
+            operation = { acc, arrayList ->
+                acc.addAll(
+                    arrayList.mapNotNull {
+                        //filter to accept only animes present in both the watchlist and the schedule
+                        watchlistAnimes.firstOrNull { wa -> wa.id == it.mal_id }
+                    }
+                )
+                acc
             }
-        }
-        return result
+        )
     }
 }

@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.upcoming
+package com.riqsphere.myapplication.ui.upcoming
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.makeramen.roundedimageview.RoundedImageView
 import com.riqsphere.myapplication.R
+import com.riqsphere.myapplication.model.upcoming.UpcomingModel
 import com.riqsphere.myapplication.utils.ImageHandler
 import java.util.*
 

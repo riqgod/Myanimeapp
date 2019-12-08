@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.watchlist.room
+package com.riqsphere.myapplication.model.watchlist.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -12,7 +12,7 @@ interface WatchlistAnimeDao {
     suspend fun insert(watchlistAnime: WatchlistAnime)
 
     @Query("update watchlist_anime set episodesOut = :eps where id = :id")
-    suspend fun updateEpisodesOut(eps: Int, id: Int)
+    suspend fun updateEpisodesOut(id: Int, eps: Int)
 
     @Query("delete from watchlist_anime")
     suspend fun deleteAll()

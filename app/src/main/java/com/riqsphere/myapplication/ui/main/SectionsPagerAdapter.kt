@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.riqsphere.myapplication.R
+import com.riqsphere.myapplication.ui.upcoming.UpcomingFragment
+import com.riqsphere.myapplication.ui.watchlist.WatchlistFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_1,
@@ -24,7 +26,8 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
         var fragment:Fragment? = null
 
         if(position == 0){
-            fragment = WatchlistFragment()
+            fragment =
+                WatchlistFragment()
             Log.d("debugg","position 0")
         }else{
             fragment = UpcomingFragment()

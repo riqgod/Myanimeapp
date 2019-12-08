@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.watchlist.room
+package com.riqsphere.myapplication.model.watchlist.room
 
 import android.content.Context
 import androidx.room.Database

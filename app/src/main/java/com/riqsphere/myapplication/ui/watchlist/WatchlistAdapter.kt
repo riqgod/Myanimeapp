@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.watchlist.room
+package com.riqsphere.myapplication.ui.watchlist
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,9 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.utils.ImageHandler
-import kotlinx.android.synthetic.main.watchlist_card.view.*
+import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
 
-class WatchlistAnimeAdapter (private val context: Context) : RecyclerView.Adapter<WatchlistAnimeAdapter.WatchlistAnimeViewHolder>() {
+class WatchlistAdapter (private val context: Context) : RecyclerView.Adapter<WatchlistAdapter.WatchlistAnimeViewHolder>() {
     private val inflater = LayoutInflater.from(context)
     private var watchlistAnimes = emptyList<WatchlistAnime>()
 
@@ -25,7 +25,7 @@ class WatchlistAnimeAdapter (private val context: Context) : RecyclerView.Adapte
         private val cardAnimeProgress: ProgressBar = itemView.findViewById(R.id.wl_progress_bar)
 
         fun bindView(wlCard: WatchlistAnime){
-            ImageHandler.getInstance(this@WatchlistAnimeAdapter.context).load(wlCard.imgURL).into(cardAnimeImage)
+            ImageHandler.getInstance(this@WatchlistAdapter.context).load(wlCard.imgURL).into(cardAnimeImage)
             cardAnimeTitle.text = wlCard.title
             cardAnimeProgress.max = wlCard.episodes
             cardAnimeProgress.progress = wlCard.episodesOut // just a placeholder.
