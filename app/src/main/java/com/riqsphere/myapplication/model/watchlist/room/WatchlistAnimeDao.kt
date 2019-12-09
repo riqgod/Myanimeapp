@@ -14,9 +14,6 @@ interface WatchlistAnimeDao {
     @Query("update watchlist_anime set episodesWatched = :episodesWatched where id = :id")
     suspend fun updateEpisodesWatched(id: Int, episodesWatched: ArrayList<Int>)
 
-    @Query("select episodesWatched from watchlist_anime where id = :id")
-    fun getEpisodesWatched(id: Int): ArrayList<Int>
-
     @Query("update watchlist_anime set episodesOut = :episodesOut where id = :id")
     suspend fun updateEpisodesOut(id: Int, episodesOut: Int)
 

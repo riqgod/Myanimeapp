@@ -28,37 +28,28 @@ class WatchlistViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun insert(anime: Anime) = insert(WatchlistAnime(anime))
 
-    fun insert(futureAnime: CompletableFuture<Anime>) = viewModelScope.launch {
-        val anime = futureAnime.get()
-        insert(anime)
+    fun insert(mal_id: Int) = insert(Singletons.connector.retrieveAnime(mal_id).get())
+
+    fun addEpisodeWatched(watchlistAnime: WatchlistAnime, episodeToAdd: Int): Boolean {
+        val success = watchlistAnime.episodesWatched.add(episodeToAdd)
+        if (!success) {
+            return false
+        }
+        viewModelScope.launch {
+            repo.updateEpisodesWatched(watchlistAnime.id, watchlistAnime.episodesWatched)
+        }
+        return true
     }
 
-    fun insert(mal_id: Int) = insert(Singletons.connector.retrieveAnime(mal_id))
-
-    @Transaction
-    fun addEpisodeWatched(id: Int, episodeWatched: Int) = viewModelScope.launch {
-        val episodesWatched = repo.getEpisodesWatched(id)
-        episodesWatched.add(episodeWatched)
-        repo.updateEpisodesWatched(id, episodesWatched)
-    }
-
-    @Transaction
-    fun removeEpisodeWatched(id: Int, episodeToRemove: Int) = viewModelScope.launch {
-        val episodesWatched = repo.getEpisodesWatched(id)
-        episodesWatched.remove(episodeToRemove)
-        repo.updateEpisodesWatched(id, episodesWatched)
-    }
-
-    @Transaction
-    fun addEpisodeWatched(watchlistAnime: WatchlistAnime, episodeWatched: Int) = viewModelScope.launch {
-        watchlistAnime.episodesWatched.add(episodeWatched)
-        repo.updateEpisodesWatched(watchlistAnime.id, watchlistAnime.episodesWatched)
-    }
-
-    @Transaction
-    fun removeEpisodeWatched(watchlistAnime: WatchlistAnime, episodeToRemove: Int) = viewModelScope.launch {
-        watchlistAnime.episodesWatched.add(episodeToRemove)
-        repo.updateEpisodesWatched(watchlistAnime.id, watchlistAnime.episodesWatched)
+    fun removeEpisodeWatched(watchlistAnime: WatchlistAnime, episodeToRemove: Int): Boolean {
+        val success = watchlistAnime.episodesWatched.remove(episodeToRemove)
+        if (!success) {
+            return false
+        }
+        viewModelScope.launch {
+            repo.updateEpisodesWatched(watchlistAnime.id, watchlistAnime.episodesWatched)
+        }
+        return true
     }
 
     fun updateEpisodesOut(id: Int, episodesOut: Int) = viewModelScope.launch {
@@ -67,12 +58,18 @@ class WatchlistViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun updateEpisodesOut(anime: Anime, episodesOut: Int) = updateEpisodesOut(anime.mal_id, episodesOut)
 
-    fun updateEpisodesOut(anime: Anime) = viewModelScope.launch {
+    fun updateEpisodesOut(anime: Anime) {
         val episodesOut = anime.getEpisodesOut().get()
-        repo.updateEpisodesOut(anime.mal_id,  episodesOut)
+        viewModelScope.launch {
+            repo.updateEpisodesOut(anime.mal_id,  episodesOut)
+        }
     }
 
     fun deleteAll() = viewModelScope.launch {
         repo.deleteAll()
+    }
+
+    companion object {
+        private val lock = Object()
     }
 }
