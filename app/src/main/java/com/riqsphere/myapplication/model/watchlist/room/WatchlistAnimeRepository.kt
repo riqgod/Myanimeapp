@@ -9,9 +9,11 @@ class WatchlistAnimeRepository(private val watchlistAnimeDao: WatchlistAnimeDao)
         watchlistAnimeDao.insert(watchlistAnime)
     }
 
-    suspend fun updateEpisodesOut(id: Int, episodes: Int) {
-        watchlistAnimeDao.updateEpisodesOut(id, episodes)
-    }
+    fun getEpisodesWatched(id: Int) = watchlistAnimeDao.getEpisodesWatched(id)
+
+    suspend fun updateEpisodesWatched(id: Int, episodesWatched: ArrayList<Int>) = watchlistAnimeDao.updateEpisodesWatched(id, episodesWatched)
+
+    suspend fun updateEpisodesOut(id: Int, episodesOut: Int) = watchlistAnimeDao.updateEpisodesOut(id, episodesOut)
 
     suspend fun deleteAll() {
         watchlistAnimeDao.deleteAll()

@@ -14,7 +14,6 @@ import com.riqsphere.myapplication.utils.ImageHandler
 import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
 
 class WatchlistAdapter (private val context: Context) : RecyclerView.Adapter<WatchlistAdapter.WatchlistAnimeViewHolder>() {
-    private val inflater = LayoutInflater.from(context)
     private var watchlistAnimes = emptyList<WatchlistAnime>()
 
     @SuppressLint("ResourceType")

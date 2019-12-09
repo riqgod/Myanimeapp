@@ -6,7 +6,6 @@ import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import com.riqsphere.myapplication.R
-import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
 
 private const val PREFERENCE_FIRST_RUN = "first_run"
 

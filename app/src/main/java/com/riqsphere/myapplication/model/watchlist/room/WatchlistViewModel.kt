@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import androidx.room.Transaction
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.riqsphere.myapplication.utils.Singletons
 import com.riqsphere.myapplication.utils.getEpisodesOut
@@ -34,15 +35,41 @@ class WatchlistViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun insert(mal_id: Int) = insert(Singletons.connector.retrieveAnime(mal_id))
 
-    fun updateEpisodesOut(id: Int, episodes: Int) = viewModelScope.launch {
-        repo.updateEpisodesOut(id, episodes)
+    @Transaction
+    fun addEpisodeWatched(id: Int, episodeWatched: Int) = viewModelScope.launch {
+        val episodesWatched = repo.getEpisodesWatched(id)
+        episodesWatched.add(episodeWatched)
+        repo.updateEpisodesWatched(id, episodesWatched)
     }
 
-    fun updateEpisodesOut(anime: Anime, episodes: Int) = updateEpisodesOut(anime.mal_id, episodes)
+    @Transaction
+    fun removeEpisodeWatched(id: Int, episodeToRemove: Int) = viewModelScope.launch {
+        val episodesWatched = repo.getEpisodesWatched(id)
+        episodesWatched.remove(episodeToRemove)
+        repo.updateEpisodesWatched(id, episodesWatched)
+    }
+
+    @Transaction
+    fun addEpisodeWatched(watchlistAnime: WatchlistAnime, episodeWatched: Int) = viewModelScope.launch {
+        watchlistAnime.episodesWatched.add(episodeWatched)
+        repo.updateEpisodesWatched(watchlistAnime.id, watchlistAnime.episodesWatched)
+    }
+
+    @Transaction
+    fun removeEpisodeWatched(watchlistAnime: WatchlistAnime, episodeToRemove: Int) = viewModelScope.launch {
+        watchlistAnime.episodesWatched.add(episodeToRemove)
+        repo.updateEpisodesWatched(watchlistAnime.id, watchlistAnime.episodesWatched)
+    }
+
+    fun updateEpisodesOut(id: Int, episodesOut: Int) = viewModelScope.launch {
+        repo.updateEpisodesOut(id, episodesOut)
+    }
+
+    fun updateEpisodesOut(anime: Anime, episodesOut: Int) = updateEpisodesOut(anime.mal_id, episodesOut)
 
     fun updateEpisodesOut(anime: Anime) = viewModelScope.launch {
-        val episodes = anime.getEpisodesOut().get()
-        updateEpisodesOut(anime,  episodes)
+        val episodesOut = anime.getEpisodesOut().get()
+        repo.updateEpisodesOut(anime.mal_id,  episodesOut)
     }
 
     fun deleteAll() = viewModelScope.launch {

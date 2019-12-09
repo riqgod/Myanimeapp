@@ -1,11 +1,11 @@
 package com.riqsphere.myapplication.model.watchlist.room
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import com.google.gson.Gson
 
 @Database(entities = [WatchlistAnime::class], version = 1, exportSchema = false)
+@TypeConverters(DataConverter::class)
 abstract class WatchlistAnimeDatabase : RoomDatabase() {
     abstract fun watchlistAnimeDao(): WatchlistAnimeDao
 
@@ -28,4 +28,14 @@ abstract class WatchlistAnimeDatabase : RoomDatabase() {
             }
         }
     }
+}
+
+class DataConverter {
+    private val gson = Gson()
+
+    @TypeConverter
+    public fun arrayListFromString(s: String): ArrayList<Int> = gson.fromJson<ArrayList<Int>>(s, java.util.ArrayList::class.java)
+
+    @TypeConverter
+    public fun stringFromArrayList(arrayList: ArrayList<Int>): String = gson.toJson(arrayList)
 }
