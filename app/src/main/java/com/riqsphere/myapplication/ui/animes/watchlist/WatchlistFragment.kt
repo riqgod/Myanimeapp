@@ -42,6 +42,8 @@ class WatchlistFragment : Fragment() {
         watchlistViewModel.insert(nrt) //naruto
         val random = WatchlistAnime(temporaryFetch(21))
         watchlistViewModel.insert(random) //random id
+        val rdm = WatchlistAnime(temporaryFetch(22))
+        watchlistViewModel.insert(rdm)
 
         val view = inflater.inflate(R.layout.fragment_watchlist,container,false)
         val watchlistAdapter = WatchlistAdapter(activity!!.applicationContext)
@@ -50,9 +52,7 @@ class WatchlistFragment : Fragment() {
         viewAdapter = watchlistAdapter
         recyclerView = view.findViewById<RecyclerView>(R.id.wl_rv).apply {
             layoutManager = viewManager
-            setHasFixedSize(true)
             adapter = viewAdapter
-            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
 
         return view
