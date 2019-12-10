@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_animes"
-        android:icon="@drawable/ic_android_black_24dp"
-        android:title="Animes"/>
+        android:icon="@drawable/neko"
+        android:title="Animes" />
 
     <item
         android:id="@+id/nav_discover"
