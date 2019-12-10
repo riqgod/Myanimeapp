@@ -15,10 +15,10 @@ import com.riqsphere.myapplication.utils.ImageHandler
 
 class SearchAdapter : BaseAdapter() {
 
-    private lateinit var list:List<SearchModel>;
+    private lateinit var list:ArrayList<SearchModel>;
     private lateinit var act:Activity;
 
-    fun setData(list: List<SearchModel>,act:Activity){
+    fun setData(list: ArrayList<SearchModel>,act:Activity){
         this.list = list
         this.act = act
         notifyDataSetChanged()

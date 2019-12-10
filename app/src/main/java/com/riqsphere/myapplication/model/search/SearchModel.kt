@@ -9,10 +9,10 @@ class SearchModel(
     val score:String,
     val added:Boolean
 ){
-    constructor(anime:Anime):this(
+    constructor(anime:Anime, boolean: Boolean):this(
         imageURL = anime.imageURL,
         animeTitle = anime.title,
         score = anime.score.toString(),
-        added = false // placeholder... should check the watchlist
+        added = boolean // placeholder... should check the watchlist
     )
 }
