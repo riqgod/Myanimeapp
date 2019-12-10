@@ -6,7 +6,9 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
+import com.riqsphere.myapplication.utils.getEpisodesOut
 import java.util.*
 import kotlin.random.Random
 
@@ -27,6 +29,10 @@ object WatchlistAlarm : BroadcastReceiver() {
             AlarmManager.INTERVAL_DAY,
             alarmIntent
         )
+    }
+
+    override fun onReceive(context: Context?, intent: Intent?) {
+        val application = context.let { it as Application }
 
         val watchlistViewModel = WatchlistViewModel(application)
         updateAllEpisodes(watchlistViewModel)
@@ -34,16 +40,11 @@ object WatchlistAlarm : BroadcastReceiver() {
 
     private fun updateAllEpisodes(watchlistViewModel: WatchlistViewModel) {
         watchlistViewModel.allWatchlistAnime.value.let {
-            it?.forEach {
-                val anime = it.toAnime().get()
-                watchlistViewModel.updateEpisodesOut(anime)
+            it?.forEach { watchlistAnime ->
+                val updatedEpisodesOut = watchlistAnime.getEpisodesOut().get()
+                watchlistViewModel.updateEpisodesOut(watchlistAnime.id, updatedEpisodesOut)
             }
         }
-    }
-
-    override fun onReceive(context: Context?, intent: Intent?) {
-        val application = context.let { it as Application }
-        setAlarm(application)
     }
 
     private const val RAND_MIN = 1

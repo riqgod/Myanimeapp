@@ -14,6 +14,7 @@ import com.github.doomsdayrs.jikan4java.types.main.schedule.Schedule
 import com.github.doomsdayrs.jikan4java.types.main.schedule.SubAnime
 
 import com.riqsphere.myapplication.R
+import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.utils.addWeekday
 import com.riqsphere.myapplication.utils.nthWeekday
 import com.riqsphere.myapplication.model.upcoming.UpcomingModel
@@ -54,7 +55,7 @@ class UpcomingFragment : Fragment() {
     }
 
     private fun fetchUpcoming(allWatchlistAnime: List<WatchlistAnime>): ArrayList<UpcomingModel> {
-        val schedule = Connector().currentSchedule.get() //TODO: parallelize this
+        val schedule = JikanCacheHandler.getCurrentSchedule()
         val upcomingPairs = filteredUpcoming(schedule, allWatchlistAnime)
         return upcomingPairs.mapTo(ArrayList()) {
             UpcomingModel(it)

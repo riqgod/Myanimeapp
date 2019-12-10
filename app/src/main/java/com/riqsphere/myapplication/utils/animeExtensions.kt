@@ -1,9 +1,16 @@
 package com.riqsphere.myapplication.utils
 
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
+import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
 import java.util.concurrent.CompletableFuture
 
 private const val EPS_PER_PAGE = 100
+
+fun WatchlistAnime.getEpisodesOut(): CompletableFuture<Int> {
+    val an = Anime()
+    an.mal_id = id
+    return an.getEpisodesOut()
+}
 
 fun Anime.getEpisodesOut(): CompletableFuture<Int> {
     return CompletableFuture.supplyAsync {

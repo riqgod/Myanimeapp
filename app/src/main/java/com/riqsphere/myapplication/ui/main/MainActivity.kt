@@ -6,6 +6,8 @@ import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import com.riqsphere.myapplication.R
+import com.riqsphere.myapplication.model.watchlist.alarm.WatchlistAlarm
+import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
 
 private const val PREFERENCE_FIRST_RUN = "first_run"
 
@@ -32,6 +34,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun installTasks() {
-
+        WatchlistAlarm.setAlarm(this.application)
     }
 }

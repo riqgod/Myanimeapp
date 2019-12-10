@@ -7,7 +7,7 @@ import android.content.Intent
 
 class WatchlistAlarmBootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        if (intent?.action == Companion.ACTION_BOOT_COMPLETED) {
+        if (intent?.action == ACTION_BOOT_COMPLETED) {
             val application = context?.applicationContext as Application
             WatchlistAlarm.setAlarm(application)
         }
