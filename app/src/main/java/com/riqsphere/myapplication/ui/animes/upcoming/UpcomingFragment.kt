@@ -1,24 +1,22 @@
 package com.riqsphere.myapplication.ui.animes.upcoming
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.doomsdayrs.jikan4java.types.main.schedule.Schedule
 import com.github.doomsdayrs.jikan4java.types.main.schedule.SubAnime
-
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
-import com.riqsphere.myapplication.utils.addWeekday
-import com.riqsphere.myapplication.utils.nthWeekday
-import com.riqsphere.myapplication.model.upcoming.UpcomingModel
 import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
 import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
+import com.riqsphere.myapplication.utils.addWeekday
+import com.riqsphere.myapplication.utils.nthWeekday
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -53,12 +51,9 @@ class UpcomingFragment : Fragment() {
         return view
     }
 
-    private fun fetchUpcoming(allWatchlistAnime: List<WatchlistAnime>): ArrayList<UpcomingModel> {
+    private fun fetchUpcoming(allWatchlistAnime: List<WatchlistAnime>): ArrayList<WatchlistAnime> {
         val schedule = JikanCacheHandler.getCurrentSchedule()
-        val upcomingPairs = filteredUpcoming(schedule, allWatchlistAnime)
-        return upcomingPairs.mapTo(ArrayList()) {
-            UpcomingModel(it)
-        }
+        return filteredUpcoming(schedule, allWatchlistAnime)
     }
 
 

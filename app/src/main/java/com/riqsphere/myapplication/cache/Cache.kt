@@ -1,7 +1,7 @@
 package com.riqsphere.myapplication.cache
 
 object Cache {
-    private const val CACHE_SIZE = 5
+    private const val CACHE_SIZE = 20
 
     val data: Array<CacheItem> = Array(CACHE_SIZE) {
         CacheItem()

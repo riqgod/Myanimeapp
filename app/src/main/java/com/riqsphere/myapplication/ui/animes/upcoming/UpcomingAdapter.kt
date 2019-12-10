@@ -8,12 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.makeramen.roundedimageview.RoundedImageView
 import com.riqsphere.myapplication.R
-import com.riqsphere.myapplication.model.upcoming.UpcomingModel
+import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
 import com.riqsphere.myapplication.utils.ImageHandler
 import java.util.*
 
 class UpcomingAdapter(private val mContext: Context): RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {
-    private var upcoming = ArrayList<UpcomingModel>()
+    private var upcoming = ArrayList<WatchlistAnime>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -21,7 +21,7 @@ class UpcomingAdapter(private val mContext: Context): RecyclerView.Adapter<Upcom
         return ViewHolder(view)
     }
 
-    fun setData(upcoming: ArrayList<UpcomingModel>) {
+    fun setData(upcoming: ArrayList<WatchlistAnime>) {
         this.upcoming = upcoming
         notifyDataSetChanged()
     }
@@ -38,11 +38,11 @@ class UpcomingAdapter(private val mContext: Context): RecyclerView.Adapter<Upcom
         private val cardTime: TextView = itemView.findViewById(R.id.uc_time)
 
         fun bindView(position: Int) {
-            val ucCard = upcoming[position]
-            ImageHandler.getInstance(this@UpcomingAdapter.mContext).load(ucCard.imageURL).into(cardAnimeImage)
-            cardAnimeTitle.text = ucCard.animeTitle
-            cardEpNum.text = ucCard.epNum
-            cardTime.text = ucCard.time
+            val up = upcoming[position]
+            ImageHandler.getInstance(this@UpcomingAdapter.mContext).load(up.imgURL).into(cardAnimeImage)
+            cardAnimeTitle.text = up.title
+            cardEpNum.text = (up.episodesOut + 1).toString()
+            cardTime.text = up.broadcast
         }
     }
 }
