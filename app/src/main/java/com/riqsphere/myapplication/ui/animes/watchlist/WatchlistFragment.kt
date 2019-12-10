@@ -40,6 +40,8 @@ class WatchlistFragment : Fragment() {
         watchlistViewModel.insert(hero4) //boku no hero academia 4
         val nrt = WatchlistAnime(temporaryFetch(20))
         watchlistViewModel.insert(nrt) //naruto
+        val random = WatchlistAnime(temporaryFetch(21))
+        watchlistViewModel.insert(random) //random id
 
         val view = inflater.inflate(R.layout.fragment_watchlist,container,false)
         val watchlistAdapter = WatchlistAdapter(activity!!.applicationContext)
