@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.ui.watchlist
+package com.riqsphere.myapplication.ui.animes.watchlist
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,7 +15,6 @@ import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
 import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
-import com.riqsphere.myapplication.utils.Singletons
 
 
 class WatchlistFragment : Fragment() {

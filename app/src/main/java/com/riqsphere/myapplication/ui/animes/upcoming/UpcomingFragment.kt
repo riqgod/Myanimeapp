@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.ui.upcoming
+package com.riqsphere.myapplication.ui.animes.upcoming
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.doomsdayrs.jikan4java.core.Connector
 import com.github.doomsdayrs.jikan4java.types.main.schedule.Schedule
 import com.github.doomsdayrs.jikan4java.types.main.schedule.SubAnime
 

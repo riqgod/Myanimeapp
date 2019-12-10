@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.ui.watchlist
+package com.riqsphere.myapplication.ui.animes.watchlist
 
 import android.annotation.SuppressLint
 import android.content.Context

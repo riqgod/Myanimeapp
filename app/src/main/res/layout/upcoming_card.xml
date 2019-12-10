@@ -41,7 +41,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/uc_anime_title"
                 app:layout_constraintStart_toStartOf="@+id/uc_anime_title"
                 app:layout_constraintTop_toTopOf="@+id/uc_anime_title"
-                app:srcCompat="@drawable/tittle_upcoming_anime_shape" />
+                app:srcCompat="@drawable/title_upcoming_anime_shape" />
 
             <TextView
                 android:id="@+id/uc_anime_title"

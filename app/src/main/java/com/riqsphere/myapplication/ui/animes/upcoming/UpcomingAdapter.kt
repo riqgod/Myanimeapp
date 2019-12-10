@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.ui.upcoming
+package com.riqsphere.myapplication.ui.animes.upcoming
 
 import android.content.Context
 import android.view.LayoutInflater
