@@ -1,9 +1,10 @@
 package com.riqsphere.myapplication.ui.animes
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.SearchView
+import android.widget.Toolbar
+import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import com.riqsphere.myapplication.R
 
@@ -12,4 +13,5 @@ class DiscoverFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_discover, container, false)
         return view
     }
+
 }
