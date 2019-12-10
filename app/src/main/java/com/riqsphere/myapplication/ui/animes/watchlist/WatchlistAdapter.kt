@@ -10,8 +10,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
-import com.riqsphere.myapplication.utils.ImageHandler
 import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
+import com.riqsphere.myapplication.utils.ImageHandler
 
 class WatchlistAdapter (private val context: Context) : RecyclerView.Adapter<WatchlistAdapter.WatchlistAnimeViewHolder>() {
     private var watchlistAnimes = emptyList<WatchlistAnime>()
@@ -42,7 +42,7 @@ class WatchlistAdapter (private val context: Context) : RecyclerView.Adapter<Wat
             ImageHandler.getInstance(this@WatchlistAdapter.context).load(watchlistAnime.imgURL).into(cardAnimeImage)
             cardAnimeTitle.text = watchlistAnime.title
             cardAnimeProgress.max = watchlistAnime.episodes
-            cardAnimeProgress.progress = watchlistAnime.episodesOut // just a placeholder.
+            cardAnimeProgress.progress = watchlistAnime.episodesWatched.size // just a placeholder.
         }
     }
 }
