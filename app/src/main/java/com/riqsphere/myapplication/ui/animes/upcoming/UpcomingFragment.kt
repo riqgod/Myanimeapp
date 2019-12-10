@@ -45,9 +45,8 @@ class UpcomingFragment : Fragment() {
         viewAdapter = upcomingAdapter
         recyclerView = view.findViewById<RecyclerView>(R.id.uc_rv).apply {
             layoutManager = viewManager
-            setHasFixedSize(true)
             adapter = viewAdapter
-            addItemDecoration(DividerItemDecoration(activity,DividerItemDecoration.VERTICAL))
+
         }
 
         return view
