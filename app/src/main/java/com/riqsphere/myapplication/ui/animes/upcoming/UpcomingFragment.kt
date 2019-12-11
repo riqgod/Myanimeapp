@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,11 +18,15 @@ import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
 import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
 import com.riqsphere.myapplication.utils.addWeekday
 import com.riqsphere.myapplication.utils.nthWeekday
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
 class UpcomingFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
     private lateinit var viewAdapter: UpcomingAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
     private lateinit var watchlistViewModel: WatchlistViewModel
@@ -30,8 +35,14 @@ class UpcomingFragment : Fragment() {
         watchlistViewModel = WatchlistViewModel(this.activity!!.application)
         watchlistViewModel.allWatchlistAnime.observe(this, Observer {
             it?.let {
-                val upcoming = fetchUpcoming(it)
-                viewAdapter.setData(upcoming)
+                GlobalScope.launch {
+                    val upcoming = fetchUpcoming(it)
+                    MainScope().launch {
+                        viewAdapter.setData(upcoming)
+                        progressBar.visibility = View.GONE
+                        recyclerView.visibility = View.VISIBLE
+                    }
+                }
             }
         })
 
@@ -41,7 +52,9 @@ class UpcomingFragment : Fragment() {
 
         viewManager = LinearLayoutManager(activity)
         viewAdapter = upcomingAdapter
-        recyclerView = view.findViewById<RecyclerView>(R.id.uc_rv).apply {
+        recyclerView = view.findViewById(R.id.uc_rv)
+        progressBar = view.findViewById(R.id.uc_pb)
+        recyclerView.apply {
             layoutManager = viewManager
             setHasFixedSize(true)
             adapter = viewAdapter

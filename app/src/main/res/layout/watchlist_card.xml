@@ -23,7 +23,7 @@
                 android:id="@+id/wl_image"
                 android:layout_width="120dp"
                 android:layout_height="190dp"
-                android:foreground="@drawable/gradient_effect_cornerless"
+                android:foreground="@drawable/gradient_effect_no_corners"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
