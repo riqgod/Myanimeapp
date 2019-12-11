@@ -25,6 +25,7 @@ class DiscoverFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view =  inflater.inflate(R.layout.fragment_discover, container, false)
 
+        //temporary model
         discoverViewModel = ArrayList<SearchModel>(5)
         val anime1 = temporaryFetch(23);
         val anime2 = temporaryFetch(24);
@@ -41,13 +42,57 @@ class DiscoverFragment : Fragment() {
 
         val discoverAdapter = DiscoverAdapter(activity!!.applicationContext)
 
+
         viewManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         viewAdapter = discoverAdapter
         viewAdapter.setData(discoverViewModel)
-        recyclerView = view.findViewById<RecyclerView>(R.id.dc_rv_top).apply{
+
+        //1
+        recyclerView = view.findViewById<RecyclerView>(R.id.dc_rv_top4u).apply{
             layoutManager = viewManager
             adapter = viewAdapter
         }
+
+        //2
+        val viewManager2 = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+
+        val rv2:RecyclerView = view.findViewById<RecyclerView>(R.id.dc_rv_mp).apply {
+            layoutManager = viewManager2
+            adapter = viewAdapter
+        }
+
+        //3
+        val viewManager3 = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        val rv3:RecyclerView = view.findViewById<RecyclerView>(R.id.dc_rv_score).apply {
+            layoutManager = viewManager3
+            adapter = viewAdapter
+        }
+        //4
+        val viewManager4 = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        val rv4:RecyclerView = view.findViewById<RecyclerView>(R.id.dc_rv_seasonal).apply {
+            layoutManager = viewManager4
+            adapter = viewAdapter
+        }
+        //5
+        val viewManager5 = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        val rv5:RecyclerView = view.findViewById<RecyclerView>(R.id.dc_rv_airing).apply {
+            layoutManager = viewManager5
+            adapter = viewAdapter
+        }
+        //6
+        val viewManager6 = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        val rv6:RecyclerView = view.findViewById<RecyclerView>(R.id.dc_rv_top_upcoming).apply {
+            layoutManager = viewManager6
+            adapter = viewAdapter
+        }
+        //7
+        val viewManager7 = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        val rv7:RecyclerView = view.findViewById<RecyclerView>(R.id.dc_rv_comedy).apply {
+            layoutManager = viewManager7
+            adapter = viewAdapter
+        }
+
+
         return view
     }
 

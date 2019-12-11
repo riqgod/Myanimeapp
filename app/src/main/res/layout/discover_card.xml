@@ -8,7 +8,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="5dp"
         app:cardCornerRadius="4dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="false"
@@ -27,11 +30,11 @@
                 android:layout_height="250dp"
                 android:foreground="@drawable/gradient_effect_corner"
                 android:scaleType="centerCrop"
+                android:src="@drawable/a102113"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src ="@drawable/a102113"
-                app:riv_corner_radius="4dip"/>
+                app:riv_corner_radius="4dip" />
 
 
             <ImageView
@@ -81,14 +84,14 @@
                 android:id="@+id/dc_anime_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-medium"
+                android:maxLines="2"
+                android:paddingLeft="5dp"
                 android:text="Boku no Hero Academia 4th Season"
                 android:textColor="#ffffff"
                 android:textSize="15sp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="8dp"
-                android:maxLines="2"
-                android:paddingLeft="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
