@@ -1,5 +1,8 @@
 package com.riqsphere.myapplication.ui
 
+import android.app.ListActivity
+import android.app.SearchManager
+import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
@@ -37,7 +40,16 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        val intent:Intent = getIntent()
+        if(Intent.ACTION_SEARCH.equals(intent.action)){
+            val query:String = intent.getStringExtra(SearchManager.QUERY)
+            doMySearch(query);
+        }
         navigateToDefaultPage()
+    }
+
+    private fun doMySearch(query: String) {
+        //not implemented yet
     }
 
     private fun navigateTo(it: Fragment) = supportFragmentManager.beginTransaction().replace(R.id.bottom_navigation_fragment_container, it).commit()

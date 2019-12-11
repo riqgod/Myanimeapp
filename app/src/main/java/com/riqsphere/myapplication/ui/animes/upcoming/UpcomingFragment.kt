@@ -56,9 +56,8 @@ class UpcomingFragment : Fragment() {
         progressBar = view.findViewById(R.id.uc_pb)
         recyclerView.apply {
             layoutManager = viewManager
-            setHasFixedSize(true)
             adapter = viewAdapter
-            addItemDecoration(DividerItemDecoration(activity,DividerItemDecoration.VERTICAL))
+
         }
 
         return view
