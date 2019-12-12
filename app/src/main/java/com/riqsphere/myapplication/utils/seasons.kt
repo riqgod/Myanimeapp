@@ -22,3 +22,13 @@ fun Calendar.jikanSeason(): Season? {
         else -> null
     }
 }
+
+fun Calendar.jikanSeasonCode(): Int {
+    return when {
+        monthIn(winterMonths) -> 0
+        monthIn(springMonths) -> 1
+        monthIn(summerMonths) -> 2
+        monthIn(fallMonths) -> 3
+        else -> -1
+    }
+}

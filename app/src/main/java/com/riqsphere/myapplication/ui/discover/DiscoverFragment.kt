@@ -24,6 +24,7 @@ import kotlinx.coroutines.runBlocking
 class DiscoverFragment : Fragment() {
 
     private lateinit var rootView: View
+    private lateinit var viewPool: RecyclerView.RecycledViewPool
     private lateinit var allWatchlistAnime: LiveData<List<WatchlistAnime>>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,6 +33,7 @@ class DiscoverFragment : Fragment() {
             return rootView
         }
 
+        viewPool = RecyclerView.RecycledViewPool()
         allWatchlistAnime = WatchlistViewModel(activity!!.application).allWatchlistAnime
 
         val empty = { arrayListOf (
@@ -47,24 +49,40 @@ class DiscoverFragment : Fragment() {
         val top4uPair = Pair(top4uRecyclerView, empty)
 
         val seasonalRecyclerView = initializeRecyclerView(R.id.dc_rv_seasonal)
-        val seasonalPair = Pair(seasonalRecyclerView, empty)
+        val seasonalPair = Pair(seasonalRecyclerView, fetchCurrentSeason)
 
         val topUpcomingRecyclerView = initializeRecyclerView(R.id.dc_rv_top_upcoming)
-        val topUpcomingPair = Pair(topUpcomingRecyclerView, empty)
+        val topUpcomingPair = Pair(topUpcomingRecyclerView, fetchTopUpcoming)
 
-        val mostPopularRecyclerView = initializeRecyclerView(R.id.dc_rv_mp)
-        val mostPopularPair = Pair(mostPopularRecyclerView, empty)
+        val mostPoplarRecyclerView = initializeRecyclerView(R.id.dc_rv_mp)
+        val mostPoplarPair = Pair(mostPoplarRecyclerView, fetchMostPoplar)
 
         val topScoreRecyclerView = initializeRecyclerView(R.id.dc_rv_score)
-        val topScorePair = Pair(topScoreRecyclerView, empty)
+        val topScorePair = Pair(topScoreRecyclerView, fetchTopScore)
 
-        val pairs = arrayOf(top4uPair, seasonalPair, topUpcomingPair, mostPopularPair, topScorePair)
+        val pairs = arrayOf(top4uPair, seasonalPair, topUpcomingPair, mostPoplarPair, topScorePair)
         AsyncDataSetter().execute(*pairs)
 
-        val recyclers = arrayOf(top4uRecyclerView, seasonalRecyclerView, topUpcomingRecyclerView, mostPopularRecyclerView, topScoreRecyclerView)
+        val recyclers = arrayOf(top4uRecyclerView, seasonalRecyclerView, topUpcomingRecyclerView, mostPoplarRecyclerView, topScoreRecyclerView)
         observe(*recyclers)
 
         return rootView
+    }
+
+    private val fetchCurrentSeason = {
+        SearchModel.arrayListFromSeasonSearch(JikanCacheHandler.getCurrentSeason())
+    }
+
+    private val fetchTopUpcoming = {
+        SearchModel.arrayListFromTopListing(JikanCacheHandler.getTopUpcoming())
+    }
+
+    private val fetchMostPoplar = {
+        SearchModel.arrayListFromAnimePageAnime(JikanCacheHandler.getMostPoplar())
+    }
+
+    private val fetchTopScore = {
+        SearchModel.arrayListFromAnimePageAnime(JikanCacheHandler.getTopScore())
     }
 
     private fun initializeRecyclerView(recyclerViewID: Int): RecyclerView {
@@ -74,6 +92,7 @@ class DiscoverFragment : Fragment() {
         rv.apply {
             layoutManager = manager
             adapter = adapt
+            setRecycledViewPool(viewPool)
         }
         return rv
     }
