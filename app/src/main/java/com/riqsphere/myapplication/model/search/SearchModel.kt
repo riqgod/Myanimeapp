@@ -1,18 +1,17 @@
 package com.riqsphere.myapplication.model.search
 
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
-import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
 
 class SearchModel(
-    val imageURL:String,
+    val id: Int,
+    val imageURL: String,
     val animeTitle: String,
-    val score:String,
-    val added:Boolean
+    val score: String
 ){
-    constructor(anime:Anime, boolean: Boolean):this(
+    constructor(anime:Anime): this(
+        id = anime.mal_id,
         imageURL = anime.imageURL,
         animeTitle = anime.title,
-        score = anime.score.toString(),
-        added = boolean // placeholder... should check the watchlist
+        score = anime.score.toString()
     )
 }

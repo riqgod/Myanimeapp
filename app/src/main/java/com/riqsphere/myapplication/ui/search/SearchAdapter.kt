@@ -1,13 +1,10 @@
 package com.riqsphere.myapplication.ui.search
 
 import android.app.Activity
-import android.content.Context
-import android.media.Image
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.TextView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.search.SearchModel
@@ -36,7 +33,7 @@ class SearchAdapter : BaseAdapter() {
         searchAnimeTitle.setText(sm.animeTitle)
         ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).into(searchImage)
         searchScore.setText(sm.score)
-        if(sm.added){
+        if(false){
             searchAdded.setImageResource(R.drawable.ic_added_to_list)
         }else{
             searchAdded.setImageResource(R.drawable.ic_add_to_list)
