@@ -1,6 +1,5 @@
 package com.riqsphere.myapplication.ui
 
-import android.app.ListActivity
 import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
@@ -11,12 +10,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.watchlist.alarm.WatchlistAlarm
 import com.riqsphere.myapplication.ui.animes.AnimesFragment
-import com.riqsphere.myapplication.ui.animes.DiscoverFragment
 import com.riqsphere.myapplication.ui.animes.SettingsFragment
+import com.riqsphere.myapplication.ui.discover.DiscoverFragment
+
 
 private const val PREFERENCE_FIRST_RUN = "first_run"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,12 +40,14 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        val intent:Intent = getIntent()
-        if(Intent.ACTION_SEARCH.equals(intent.action)){
-            val query:String = intent.getStringExtra(SearchManager.QUERY)
-            doMySearch(query);
-        }
         navigateToDefaultPage()
+    }
+
+    private fun handleIntent(intent:Intent) {
+        if (Intent.ACTION_SEARCH == intent.action) {
+            val query = intent.getStringExtra(SearchManager.QUERY)
+            doMySearch(query)
+        }
     }
 
     private fun doMySearch(query: String) {
@@ -61,4 +63,5 @@ class MainActivity : AppCompatActivity() {
     private fun installTasks() {
         WatchlistAlarm.setAlarm(this.application)
     }
+
 }

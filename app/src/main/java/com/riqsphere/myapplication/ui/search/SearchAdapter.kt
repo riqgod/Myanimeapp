@@ -29,6 +29,8 @@ class SearchAdapter : BaseAdapter() {
         val searchImage:ImageView = view.findViewById(R.id.lv_image)
         val searchScore:TextView = view.findViewById(R.id.lv_score)
         val searchAdded:ImageView = view.findViewById(R.id.lv_add_to_list)
+        val searchScoreStar: ImageView = view.findViewById(R.id.lv_star)
+        val searchScoreBg: ImageView = view.findViewById(R.id.lv_rectangle_score)
 
         searchAnimeTitle.setText(sm.animeTitle)
         ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).into(searchImage)
@@ -38,6 +40,9 @@ class SearchAdapter : BaseAdapter() {
         }else{
             searchAdded.setImageResource(R.drawable.ic_add_to_list)
         }
+
+        searchScoreStar.setImageResource(R.drawable.ic_star_1)
+        searchScoreBg.setImageResource(R.drawable.rectangle_score)
 
         return view;
     }

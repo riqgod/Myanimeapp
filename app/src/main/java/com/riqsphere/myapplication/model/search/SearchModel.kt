@@ -5,6 +5,7 @@ import com.github.doomsdayrs.jikan4java.types.main.anime.animePage.AnimePageAnim
 import com.github.doomsdayrs.jikan4java.types.main.season.SeasonSearchAnime
 import com.github.doomsdayrs.jikan4java.types.main.top.TopListing
 
+
 class SearchModel(
     val id: Int,
     val imageURL: String,

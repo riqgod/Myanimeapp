@@ -1,10 +1,15 @@
-package com.riqsphere.myapplication.ui.animes
+package com.riqsphere.myapplication.ui.discover
 
 import android.os.AsyncTask
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -15,7 +20,7 @@ import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
 import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
-import com.riqsphere.myapplication.ui.discover.DiscoverAdapter
+import com.riqsphere.myapplication.ui.SearchActivity
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -26,6 +31,7 @@ class DiscoverFragment : Fragment() {
     private lateinit var rootView: View
     private lateinit var viewPool: RecyclerView.RecycledViewPool
     private lateinit var allWatchlistAnime: LiveData<List<WatchlistAnime>>
+    private lateinit var editTxt:EditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView =  inflater.inflate(R.layout.fragment_discover, container, false)
@@ -35,7 +41,34 @@ class DiscoverFragment : Fragment() {
 
         viewPool = RecyclerView.RecycledViewPool()
         allWatchlistAnime = WatchlistViewModel(activity!!.application).allWatchlistAnime
+        setRecyclerViews()
 
+        editTxt = rootView.findViewById(R.id.search_input)
+        editTxt.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                goToSearchPage("Results:")
+                return@OnEditorActionListener true
+            }
+            false
+        })
+        editTxt.isFocusable=true
+
+        val button: ImageButton = rootView.findViewById(R.id.search_img_btn1)
+        button.setOnClickListener {
+            editTxt.requestFocus()
+        }
+
+        return rootView
+    }
+
+    private fun goToSearchPage(searchText: String) {
+        val i = Intent(activity, SearchActivity::class.java)
+        i.putExtra("searchInput",editTxt.text.toString())
+        i.putExtra("searchText",searchText)
+        startActivity(i)
+    }
+
+    private fun setRecyclerViews() {
         val empty = { arrayListOf (
             SearchModel(JikanCacheHandler.getAnime(27)),
             SearchModel(JikanCacheHandler.getAnime(20)),
@@ -65,8 +98,6 @@ class DiscoverFragment : Fragment() {
 
         val recyclers = arrayOf(top4uRecyclerView, seasonalRecyclerView, topUpcomingRecyclerView, mostPoplarRecyclerView, topScoreRecyclerView)
         observe(*recyclers)
-
-        return rootView
     }
 
     private val fetchCurrentSeason = {

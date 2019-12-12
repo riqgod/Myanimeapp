@@ -12,6 +12,39 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
+
+    <style name="foo" parent="Theme.AppCompat.Light">
+        <item name="actionBarTheme">@style/AppActionBarTheme</item>
+    </style>
+
+    <style name="AppActionBarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="searchViewStyle">@style/hintPaint</item>
+    </style>
+
+    <style name="hintPaint" parent="Widget.AppCompat.SearchView.ActionBar">
+        <!--This line changes the color of text in Toolbar-->
+        <item name="android:textColorPrimary">#64D2FF</item>
+        <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
+        <item name="android:textColorSecondary">#64D2FF</item>
+        <item name="android:textColorHint">#64D2FF</item>
+        <item name="android:textSize">16sp</item>
+        <item name="colorAccent">#64D2FF</item>
+        <item name="colorControlNormal">#64D2FF</item>
+        <item name="colorControlActivated">#64D2FF</item>
+        <item name="android:textColor">#64D2FF</item>
+        <item name="android:editTextColor">#64D2FF</item>
+    </style>
+
+    <style name="HintText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#64D2FF</item>
+        <item name="android:textColorHint">#64D2FF</item>
+        <item name="android:textSize">16sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">#64D2FF</item>
+        <item name="colorControlNormal">#64D2FF</item>
+        <item name="colorControlActivated">#64D2FF</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
