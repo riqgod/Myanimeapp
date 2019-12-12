@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.model.watchlist.alarm
+package com.riqsphere.myapplication.tasks
 
 import android.app.Application
 import android.content.BroadcastReceiver

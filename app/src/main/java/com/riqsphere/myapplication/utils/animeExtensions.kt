@@ -1,7 +1,7 @@
 package com.riqsphere.myapplication.utils
 
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
-import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
+import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import java.util.concurrent.CompletableFuture
 
 private const val EPS_PER_PAGE = 100

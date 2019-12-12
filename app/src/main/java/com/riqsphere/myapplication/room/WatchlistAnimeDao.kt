@@ -1,7 +1,11 @@
-package com.riqsphere.myapplication.model.watchlist.room
+package com.riqsphere.myapplication.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 
 @Dao
 interface WatchlistAnimeDao {

@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.model.watchlist.room
+package com.riqsphere.myapplication.model.watchlist
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

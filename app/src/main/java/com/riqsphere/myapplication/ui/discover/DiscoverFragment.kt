@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.search.SearchModel
-import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
-import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
+import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
+import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.ui.SearchActivity
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -40,7 +40,9 @@ class DiscoverFragment : Fragment() {
         }
 
         viewPool = RecyclerView.RecycledViewPool()
-        allWatchlistAnime = WatchlistViewModel(activity!!.application).allWatchlistAnime
+        allWatchlistAnime = MyaaViewModel(
+            activity!!.application
+        ).allWatchlistAnime
         setRecyclerViews()
 
         editTxt = rootView.findViewById(R.id.search_input)

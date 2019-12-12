@@ -1,20 +1,29 @@
-package com.riqsphere.myapplication.model.watchlist.room
+package com.riqsphere.myapplication.room
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
+import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import kotlinx.coroutines.launch
 
-class WatchlistViewModel(application: Application) : AndroidViewModel(application) {
+class MyaaViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repo: WatchlistAnimeRepository
+    private val repo: MyaaRepository
     val allWatchlistAnime: LiveData<List<WatchlistAnime>>
 
     init {
-        val watchlistAnimeDao = WatchlistAnimeDatabase.getDatabase(application).watchlistAnimeDao()
-        repo = WatchlistAnimeRepository(watchlistAnimeDao)
+        val db =
+            MyaaDatabase.getDatabase(
+                application
+            )
+        val watchlistAnimeDao = db.watchlistAnimeDao()
+        val recommendationDao = db.recommendationDao()
+        repo = MyaaRepository(
+            watchlistAnimeDao,
+            recommendationDao
+        )
         allWatchlistAnime = repo.allWatchlistAnime
     }
 
@@ -22,7 +31,11 @@ class WatchlistViewModel(application: Application) : AndroidViewModel(applicatio
         repo.insert(watchlistAnime)
     }
 
-    fun insert(anime: Anime) = insert(WatchlistAnime(anime))
+    fun insert(anime: Anime) = insert(
+        WatchlistAnime(
+            anime
+        )
+    )
 
     fun addEpisodeWatched(watchlistAnime: WatchlistAnime, episodeToAdd: Int): Boolean {
         val success = watchlistAnime.episodesWatched.add(episodeToAdd)

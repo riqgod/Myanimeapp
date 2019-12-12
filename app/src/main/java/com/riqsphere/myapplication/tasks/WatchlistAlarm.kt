@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.model.watchlist.alarm
+package com.riqsphere.myapplication.tasks
 
 import android.app.AlarmManager
 import android.app.Application
@@ -6,8 +6,7 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.riqsphere.myapplication.cache.JikanCacheHandler
-import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
+import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.utils.getEpisodesOut
 import java.util.*
 import kotlin.random.Random
@@ -16,7 +15,10 @@ object WatchlistAlarm : BroadcastReceiver() {
     fun setAlarm(application: Application) {
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, Random.Default.nextInt(RAND_MIN, RAND_MAX))
+            set(Calendar.HOUR_OF_DAY, Random.Default.nextInt(
+                RAND_MIN,
+                RAND_MAX
+            ))
         }
 
         val alarmMgr = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -34,15 +36,18 @@ object WatchlistAlarm : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         val application = context.let { it as Application }
 
-        val watchlistViewModel = WatchlistViewModel(application)
-        updateAllEpisodes(watchlistViewModel)
+        val watchlistViewModel =
+            MyaaViewModel(application)
+        updateAllEpisodes(
+            watchlistViewModel
+        )
     }
 
-    private fun updateAllEpisodes(watchlistViewModel: WatchlistViewModel) {
-        watchlistViewModel.allWatchlistAnime.value.let {
+    private fun updateAllEpisodes(myaaViewModel: MyaaViewModel) {
+        myaaViewModel.allWatchlistAnime.value.let {
             it?.forEach { watchlistAnime ->
                 val updatedEpisodesOut = watchlistAnime.getEpisodesOut().get()
-                watchlistViewModel.updateEpisodesOut(watchlistAnime.id, updatedEpisodesOut)
+                myaaViewModel.updateEpisodesOut(watchlistAnime.id, updatedEpisodesOut)
             }
         }
     }

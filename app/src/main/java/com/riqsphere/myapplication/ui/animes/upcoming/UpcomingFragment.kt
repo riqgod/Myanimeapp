@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.doomsdayrs.jikan4java.types.main.schedule.Schedule
 import com.github.doomsdayrs.jikan4java.types.main.schedule.SubAnime
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
-import com.riqsphere.myapplication.model.watchlist.room.WatchlistAnime
-import com.riqsphere.myapplication.model.watchlist.room.WatchlistViewModel
+import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
+import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.utils.addWeekday
 import com.riqsphere.myapplication.utils.nthWeekday
 import kotlinx.coroutines.GlobalScope
@@ -29,11 +28,12 @@ class UpcomingFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var viewAdapter: UpcomingAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var watchlistViewModel: WatchlistViewModel
+    private lateinit var myaaViewModel: MyaaViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        watchlistViewModel = WatchlistViewModel(this.activity!!.application)
-        watchlistViewModel.allWatchlistAnime.observe(this, Observer {
+        myaaViewModel =
+            MyaaViewModel(this.activity!!.application)
+        myaaViewModel.allWatchlistAnime.observe(this, Observer {
             it?.let {
                 GlobalScope.launch {
                     val upcoming = fetchUpcoming(it)

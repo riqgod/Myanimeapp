@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.riqsphere.myapplication.R
-import com.riqsphere.myapplication.model.watchlist.alarm.WatchlistAlarm
+import com.riqsphere.myapplication.tasks.WatchlistAlarm
 import com.riqsphere.myapplication.ui.animes.AnimesFragment
 import com.riqsphere.myapplication.ui.animes.SettingsFragment
 import com.riqsphere.myapplication.ui.discover.DiscoverFragment
