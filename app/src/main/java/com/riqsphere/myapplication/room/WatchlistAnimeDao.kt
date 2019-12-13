@@ -21,6 +21,9 @@ interface WatchlistAnimeDao {
     @Query("update watchlist_anime set episodesOut = :episodesOut where id = :id")
     suspend fun updateEpisodesOut(id: Int, episodesOut: Int)
 
+    @Query("delete from watchlist_anime where id = :id")
+    suspend fun delete(id: Int)
+
     @Query("delete from watchlist_anime")
     suspend fun deleteAll()
 }

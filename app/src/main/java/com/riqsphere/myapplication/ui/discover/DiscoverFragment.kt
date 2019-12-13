@@ -1,7 +1,7 @@
 package com.riqsphere.myapplication.ui.discover
 
-import android.os.AsyncTask
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,20 +17,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
+import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.ui.SearchActivity
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 
 class DiscoverFragment : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var viewPool: RecyclerView.RecycledViewPool
+    private lateinit var myaaViewModel: MyaaViewModel
     private lateinit var allWatchlistAnime: LiveData<List<WatchlistAnime>>
+    private lateinit var allRecommendation: LiveData<List<Recommendation>>
     private lateinit var editTxt:EditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,9 +44,9 @@ class DiscoverFragment : Fragment() {
         }
 
         viewPool = RecyclerView.RecycledViewPool()
-        allWatchlistAnime = MyaaViewModel(
-            activity!!.application
-        ).allWatchlistAnime
+        myaaViewModel = MyaaViewModel(activity!!.application)
+        allWatchlistAnime = myaaViewModel.allWatchlistAnime
+        allRecommendation = myaaViewModel.allRecommendation
         setRecyclerViews()
 
         editTxt = rootView.findViewById(R.id.search_input)
@@ -80,26 +84,26 @@ class DiscoverFragment : Fragment() {
             SearchModel(JikanCacheHandler.getAnime(24))
         )}
 
-        val top4uRecyclerView = initializeRecyclerView(R.id.dc_rv_top4u)
-        val top4uPair = Pair(top4uRecyclerView, empty)
+        val top4uRecyclerView = initializeRecommendationsRecyclerView(R.id.dc_rv_top4u)
+        observeRecommendation(top4uRecyclerView)
 
-        val seasonalRecyclerView = initializeRecyclerView(R.id.dc_rv_seasonal)
+        val seasonalRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_seasonal)
         val seasonalPair = Pair(seasonalRecyclerView, fetchCurrentSeason)
 
-        val topUpcomingRecyclerView = initializeRecyclerView(R.id.dc_rv_top_upcoming)
+        val topUpcomingRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_top_upcoming)
         val topUpcomingPair = Pair(topUpcomingRecyclerView, fetchTopUpcoming)
 
-        val mostPoplarRecyclerView = initializeRecyclerView(R.id.dc_rv_mp)
+        val mostPoplarRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_mp)
         val mostPoplarPair = Pair(mostPoplarRecyclerView, fetchMostPoplar)
 
-        val topScoreRecyclerView = initializeRecyclerView(R.id.dc_rv_score)
+        val topScoreRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_score)
         val topScorePair = Pair(topScoreRecyclerView, fetchTopScore)
 
-        val pairs = arrayOf(top4uPair, seasonalPair, topUpcomingPair, mostPoplarPair, topScorePair)
+        val pairs = arrayOf(seasonalPair, topUpcomingPair, mostPoplarPair, topScorePair)
         AsyncDataSetter().execute(*pairs)
 
         val recyclers = arrayOf(top4uRecyclerView, seasonalRecyclerView, topUpcomingRecyclerView, mostPoplarRecyclerView, topScoreRecyclerView)
-        observe(*recyclers)
+        observeWatchlist(*recyclers)
     }
 
     private val fetchCurrentSeason = {
@@ -118,7 +122,19 @@ class DiscoverFragment : Fragment() {
         SearchModel.arrayListFromAnimePageAnime(JikanCacheHandler.getTopScore())
     }
 
-    private fun initializeRecyclerView(recyclerViewID: Int): RecyclerView {
+    private fun initializeRecommendationsRecyclerView(recyclerViewID: Int): RecyclerView {
+        val adapt = DiscoverRecommendationAdapter(activity!!)
+        val manager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        val rv = rootView.findViewById<RecyclerView>(recyclerViewID)
+        rv.apply {
+            layoutManager = manager
+            adapter = adapt
+            setRecycledViewPool(viewPool)
+        }
+        return rv
+    }
+
+    private fun initializeDiscoverRecyclerView(recyclerViewID: Int): RecyclerView {
         val adapt = DiscoverAdapter(activity!!)
         val manager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         val rv = rootView.findViewById<RecyclerView>(recyclerViewID)
@@ -130,12 +146,31 @@ class DiscoverFragment : Fragment() {
         return rv
     }
 
-    private fun observe(vararg params: RecyclerView) {
+    private fun observeRecommendation(vararg params: RecyclerView) {
+        params.forEach { recyclerView ->
+            allRecommendation.observe(this, Observer {
+                when {
+                    (recyclerView.adapter is DiscoverRecommendationAdapter) -> {
+                        val adapt = recyclerView.adapter as DiscoverRecommendationAdapter
+                        adapt.setRecListData(it)
+                    }
+                }
+            })
+        }
+    }
+
+    private fun observeWatchlist(vararg params: RecyclerView) {
         params.forEach { recyclerView ->
             allWatchlistAnime.observe(this, Observer {
-                if (recyclerView.adapter is DiscoverAdapter) {
-                    val adapt = recyclerView.adapter as DiscoverAdapter
-                    adapt.setWatchlistData(it)
+                when {
+                    (recyclerView.adapter is DiscoverAdapter) -> {
+                        val adapt = recyclerView.adapter as DiscoverAdapter
+                        adapt.setWatchlistData(it)
+                    }
+                    (recyclerView.adapter is DiscoverRecommendationAdapter) -> {
+                        val adapt = recyclerView.adapter as DiscoverRecommendationAdapter
+                        adapt.setWatchlistData(it)
+                    }
                 }
             })
         }
@@ -148,7 +183,7 @@ class DiscoverFragment : Fragment() {
                     launch {
                         if (pair != null) {
                             val recyclerView = pair.first
-                            val data = fetchData(pair.second)
+                            val data = withContext(Dispatchers.Unconfined) { fetchData(pair.second) }
                             recyclerView.setData(data)
                         }
                     }
@@ -159,10 +194,10 @@ class DiscoverFragment : Fragment() {
 
         private inline fun <T> fetchData(func: () -> T) = func()
 
-        private fun RecyclerView.setData(data: ArrayList<SearchModel>) {
+        private suspend fun RecyclerView.setData(data: ArrayList<SearchModel>) {
             if (adapter is DiscoverAdapter) {
                 val discoverAdapter = adapter as DiscoverAdapter
-                MainScope().launch {
+                withContext(Dispatchers.Main) {
                     discoverAdapter.setSearchData(data)
                 }
             }

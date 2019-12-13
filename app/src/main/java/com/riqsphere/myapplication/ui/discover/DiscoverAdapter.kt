@@ -38,6 +38,7 @@ class DiscoverAdapter (private val mContext:Context) : RecyclerView.Adapter<Disc
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.setLoading()
         holder.bindView(position)
     }
 
@@ -60,6 +61,10 @@ class DiscoverAdapter (private val mContext:Context) : RecyclerView.Adapter<Disc
             }
         }
 
+        fun setLoading() {
+            ImageHandler.getInstance(this@DiscoverAdapter.mContext).load(R.drawable.neko).into(cardAnimeImage)
+            cardAnimeTitle.text = "Loading..."
+            cardAnimeScore.text = ""
+        }
     }
-
 }

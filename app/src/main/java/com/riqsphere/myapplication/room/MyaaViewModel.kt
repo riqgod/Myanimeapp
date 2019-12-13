@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.Transaction
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
-import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import kotlinx.coroutines.launch
@@ -34,20 +33,10 @@ class MyaaViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insert(watchlistAnime: WatchlistAnime) = viewModelScope.launch {
         repo.insert(watchlistAnime)
-        launch {
-            val anime = watchlistAnime.toAnime()
-            val recommend = JikanCacheHandler.getRecommendationPage(anime)
-            val recommendation = Recommendation.arrayListFrom(watchlistAnime.id, recommend)
-            recommendation.forEach {
-                repo.insert(it)
-            }
-        }
     }
 
     fun insert(anime: Anime) = insert(
-        WatchlistAnime(
-            anime
-        )
+        WatchlistAnime(anime)
     )
 
     @Transaction
@@ -76,6 +65,10 @@ class MyaaViewModel(application: Application) : AndroidViewModel(application) {
 
     fun updateEpisodesOut(id: Int, episodesOut: Int) = viewModelScope.launch {
         repo.updateEpisodesOut(id, episodesOut)
+    }
+
+    fun deleteAllRecs() = viewModelScope.launch {
+        repo.deleteAllRecs()
     }
 
     fun deleteAll() = viewModelScope.launch {

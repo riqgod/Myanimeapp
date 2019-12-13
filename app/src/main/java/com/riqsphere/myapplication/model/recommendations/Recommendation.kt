@@ -1,24 +1,23 @@
 package com.riqsphere.myapplication.model.recommendations
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.github.doomsdayrs.jikan4java.types.support.recommendations.Recommend
 
 @Entity(
-    tableName = "recommendation",
-    primaryKeys = ["from_id", "to_id"]
+    tableName = "recommendation"
 )
 data class Recommendation (
-    val from_id: Int,
-    val to_id: Int,
-    val count: Int
+    @PrimaryKey
+    val id: Int,
+    var count: Int
 ) {
-    constructor(sourceId: Int, recommend: Recommend): this(
-        sourceId,
+    constructor(recommend: Recommend): this(
         recommend.mal_id,
         recommend.recommendation_count
     )
 
     companion object {
-        fun arrayListFrom(sourceId: Int, other: ArrayList<Recommend>) = other.mapTo(arrayListOf(), { Recommendation(sourceId, it) })
+        fun arrayListFrom(other: ArrayList<Recommend>) = other.mapTo(arrayListOf(), { Recommendation(it) })
     }
 }
