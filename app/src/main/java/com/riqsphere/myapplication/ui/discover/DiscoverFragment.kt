@@ -129,7 +129,6 @@ class DiscoverFragment : Fragment() {
         rv.apply {
             layoutManager = manager
             adapter = adapt
-            setRecycledViewPool(viewPool)
         }
         return rv
     }

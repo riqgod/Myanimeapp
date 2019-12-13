@@ -52,6 +52,7 @@ class DiscoverRecommendationAdapter (private val mContext:Context) : RecyclerVie
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setLoading()
+        holder.preBind(recList[position])
         BindAsync(holder, recList[position].id).execute()
     }
 
@@ -61,11 +62,14 @@ class DiscoverRecommendationAdapter (private val mContext:Context) : RecyclerVie
         private val cardAnimeScore: TextView = itemView.findViewById(R.id.dc_score)
         private val cardAnimeAdded: ImageView = itemView.findViewById(R.id.dc_add_to_list)
 
-        fun bindView(anime: Anime) {
-            ImageHandler.getInstance(this@DiscoverRecommendationAdapter.mContext).load(anime.imageURL).into(cardAnimeImage)
-            cardAnimeTitle.text = anime.title
-            cardAnimeScore.text = anime.score.toString()
+        fun preBind(recommendation: Recommendation) {
+            ImageHandler.getInstance(this@DiscoverRecommendationAdapter.mContext).load(recommendation.imageURL).into(cardAnimeImage)
+            cardAnimeTitle.text = recommendation.title
             cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
+        }
+
+        fun bindView(anime: Anime) {
+            cardAnimeScore.text = anime.score.toString()
         }
 
         fun setLoading() {

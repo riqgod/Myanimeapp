@@ -10,11 +10,15 @@ import com.github.doomsdayrs.jikan4java.types.support.recommendations.Recommend
 data class Recommendation (
     @PrimaryKey
     val id: Int,
-    var count: Int
+    var count: Int,
+    val imageURL: String,
+    val title: String
 ) {
     constructor(recommend: Recommend): this(
         recommend.mal_id,
-        recommend.recommendation_count
+        recommend.recommendation_count,
+        recommend.image_url,
+        recommend.title
     )
 
     companion object {
