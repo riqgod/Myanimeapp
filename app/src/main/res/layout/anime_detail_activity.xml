@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/anime_bg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/collapsing_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/anime_bg_collapsing_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:foreground="@drawable/gradient_effect_no_corners"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/bokunoheroda" />
+
+                    <TextView
+                        android:id="@+id/anime_bg_tittle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="Boku no Hero Academia"
+                        android:textAlignment="viewStart"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toTopOf="@+id/anime_bg_subtitle"
+                        app:layout_constraintEnd_toStartOf="@+id/anime_bg_score_bg"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:lineHeight="24dp" />
+
+                    <TextView
+                        android:id="@+id/anime_bg_subtitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="4 seasons • Action, Comedy, Super Power, School, Shounen"
+                        android:textAlignment="viewStart"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toTopOf="@+id/anime_bg_progress_bar"
+                        app:layout_constraintEnd_toStartOf="@+id/anime_bg_score_bg"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:lineHeight="16.5dp" />
+
+                    <ProgressBar
+                        android:id="@+id/anime_bg_progress_bar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="0dp"
+                        android:layout_height="6dp"
+                        android:indeterminate="false"
+                        android:indeterminateOnly="false"
+                        android:max="100"
+                        android:progress="50"
+                        android:progressBackgroundTint="#80C4C4C4"
+                        android:progressDrawable="@drawable/progress_bar"
+                        android:progressTint="#CCFFF652"
+                        app:layout_constraintBottom_toBottomOf="@id/anime_bg_collapsing_image"
+                        app:layout_constraintEnd_toEndOf="@id/anime_bg_collapsing_image"
+                        app:layout_constraintStart_toStartOf="@id/anime_bg_collapsing_image" />
+
+                    <ImageView
+                        android:id="@+id/anime_bg_score_bg"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/anime_bg_score"
+                        app:layout_constraintEnd_toEndOf="@+id/anime_bg_score"
+                        app:layout_constraintStart_toStartOf="@+id/anime_bg_score"
+                        app:layout_constraintTop_toTopOf="@+id/anime_bg_score"
+                        app:srcCompat="@drawable/rectangle_score" />
+
+                    <TextView
+                        android:id="@+id/anime_bg_score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:fontFamily="sans-serif-black"
+                        android:paddingLeft="24dp"
+                        android:paddingEnd="10dp"
+                        android:text="8,00"
+                        android:textAlignment="viewStart"
+                        android:textColor="#ffffff"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/anime_bg_collapsing_image" />
+
+                    <ImageView
+                        android:id="@+id/anime_bg_star"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/anime_bg_score"
+                        app:layout_constraintStart_toStartOf="@+id/anime_bg_score"
+                        app:layout_constraintTop_toTopOf="@+id/anime_bg_score"
+                        app:srcCompat="@drawable/ic_star_1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs_anime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/MyCustomTabLayout"
+            android:alwaysDrawnWithCache="false"
+            android:background="#ffffff"
+            android:defaultFocusHighlightEnabled="false"
+            android:textAlignment="center"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="#64D2FF"
+            app:tabIndicatorHeight="2.3dp"
+            app:tabSelectedTextColor="#FFFFFF"
+            app:tabTextColor="#B3979797"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/anime_bg">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ABOUT" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EPISODES" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RECS" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabs_anime"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

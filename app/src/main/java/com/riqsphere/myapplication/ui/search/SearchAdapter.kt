@@ -22,7 +22,7 @@ class SearchAdapter : BaseAdapter() {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-       val view = act.layoutInflater.inflate(R.layout.anime_listview,parent,false)
+       val view = act.layoutInflater.inflate(R.layout.search_listview,parent,false)
         val sm = list.get(position)
 
         val searchAnimeTitle:TextView = view.findViewById(R.id.lv_anime_title)
