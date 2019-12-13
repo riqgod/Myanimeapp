@@ -32,4 +32,16 @@ data class WatchlistAnime(
         broadcast = anime.broadcast
     )
 
+    fun toAnime(): Anime {
+        val anime = Anime()
+        anime.mal_id = id
+        anime.title = title
+        anime.title_english = title_english
+        anime.title_japanese = title_japanese
+        anime.imageURL = imgURL
+        anime.episodes = episodes
+        anime.broadcast = broadcast
+
+        return anime
+    }
 }

@@ -10,6 +10,7 @@ import com.github.doomsdayrs.jikan4java.types.main.anime.animePage.AnimePageAnim
 import com.github.doomsdayrs.jikan4java.types.main.schedule.Schedule
 import com.github.doomsdayrs.jikan4java.types.main.season.SeasonSearchAnime
 import com.github.doomsdayrs.jikan4java.types.main.top.TopListing
+import com.github.doomsdayrs.jikan4java.types.support.recommendations.Recommend
 import com.riqsphere.myapplication.utils.Singletons
 import com.riqsphere.myapplication.utils.getEpisodesOut
 import com.riqsphere.myapplication.utils.jikanSeason
@@ -101,4 +102,18 @@ object JikanCacheHandler {
 
     private const val TOP_SCORE_REQ = 6
     fun getTopScore() = getPoplarScoreCommon(TOP_SCORE_REQ, AnimeOrderBy.SCORE)
+
+    private const val REC_PAGE_REQ = 7
+    fun getRecommendationPage(anime: Anime): ArrayList<Recommend>{
+        val fetch = {
+            anime.recommendationPage.get().recommends
+        }
+
+        val calendar = Calendar.getInstance()
+        val date = calendar.get(Calendar.DATE)
+        var hash = date.toLong()
+        hash = hash * 100 + REC_PAGE_REQ
+
+        return Cache.get(fetch, hash)
+    }
 }

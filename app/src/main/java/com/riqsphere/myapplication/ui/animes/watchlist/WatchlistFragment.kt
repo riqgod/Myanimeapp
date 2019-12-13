@@ -8,10 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.riqsphere.myapplication.R
-import com.riqsphere.myapplication.cache.JikanCacheHandler
-import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 
 
@@ -33,27 +30,6 @@ class WatchlistFragment : Fragment() {
             viewAdapter.setData(it)
         })
 
-        val naruto = WatchlistAnime(
-            temporaryFetch(20)
-        )
-        myaaViewModel.insert(naruto) //naruto
-        val hero4 = WatchlistAnime(
-            temporaryFetch(38408)
-        )
-        myaaViewModel.insert(hero4) //boku no hero academia 4
-        val nrt = WatchlistAnime(
-            temporaryFetch(20)
-        )
-        myaaViewModel.insert(nrt) //naruto
-        val random = WatchlistAnime(
-            temporaryFetch(21)
-        )
-        myaaViewModel.insert(random) //random id
-        val rdm = WatchlistAnime(
-            temporaryFetch(22)
-        )
-        myaaViewModel.insert(rdm)
-
         val view = inflater.inflate(R.layout.fragment_watchlist,container,false)
         val watchlistAdapter = WatchlistAdapter(activity!!.applicationContext)
 
@@ -66,10 +42,4 @@ class WatchlistFragment : Fragment() {
 
         return view
     }
-
-
-    private fun temporaryFetch(id: Int): Anime{
-        return JikanCacheHandler.getAnime(id)
-    }
-
 }

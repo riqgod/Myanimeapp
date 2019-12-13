@@ -4,7 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import androidx.room.Transaction
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
+import com.riqsphere.myapplication.cache.JikanCacheHandler
+import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import kotlinx.coroutines.launch
 
@@ -12,6 +15,7 @@ class MyaaViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repo: MyaaRepository
     val allWatchlistAnime: LiveData<List<WatchlistAnime>>
+    val allRecommendation: LiveData<List<Recommendation>>
 
     init {
         val db =
@@ -25,10 +29,19 @@ class MyaaViewModel(application: Application) : AndroidViewModel(application) {
             recommendationDao
         )
         allWatchlistAnime = repo.allWatchlistAnime
+        allRecommendation = repo.allRecommendation
     }
 
     fun insert(watchlistAnime: WatchlistAnime) = viewModelScope.launch {
         repo.insert(watchlistAnime)
+        launch {
+            val anime = watchlistAnime.toAnime()
+            val recommend = JikanCacheHandler.getRecommendationPage(anime)
+            val recommendation = Recommendation.arrayListFrom(watchlistAnime.id, recommend)
+            recommendation.forEach {
+                repo.insert(it)
+            }
+        }
     }
 
     fun insert(anime: Anime) = insert(
@@ -37,6 +50,7 @@ class MyaaViewModel(application: Application) : AndroidViewModel(application) {
         )
     )
 
+    @Transaction
     fun addEpisodeWatched(watchlistAnime: WatchlistAnime, episodeToAdd: Int): Boolean {
         val success = watchlistAnime.episodesWatched.add(episodeToAdd)
         if (!success) {
@@ -48,6 +62,7 @@ class MyaaViewModel(application: Application) : AndroidViewModel(application) {
         return true
     }
 
+    @Transaction
     fun removeEpisodeWatched(watchlistAnime: WatchlistAnime, episodeToRemove: Int): Boolean {
         val success = watchlistAnime.episodesWatched.remove(episodeToRemove)
         if (!success) {

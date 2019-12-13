@@ -9,19 +9,13 @@ import com.riqsphere.myapplication.model.recommendations.Recommendation
 
 @Dao
 interface RecommendationDao {
-    @Query("select * from recommendation order by count desc")
+    @Query("select * from recommendation")
     fun getRecommendations(): LiveData<List<Recommendation>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(recommendation: Recommendation)
 
-    @Query("update recommendation set count = (count + :add) where id = :id")
-    suspend fun addCount(id: Int, add: Int)
-
-    @Query("update recommendation set count = 0")
-    suspend fun reset()
-
-    @Query("delete from recommendation where id = :id")
+    @Query("delete from recommendation where from_id = :id")
     suspend fun delete(id: Int)
 
     @Query("delete from recommendation")

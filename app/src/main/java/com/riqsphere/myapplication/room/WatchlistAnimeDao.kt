@@ -10,7 +10,7 @@ import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 @Dao
 interface WatchlistAnimeDao {
     @Query("select * from watchlist_anime")
-    fun getUnorderedWatchlistAnime(): LiveData<List<WatchlistAnime>>
+    fun getWatchlistAnimes(): LiveData<List<WatchlistAnime>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(watchlistAnime: WatchlistAnime)
