@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBEB"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/episodes_watch_next_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="WATCH NEXT"
+        android:textColor="#979797"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/episodes_watch_next_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/episodes_watch_next_text">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/episodes_all_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="ALL EPISODES"
+        android:textColor="#979797"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/episodes_watch_next_rv" />
+
+    <ImageView
+        android:id="@+id/episodes_all_rect"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/episodes_all_text"
+        app:srcCompat="@drawable/rect_episodes_card" />
+
+    <TextView
+        android:id="@+id/episodes_all_inside_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Episodes"
+        android:textColor="#979797"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/episodes_all_rect"
+        app:layout_constraintStart_toStartOf="@+id/episodes_all_rect"
+        app:layout_constraintTop_toTopOf="@+id/episodes_all_rect" />
+
+    <TextView
+        android:id="@+id/episodes_all_total_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="0/13"
+        app:layout_constraintBottom_toBottomOf="@+id/episodes_all_rect"
+        app:layout_constraintEnd_toStartOf="@+id/episodes_all_check_as_watched"
+        app:layout_constraintTop_toTopOf="@+id/episodes_all_rect" />
+
+    <ImageButton
+        android:id="@+id/episodes_all_check_as_watched"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/episodes_all_rect"
+        app:layout_constraintEnd_toEndOf="@+id/episodes_all_rect"
+        app:layout_constraintTop_toTopOf="@+id/episodes_all_rect"
+        app:srcCompat="@drawable/ic_button_check_as_watched" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/episodes_all_rv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/episodes_all_rect" />
+</androidx.constraintlayout.widget.ConstraintLayout>
