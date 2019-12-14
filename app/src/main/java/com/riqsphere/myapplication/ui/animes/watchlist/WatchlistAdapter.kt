@@ -2,15 +2,19 @@ package com.riqsphere.myapplication.ui.animes.watchlist
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
+import com.riqsphere.myapplication.ui.animeDetail.AnimeDetailActivity
 import com.riqsphere.myapplication.utils.ImageHandler
 
 class WatchlistAdapter (private val context: Context) : RecyclerView.Adapter<WatchlistAdapter.WatchlistAnimeViewHolder>() {
@@ -33,7 +37,7 @@ class WatchlistAdapter (private val context: Context) : RecyclerView.Adapter<Wat
     override fun getItemCount() = watchlistAnimes.size
 
     inner class WatchlistAnimeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val cardAnimeImage: ImageView = itemView.findViewById(R.id.wl_image)
+        private val cardAnimeImage: ImageButton = itemView.findViewById(R.id.wl_image)
         private val cardAnimeTitle :TextView = itemView.findViewById(R.id.wl_anime_title)
         private val cardAnimeProgress: ProgressBar = itemView.findViewById(R.id.wl_progress_bar)
 
@@ -43,6 +47,7 @@ class WatchlistAdapter (private val context: Context) : RecyclerView.Adapter<Wat
             cardAnimeTitle.text = watchlistAnime.title
             cardAnimeProgress.max = watchlistAnime.episodes
             cardAnimeProgress.progress = watchlistAnime.episodesWatched.size // just a placeholder.
+
         }
     }
 }

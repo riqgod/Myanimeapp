@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="sans-serif"
             android:text="Synopsis"
             android:textAlignment="viewStart"
             android:textSize="18sp"
@@ -60,7 +60,8 @@
             android:text="Related Anime"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/synopsis" />
+            app:layout_constraintTop_toBottomOf="@+id/synopsis"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/prequel"
@@ -72,7 +73,8 @@
             android:textColor="#979797"
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/related" />
+            app:layout_constraintTop_toBottomOf="@+id/related"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ad_rv_prequel"
@@ -83,7 +85,8 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/prequel" />
+            app:layout_constraintTop_toBottomOf="@+id/prequel"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/sequel"
@@ -95,7 +98,8 @@
             android:textColor="#979797"
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ad_rv_prequel" />
+            app:layout_constraintTop_toBottomOf="@+id/ad_rv_prequel"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ad_rv_sequel"
@@ -106,6 +110,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sequel" />
+            app:layout_constraintTop_toBottomOf="@+id/sequel"
+            android:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
