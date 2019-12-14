@@ -13,14 +13,14 @@ import com.github.doomsdayrs.jikan4java.types.support.recommendations.Recommend
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.search.SearchModel
-import com.riqsphere.myapplication.ui.search.SearchAdapter
+import com.riqsphere.myapplication.ui.discover.search.SearchAdapter
 
 class RecsFragment(anime: Anime) : Fragment(){
 
     private val animus:Anime = anime
 
     private lateinit var list:ListView
-    private lateinit var adapter:SearchAdapter
+    private lateinit var adapter: SearchAdapter
     private lateinit var model:ArrayList<SearchModel>
 
     override fun onCreateView(
@@ -42,8 +42,8 @@ class RecsFragment(anime: Anime) : Fragment(){
         list = view.findViewById<ListView>(R.id.recs_listview)
 
         //pass results to ListViewAdapter
-        adapter = SearchAdapter()
-        adapter.setData(model,activity!!)
+        adapter = SearchAdapter(activity!!)
+        adapter.setData(model)
 
         //binds the adapter to the list view
         list.adapter = adapter

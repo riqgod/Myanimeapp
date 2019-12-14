@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.animeDetail.episodes.EpisodesModel
+import com.riqsphere.myapplication.utils.MarginItemDecoration
 
 class EpisodesFragment(anime:Anime) : Fragment(){
 
@@ -48,7 +49,9 @@ class EpisodesFragment(anime:Anime) : Fragment(){
         wn_recyclerView = view.findViewById<RecyclerView>(R.id.episodes_watch_next_rv).apply {
             layoutManager = wn_viewManager
             adapter = wn_viewAdapter
+            addItemDecoration(MarginItemDecoration(175))
         }
+
 
         //all episodes [to com sono]
         val all_viewManager = LinearLayoutManager(activity)
