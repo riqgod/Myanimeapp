@@ -20,7 +20,10 @@ class AnimeDetailActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.anime_detail_activity)
 
-        val fragmentPagerAdapter = AnimeDetailFragmentPagerAdapter(this,supportFragmentManager)
+        //get temporary anime to pass to another fragments...
+        temporaryAnime = temporaryFetch(37520)
+
+        val fragmentPagerAdapter = AnimeDetailFragmentPagerAdapter(this,supportFragmentManager,temporaryAnime)
         val viewPager: ViewPager = findViewById(R.id.anime_view_pager)
         viewPager.adapter = fragmentPagerAdapter
         val tabs: TabLayout = this.findViewById(R.id.tabs_anime)
@@ -33,11 +36,9 @@ class AnimeDetailActivity : AppCompatActivity(){
         val animeScore = findViewById<TextView>(R.id.anime_bg_score)
 
         //temporary feed
-        temporaryAnime = temporaryFetch(37520)
-
         imageBg.setImageResource(R.drawable.dororo) //temporary
         animeTitle.setText(temporaryAnime.title)
-        animeSubtitle.setText(temporaryAnime.genres.toString())
+        animeSubtitle.setText(getGenres(temporaryAnime))
         animeScore.setText(temporaryAnime.score.toString())
 
 
@@ -46,6 +47,22 @@ class AnimeDetailActivity : AppCompatActivity(){
 
     fun temporaryFetch(id:Int): Anime {
         return JikanCacheHandler.getAnime(id)
+    }
+
+    fun getGenres(anime:Anime): String{
+        val genres = anime.genres
+        var genresText:String = ""
+        var count:Int = 0
+        for (genre in genres){
+            if(count+1 >= genres.size){
+                genresText += genre.name+"."
+            }else{
+                genresText += genre.name+", "
+            }
+            count++
+        }
+
+        return genresText
     }
 
 

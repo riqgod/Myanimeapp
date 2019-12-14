@@ -55,13 +55,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-medium"
             android:text="Related Anime"
             android:textSize="18dp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/synopsis"
-            android:visibility="gone" />
+            app:layout_constraintTop_toBottomOf="@+id/synopsis" />
 
         <TextView
             android:id="@+id/prequel"
@@ -72,9 +71,9 @@
             android:text="Prequel:"
             android:textColor="#979797"
             android:textSize="14dp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/related"
-            android:visibility="gone" />
+            app:layout_constraintTop_toBottomOf="@+id/related" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ad_rv_prequel"
@@ -83,10 +82,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/prequel"
-            android:visibility="gone" />
+            app:layout_constraintTop_toBottomOf="@+id/prequel" />
 
         <TextView
             android:id="@+id/sequel"
@@ -97,9 +96,9 @@
             android:text="Sequel:"
             android:textColor="#979797"
             android:textSize="14dp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ad_rv_prequel"
-            android:visibility="gone" />
+            app:layout_constraintTop_toBottomOf="@+id/ad_rv_prequel" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ad_rv_sequel"
@@ -108,9 +107,20 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sequel"
-            android:visibility="gone" />
+            app:layout_constraintTop_toBottomOf="@+id/sequel">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/emptyBox"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ad_rv_sequel" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
