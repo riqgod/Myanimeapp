@@ -1,5 +1,6 @@
 package com.riqsphere.myapplication.ui.animes.watchlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.room.MyaaViewModel
+import com.riqsphere.myapplication.ui.animeDetail.AnimeDetailActivity
 
 
 class WatchlistFragment : Fragment() {
@@ -42,4 +44,5 @@ class WatchlistFragment : Fragment() {
 
         return view
     }
+
 }

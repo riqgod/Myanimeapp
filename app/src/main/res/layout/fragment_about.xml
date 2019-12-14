@@ -61,7 +61,7 @@
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/synopsis"
-            tools:visibility="gone" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/prequel"
@@ -74,7 +74,7 @@
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/related"
-            tools:visibility="gone" />
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ad_rv_prequel"
@@ -86,7 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/prequel"
-            tools:visibility="gone" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/sequel"
@@ -99,7 +99,7 @@
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ad_rv_prequel"
-            tools:visibility="gone" />
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ad_rv_sequel"
@@ -111,6 +111,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sequel"
-            tools:visibility="gone" />
+            android:visibility="gone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

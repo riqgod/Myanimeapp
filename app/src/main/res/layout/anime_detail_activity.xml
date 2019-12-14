@@ -38,12 +38,12 @@
                         android:id="@+id/anime_bg_collapsing_image"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
-                        android:foreground="@drawable/gradient_effect_no_corners"
+                        android:foreground="@drawable/gradient_effect_no_corners_bigger"
                         android:scaleType="centerCrop"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/bokunoheroda" />
+                        android:src="@drawable/bokunoheroda" />
 
                     <TextView
                         android:id="@+id/anime_bg_tittle"
@@ -52,7 +52,6 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
                         android:maxLines="2"
                         android:text="Boku no Hero Academia"
                         android:textAlignment="viewStart"
@@ -71,7 +70,6 @@
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="8dp"
                         android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
                         android:maxLines="2"
                         android:text="4 seasons • Action, Comedy, Super Power, School, Shounen"
                         android:textAlignment="viewStart"
@@ -106,7 +104,7 @@
                         app:layout_constraintEnd_toEndOf="@+id/anime_bg_score"
                         app:layout_constraintStart_toStartOf="@+id/anime_bg_score"
                         app:layout_constraintTop_toTopOf="@+id/anime_bg_score"
-                        app:srcCompat="@drawable/rectangle_score" />
+                        android:src="@drawable/rectangle_score" />
 
                     <TextView
                         android:id="@+id/anime_bg_score"
@@ -132,7 +130,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/anime_bg_score"
                         app:layout_constraintStart_toStartOf="@+id/anime_bg_score"
                         app:layout_constraintTop_toTopOf="@+id/anime_bg_score"
-                        app:srcCompat="@drawable/ic_star_1" />
+                        android:src="@drawable/ic_star_1" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -176,13 +174,14 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
+            android:id="@+id/anime_view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabs_anime"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_constraintTop_toBottomOf="@+id/tabs_anime" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
