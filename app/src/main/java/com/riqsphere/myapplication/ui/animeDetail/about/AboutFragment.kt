@@ -49,7 +49,7 @@ class AboutFragment(anime: Anime) : Fragment(){
         processedAired = processedAired.substringAfter("to ") //ignore o "to "
 
         if (processedAired.length > 2) { //checks if the next element is a "? "
-            resultAppend += processedAired.substring(0, 3)
+            resultAppend += processedAired.substring(0, 3)+", "
             processedAired = processedAired.substringAfter(", ")
 
             resultAppend += processedAired.substring(0, 4)
