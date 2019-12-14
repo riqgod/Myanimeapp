@@ -6,11 +6,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.google.android.material.tabs.TabLayout
 import com.riqsphere.myapplication.R
+import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.ui.animeDetail.AnimeDetailFragmentPagerAdapter
 
 class AnimeDetailActivity : AppCompatActivity(){
+
+    public lateinit var temporaryAnime:Anime
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +33,20 @@ class AnimeDetailActivity : AppCompatActivity(){
         val animeScore = findViewById<TextView>(R.id.anime_bg_score)
 
         //temporary feed
-        imageBg.setImageResource(R.drawable.dororo)
-        animeTitle.setText("Dororo")
-        animeSubtitle.setText(" Action, Adventure, Historical, Demons, Supernatural, Samurai, Shounen")
-        animeScore.setText("8,23")
-        
+        temporaryAnime = temporaryFetch(37520)
+
+        imageBg.setImageResource(R.drawable.dororo) //temporary
+        animeTitle.setText(temporaryAnime.title)
+        animeSubtitle.setText(temporaryAnime.genres.toString())
+        animeScore.setText(temporaryAnime.score.toString())
+
 
 
     }
-    
+
+    fun temporaryFetch(id:Int): Anime {
+        return JikanCacheHandler.getAnime(id)
+    }
+
+
 }
