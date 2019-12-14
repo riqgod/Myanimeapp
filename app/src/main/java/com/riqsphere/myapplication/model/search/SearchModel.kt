@@ -4,6 +4,7 @@ import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.github.doomsdayrs.jikan4java.types.main.anime.animePage.AnimePageAnime
 import com.github.doomsdayrs.jikan4java.types.main.season.SeasonSearchAnime
 import com.github.doomsdayrs.jikan4java.types.main.top.TopListing
+import com.github.doomsdayrs.jikan4java.types.support.recommendations.Recommend
 
 
 class SearchModel(
@@ -38,6 +39,13 @@ class SearchModel(
         imageURL = apa.image_url,
         animeTitle = apa.title,
         score = apa.score.toString()
+    )
+
+    constructor(rec: Recommend): this(
+        id = rec.mal_id,
+        imageURL = rec.image_url,
+        animeTitle = rec.title,
+        score = rec.recommendation_count.toString()
     )
 
     companion object {
