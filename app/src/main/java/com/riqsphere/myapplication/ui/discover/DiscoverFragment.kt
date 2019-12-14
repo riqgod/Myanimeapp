@@ -21,7 +21,7 @@ import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
-import com.riqsphere.myapplication.ui.SearchActivity
+import com.riqsphere.myapplication.ui.discover.search.SearchActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -50,9 +50,9 @@ class DiscoverFragment : Fragment() {
         setRecyclerViews()
 
         editTxt = rootView.findViewById(R.id.search_input)
-        editTxt.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        editTxt.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                goToSearchPage("Results:")
+                goToSearchPage()
                 return@OnEditorActionListener true
             }
             false
@@ -67,23 +67,14 @@ class DiscoverFragment : Fragment() {
         return rootView
     }
 
-    private fun goToSearchPage(searchText: String) {
+    private fun goToSearchPage() {
         val i = Intent(activity, SearchActivity::class.java)
-        i.putExtra("searchInput",editTxt.text.toString())
-        i.putExtra("searchText",searchText)
+        i.putExtra("searchInput", editTxt.text.toString())
+        i.putExtra("searchText", "Results:")
         startActivity(i)
     }
 
     private fun setRecyclerViews() {
-        val empty = { arrayListOf (
-            SearchModel(JikanCacheHandler.getAnime(27)),
-            SearchModel(JikanCacheHandler.getAnime(20)),
-            SearchModel(JikanCacheHandler.getAnime(21)),
-            SearchModel(JikanCacheHandler.getAnime(22)),
-            SearchModel(JikanCacheHandler.getAnime(23)),
-            SearchModel(JikanCacheHandler.getAnime(24))
-        )}
-
         val top4uRecyclerView = initializeRecommendationsRecyclerView(R.id.dc_rv_top4u)
         observeRecommendation(top4uRecyclerView)
 

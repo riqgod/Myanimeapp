@@ -125,9 +125,9 @@ object JikanCacheHandler {
     private val defaultAnimePage = AnimePage().apply {
         animes = defaultAPAArray
     }
-    private fun getPoplarScoreCommon(req: Int, orderBy: AnimeOrderBy): AnimePage {
+    private fun getAnimePage(req: Int, specifier: (AnimeSearch) -> AnimeSearch ): AnimePage {
         val fetch = {
-            AnimeSearch().orderBy(orderBy).get().get()
+            specifier(AnimeSearch()).get().get()
         }
 
         val calendar = Calendar.getInstance()
@@ -139,10 +139,13 @@ object JikanCacheHandler {
     }
 
     private const val MOST_POPLAR_REQ = 5
-    fun getMostPoplar() = getPoplarScoreCommon(MOST_POPLAR_REQ, AnimeOrderBy.MEMBERS)
+    fun getMostPoplar() = getAnimePage(MOST_POPLAR_REQ) { it.orderBy(AnimeOrderBy.MEMBERS) }
 
     private const val TOP_SCORE_REQ = 6
-    fun getTopScore() = getPoplarScoreCommon(TOP_SCORE_REQ, AnimeOrderBy.SCORE)
+    fun getTopScore() = getAnimePage(TOP_SCORE_REQ) { it.orderBy(AnimeOrderBy.SCORE) }
+
+    private const val SEARCH_REQ = 7
+    fun search(query: String) = getAnimePage(SEARCH_REQ) { it.setQuery(query) }
 
     private val defaultRecommend = Recommend().apply {
         title = INTERNET_UNAVAILABLE

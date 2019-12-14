@@ -1,5 +1,7 @@
 package com.riqsphere.myapplication.cache
 
+import com.github.doomsdayrs.jikan4java.exceptions.RequestError
+
 object Cache {
     private const val CACHE_SIZE = 20
 
@@ -21,8 +23,11 @@ object Cache {
 
     inline fun <T>fetchAndStore(fetch: () -> T, default: T, hashCode: Long): T {
         val oldest = oldestUseItem()
-        val result = fetch()
-        result?.let { oldest.newData(hashCode, result as Any) }
+        var result: T? = null
+        try {
+            result = fetch()
+        } catch (e: RequestError) {}
+        result?.let { oldest.newData(hashCode, it as Any) }
         return result ?: default
     }
 
