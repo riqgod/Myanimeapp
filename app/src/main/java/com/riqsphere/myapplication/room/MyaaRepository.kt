@@ -19,7 +19,7 @@ class MyaaRepository(private val watchlistAnimeDao: WatchlistAnimeDao, private v
         val recommend = withContext(Dispatchers.Unconfined) {
             JikanCacheHandler.getRecommendationPage(anime)
         }
-        val recommendation = Recommendation.arrayListFrom(recommend)
+        val recommendation = Recommendation.arrayListFrom(recommend.recommends)
         recommendation.forEach {
             insertRecWithCountZero(it)
             recommendationDao.addCount(it.id, it.count)
@@ -42,7 +42,7 @@ class MyaaRepository(private val watchlistAnimeDao: WatchlistAnimeDao, private v
         watchlistAnimeDao.delete(watchlistAnime.id)
         val anime = watchlistAnime.toAnime()
         val recommend = withContext(Dispatchers.Unconfined) {
-            JikanCacheHandler.getRecommendationPage(anime)
+            JikanCacheHandler.getRecommendationPage(anime).recommends
         }
 
         recommend.forEach {

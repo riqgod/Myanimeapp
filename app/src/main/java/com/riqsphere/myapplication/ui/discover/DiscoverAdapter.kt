@@ -50,7 +50,9 @@ class DiscoverAdapter (private val mContext:Context) : RecyclerView.Adapter<Disc
 
         fun bindView(position:Int) {
             val dcCard = searchList[position]
-            ImageHandler.getInstance(this@DiscoverAdapter.mContext).load(dcCard.imageURL).into(cardAnimeImage)
+            if (dcCard.imageURL != "") {
+                ImageHandler.getInstance(this@DiscoverAdapter.mContext).load(dcCard.imageURL).into(cardAnimeImage)
+            }
             cardAnimeTitle.text = dcCard.animeTitle
             cardAnimeScore.text = dcCard.score
 

@@ -107,19 +107,19 @@ class DiscoverFragment : Fragment() {
     }
 
     private val fetchCurrentSeason = {
-        SearchModel.arrayListFromSeasonSearch(JikanCacheHandler.getCurrentSeason())
+        SearchModel.arrayListFromSeasonSearch(JikanCacheHandler.getCurrentSeason().animes)
     }
 
     private val fetchTopUpcoming = {
-        SearchModel.arrayListFromTopListing(JikanCacheHandler.getTopUpcoming())
+        SearchModel.arrayListFromTopListing(JikanCacheHandler.getTopUpcoming().topListings ?: arrayListOf())
     }
 
     private val fetchMostPoplar = {
-        SearchModel.arrayListFromAnimePageAnime(JikanCacheHandler.getMostPoplar())
+        SearchModel.arrayListFromAnimePageAnime(JikanCacheHandler.getMostPoplar().animes)
     }
 
     private val fetchTopScore = {
-        SearchModel.arrayListFromAnimePageAnime(JikanCacheHandler.getTopScore())
+        SearchModel.arrayListFromAnimePageAnime(JikanCacheHandler.getTopScore().animes)
     }
 
     private fun initializeRecommendationsRecyclerView(recyclerViewID: Int): RecyclerView {

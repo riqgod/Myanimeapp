@@ -7,29 +7,29 @@ object Cache {
         CacheItem()
     }
 
-    inline fun <reified T> get(fetch: () -> T, hashCode: Long): T {
+    inline fun <reified T> get(fetch: () -> T, default: T, hashCode: Long): T {
         val itemIndex = data.indexOfFirst {
             it.hashEquals(hashCode)
         }
 
         return if (itemIndex >= 0) {
-            data[itemIndex].attemptToCastStoredItem<T>() ?: fetchAndStoreWithSetIndex(fetch, hashCode, itemIndex)
+            data[itemIndex].attemptToCastStoredItem<T>() ?: fetchAndStoreWithSetIndex(fetch, default, hashCode, itemIndex)
         } else {
-            fetchAndStore(fetch, hashCode)
+            fetchAndStore(fetch, default, hashCode)
         }
     }
 
-    inline fun <T>fetchAndStore(fetch: () -> T, hashCode: Long): T {
+    inline fun <T>fetchAndStore(fetch: () -> T, default: T, hashCode: Long): T {
         val oldest = oldestUseItem()
         val result = fetch()
-        oldest.newData(hashCode, result as Any)
-        return result
+        result?.let { oldest.newData(hashCode, result as Any) }
+        return result ?: default
     }
 
-    inline fun <T>fetchAndStoreWithSetIndex(fetch: () -> T, hashCode: Long, withIndex: Int): T {
+    inline fun <T>fetchAndStoreWithSetIndex(fetch: () -> T, default: T, hashCode: Long, withIndex: Int): T {
         val result = fetch()
-        data[withIndex].newData(hashCode, result as Any)
-        return result
+        result?.let { data[withIndex].newData(hashCode, result as Any) }
+        return result ?: default
     }
 
     fun oldestUseItem(): CacheItem = data.minBy {
