@@ -1,10 +1,13 @@
 package com.riqsphere.myapplication.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.riqsphere.myapplication.BuildConfig
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
@@ -21,6 +24,12 @@ private const val PREFERENCE_FIRST_RUN = "first_run"
 class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /*
+        if (BuildConfig.DEBUG) {
+            AndroidDevMetrics.initWith(this);
+        }
+      */
 
         val p = PreferenceManager.getDefaultSharedPreferences(this)
         if (p.getBoolean(PREFERENCE_FIRST_RUN, true)) {
