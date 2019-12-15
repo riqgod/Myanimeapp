@@ -53,10 +53,7 @@ class WatchlistAdder(
                 JikanCacheHandler.getAnime(id)
             }
             if (anime.title != JikanCacheHandler.INTERNET_UNAVAILABLE) {
-                val result = myaaViewModel.insert(anime)
-                if (!result) {
-
-                }
+                myaaViewModel.insert(anime)
             }
             null
         }
