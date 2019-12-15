@@ -38,7 +38,7 @@ class RecsAdapter(private val context:Context) : RecyclerView.Adapter<RecsAdapte
         private var recsImage:ImageView = itemView.findViewById(R.id.rec_image)
         private var recsTitle:TextView = itemView.findViewById(R.id.rec_anime_title)
         private var recsCount:TextView = itemView.findViewById(R.id.rec_score)
-        private var recsAdded:ImageButton = itemView.findViewById(R.id.rec_recomendations)
+        private var recsAdded:ImageButton = itemView.findViewById(R.id.rec_add_to_list)
 
         fun bindView(position:Int){
             val item = list[position]
