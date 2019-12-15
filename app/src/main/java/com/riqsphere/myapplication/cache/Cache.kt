@@ -1,7 +1,5 @@
 package com.riqsphere.myapplication.cache
 
-import com.github.doomsdayrs.jikan4java.exceptions.RequestError
-
 object Cache {
     private const val CACHE_SIZE = 20
 
@@ -9,32 +7,29 @@ object Cache {
         CacheItem()
     }
 
-    inline fun <reified T> get(fetch: () -> T, default: T, hashCode: Long): T {
+    inline fun <reified T> get(fetch: () -> T, hashCode: Long): T {
         val itemIndex = data.indexOfFirst {
             it.hashEquals(hashCode)
         }
 
         return if (itemIndex >= 0) {
-            data[itemIndex].attemptToCastStoredItem<T>() ?: fetchAndStoreWithSetIndex(fetch, default, hashCode, itemIndex)
+            data[itemIndex].attemptToCastStoredItem<T>() ?: fetchAndStoreWithSetIndex(fetch, hashCode, itemIndex)
         } else {
-            fetchAndStore(fetch, default, hashCode)
+            fetchAndStore(fetch, hashCode)
         }
     }
 
-    inline fun <T>fetchAndStore(fetch: () -> T, default: T, hashCode: Long): T {
+    inline fun <T>fetchAndStore(fetch: () -> T, hashCode: Long): T {
         val oldest = oldestUseItem()
-        var result: T? = null
-        try {
-            result = fetch()
-        } catch (e: RequestError) {}
+        val result = fetch()
         result?.let { oldest.newData(hashCode, it as Any) }
-        return result ?: default
+        return result
     }
 
-    inline fun <T>fetchAndStoreWithSetIndex(fetch: () -> T, default: T, hashCode: Long, withIndex: Int): T {
+    inline fun <T>fetchAndStoreWithSetIndex(fetch: () -> T, hashCode: Long, withIndex: Int): T {
         val result = fetch()
         result?.let { data[withIndex].newData(hashCode, result as Any) }
-        return result ?: default
+        return result
     }
 
     fun oldestUseItem(): CacheItem = data.minBy {

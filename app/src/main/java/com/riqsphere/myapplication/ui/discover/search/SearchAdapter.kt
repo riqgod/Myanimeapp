@@ -9,9 +9,11 @@ import android.widget.TextView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
+import com.riqsphere.myapplication.room.MyaaViewModel
+import com.riqsphere.myapplication.ui.onClickListeners.WatchlistAdder
 import com.riqsphere.myapplication.utils.ImageHandler
 
-class SearchAdapter(private val act: Activity) : BaseAdapter() {
+class SearchAdapter(private val act: Activity, private val myaaViewModel: MyaaViewModel) : BaseAdapter() {
     private var watchlist: List<WatchlistAnime> = arrayListOf()
     private var searchResults = ArrayList<SearchModel>()
 
@@ -38,15 +40,22 @@ class SearchAdapter(private val act: Activity) : BaseAdapter() {
         val searchScoreBg: ImageView = view.findViewById(R.id.lv_rectangle_score)
 
         searchAnimeTitle.text = sm.animeTitle
-        ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).into(searchImage)
+        if (sm.imageURL != "") {
+            ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).into(searchImage)
+        } else {
+            ImageHandler.getInstance(this@SearchAdapter.act).load(R.drawable.neko).into(searchImage)
+        }
+
         searchScore.text = sm.score
 
-        val resource = if (watchlist.any { it.id == sm.id }) {
+        val added = watchlist.any { it.id == sm.id }
+        val resource = if (added) {
             R.drawable.ic_added_to_list
         } else {
             R.drawable.ic_add_to_list
         }
         searchAdded.setImageResource(resource)
+        searchAdded.setOnClickListener(WatchlistAdder(myaaViewModel, sm.id, sm.animeTitle, added))
 
         searchScoreStar.setImageResource(R.drawable.ic_star_1)
         searchScoreBg.setImageResource(R.drawable.rectangle_score)

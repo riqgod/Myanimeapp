@@ -2,6 +2,7 @@ package com.riqsphere.myapplication.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Transaction
+import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
@@ -15,6 +16,7 @@ class MyaaRepository(private val watchlistAnimeDao: WatchlistAnimeDao, private v
     @Transaction
     suspend fun insert(watchlistAnime: WatchlistAnime) {
         watchlistAnimeDao.insert(watchlistAnime)
+        recommendationDao.delete(watchlistAnime.id)
         val anime = watchlistAnime.toAnime()
         val recommend = withContext(Dispatchers.Unconfined) {
             JikanCacheHandler.getRecommendationPage(anime)
@@ -33,19 +35,25 @@ class MyaaRepository(private val watchlistAnimeDao: WatchlistAnimeDao, private v
         recommendation.count = temp
     }
 
-    suspend fun updateEpisodesWatched(id: Int, episodesWatched: ArrayList<Int>) = watchlistAnimeDao.updateEpisodesWatched(id, episodesWatched)
+    suspend fun updateEpisodesWatched(id: Int, episodesWatched: IntArray) {
+        val episodesString = MyaaDatabase.dataConverter.stringFromArrayList(episodesWatched)
+        watchlistAnimeDao.updateEpisodesWatched(id, episodesString)
+    }
 
     suspend fun updateEpisodesOut(id: Int, episodesOut: Int) = watchlistAnimeDao.updateEpisodesOut(id, episodesOut)
 
     @Transaction
-    suspend fun delete(watchlistAnime: WatchlistAnime) {
-        watchlistAnimeDao.delete(watchlistAnime.id)
-        val anime = watchlistAnime.toAnime()
-        val recommend = withContext(Dispatchers.Unconfined) {
-            JikanCacheHandler.getRecommendationPage(anime).recommends
+    suspend fun delete(id: Int) {
+        val anime = Anime().apply { mal_id = id }
+        val page = withContext(Dispatchers.Unconfined) {
+            JikanCacheHandler.getRecommendationPage(anime)
+        }
+        if (page.request_hash == "") {
+            return
         }
 
-        recommend.forEach {
+        watchlistAnimeDao.delete(id)
+        page.recommends.forEach {
             recommendationDao.addCount(it.mal_id, -it.recommendation_count)
             if (recommendationDao.getCountFor(it.mal_id) <= 0) {
                 recommendationDao.delete(it.mal_id)

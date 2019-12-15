@@ -1,9 +1,7 @@
 package com.riqsphere.myapplication.ui.animeDetail.episodes
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.media.MediaMetadataRetriever
-import android.os.Build
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,21 +11,45 @@ import androidx.recyclerview.widget.RecyclerView
 import com.makeramen.roundedimageview.RoundedImageView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.animeDetail.episodes.EpisodesModel
+import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
+import com.riqsphere.myapplication.room.MyaaViewModel
+import com.riqsphere.myapplication.ui.onClickListeners.EpisodeWatchedListener
 import com.riqsphere.myapplication.utils.ImageHandler
-import java.util.*
-import kotlin.collections.ArrayList
 
 
-class EpisodesWatchNextAdapter(private val mContext:Context) : RecyclerView.Adapter<EpisodesWatchNextAdapter.ViewHolder>(){
+class EpisodesWatchNextAdapter(
+    private val context: Context,
+    private val myaaViewModel: MyaaViewModel
+) : RecyclerView.Adapter<EpisodesWatchNextAdapter.ViewHolder>(){
+    private var originalEpList = ArrayList<EpisodesModel>()
     private var epList = ArrayList<EpisodesModel>()
+    private var watchedList = SparseBooleanArray()
+    private var watchlistAnime: WatchlistAnime? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.episodes_watch_next_card,parent,false)
         return ViewHolder(view)
     }
 
-    fun setData(list:ArrayList<EpisodesModel>){
-        epList = list
+    fun setEpisodes(list: ArrayList<EpisodesModel>) {
+        originalEpList = list
+        buildEpList()
+        notifyDataSetChanged()
+    }
+
+    fun setWatchlistAnime(watchlistAnime: WatchlistAnime) {
+        this.watchlistAnime = watchlistAnime
+        setWatched(watchlistAnime.episodesWatched)
+        notifyDataSetChanged()
+    }
+
+    private fun setWatched(arr: IntArray) {
+        watchedList.clear()
+        arr.forEach { watchedList.put(it, true) }
+    }
+
+    private fun buildEpList() {
+        epList = originalEpList.filterTo(arrayListOf()) { !(watchedList[it.num]) }
     }
 
     override fun getItemCount(): Int {
@@ -39,57 +61,28 @@ class EpisodesWatchNextAdapter(private val mContext:Context) : RecyclerView.Adap
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        private val cardEpImage: RoundedImageView = itemView.findViewById(R.id.episode_image)
-        private val cardEpTitle: TextView = itemView.findViewById(R.id.episode_name)
-        private val cardEpNum: TextView = itemView.findViewById(R.id.episode_num)
-        private val cardEpChecked: ImageView = itemView.findViewById(R.id.episode_check_as_watched)
+        private val cardEpImage: RoundedImageView = itemView.findViewById(R.id.watch_next_episode_image)
+        private val cardEpTitle: TextView = itemView.findViewById(R.id.watch_next_episode_name)
+        private val cardEpNum: TextView = itemView.findViewById(R.id.watch_next_episode_num)
+        private val cardEpChecked: ImageView = itemView.findViewById(R.id.watch_next_episode_check_as_watched)
 
-        fun bindView(position:Int){
+        fun bindView(position:Int) {
             val epCard = epList[position]
-
-            /*
-            if(epCard.urlVideo == null){
-                if(epCard.urlVideo != ""){
-                    val frame = retriveVideoFrameFromVideo(epCard.urlVideo)
-                    cardEpImage.setImageBitmap(frame)
-                }else{
-                    ImageHandler.getInstance(mContext).load(epCard.imageUrl).into(cardEpImage)
-                }
-            }else{
-
-             */
-                ImageHandler.getInstance(mContext).load(epCard.imageUrl).into(cardEpImage)
-          //  }
+            if (epCard.imageUrl != "") {
+                ImageHandler.getInstance(context).load(epCard.imageUrl).into(cardEpImage)
+            }
 
             cardEpTitle.text = epCard.title
-            cardEpNum.text = epCard.num
-            if(epCard.watched){
-                cardEpChecked.setImageResource(R.drawable.ic_button_checked_as_watched)
-            }else{
-               cardEpChecked.setImageResource(R.drawable.ic_button_check_as_watched)
+            cardEpNum.text = "Episode " + epCard.num
+
+            val watched = watchedList[epCard.num]
+            val resource = if(watched){
+                R.drawable.ic_button_checked_as_watched
+            } else {
+                R.drawable.ic_button_check_as_watched
             }
+            cardEpChecked.setImageResource(resource)
+            cardEpChecked.setOnClickListener(EpisodeWatchedListener(myaaViewModel, watchlistAnime, epCard.num, watched))
         }
     }
-
-    @Throws(Throwable::class)
-    fun retriveVideoFrameFromVideo(videoPath: String?): Bitmap? {
-        var bitmap: Bitmap? = null
-        var mediaMetadataRetriever: MediaMetadataRetriever? = null
-        try {
-            mediaMetadataRetriever = MediaMetadataRetriever()
-            if (Build.VERSION.SDK_INT >= 14) mediaMetadataRetriever.setDataSource(
-                videoPath,
-                HashMap()
-            ) else mediaMetadataRetriever.setDataSource(videoPath)
-            //   mediaMetadataRetriever.setDataSource(videoPath);
-            bitmap = mediaMetadataRetriever.frameAtTime
-        } catch (e: Exception) {
-            e.printStackTrace()
-            throw Throwable("Exception in retriveVideoFrameFromVideo(String videoPath)" + e.message)
-        } finally {
-            mediaMetadataRetriever?.release()
-        }
-        return bitmap
-    }
-
 }

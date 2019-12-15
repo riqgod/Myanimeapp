@@ -6,65 +6,70 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
+import com.github.doomsdayrs.jikan4java.types.main.anime.videos.Video
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.animeDetail.episodes.EpisodesModel
+import com.riqsphere.myapplication.room.MyaaViewModel
 
-class EpisodesFragment(anime:Anime) : Fragment(){
+class EpisodesFragment(private val animeId: Int) : Fragment(){
 
-    private val animus: Anime = anime
+    private lateinit var myaaViewModel: MyaaViewModel
 
-    private lateinit var wn_recyclerView: RecyclerView
-    private lateinit var wn_viewAdapter: EpisodesWatchNextAdapter
-    private lateinit var wn_viewManager: RecyclerView.LayoutManager
+    private lateinit var epTotal: TextView
+    private lateinit var wnRecyclerView: RecyclerView
+    private lateinit var wnViewAdapter: EpisodesWatchNextAdapter
+    private lateinit var allViewAdapter: EpisodesAllAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val view = inflater.inflate(R.layout.fragment_episodes,container,false)
-        val image_url = animus.imageURL
-        val epTotal = view.findViewById<TextView>(R.id.episodes_all_total_text) //preencher dps
-        epTotal.text = "0/"+animus.episodes
-
-
-        //watchnext!!!
-        val model = animus.getEpisodes().get()
-        val listModel = ArrayList<EpisodesModel>(0)
-
-        for (i in model.episodes){
-            listModel.add(EpisodesModel(i,image_url,false))
+        if (activity == null) {
+            return view
         }
 
-        val epWatchNextAdapter = EpisodesWatchNextAdapter(activity!!.applicationContext)
-        epWatchNextAdapter.setData(listModel)
+        myaaViewModel = MyaaViewModel(activity!!.application)
 
-        wn_viewManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        wn_viewAdapter = epWatchNextAdapter
-        wn_recyclerView = view.findViewById<RecyclerView>(R.id.episodes_watch_next_rv).apply {
-            layoutManager = wn_viewManager
-            adapter = wn_viewAdapter
+        epTotal = view.findViewById(R.id.episodes_all_total_text)
+
+        val wnViewManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        wnViewAdapter = EpisodesWatchNextAdapter(activity!!.applicationContext, myaaViewModel)
+        wnRecyclerView = view.findViewById<RecyclerView>(R.id.episodes_watch_next_rv).apply {
+            layoutManager = wnViewManager
+            adapter = wnViewAdapter
         }
 
         //all episodes [to com sono]
-        val all_viewManager = LinearLayoutManager(activity)
-        val all_viewAdapter = EpisodesAllAdapter(activity!!.applicationContext)
-        all_viewAdapter.setData(listModel)
-        val all_recyclewView = view.findViewById<RecyclerView>(R.id.episodes_all_rv).apply {
-            layoutManager= all_viewManager
-            adapter = all_viewAdapter
+        val allViewManager = LinearLayoutManager(activity)
+        allViewAdapter = EpisodesAllAdapter(activity!!.applicationContext, myaaViewModel)
+        view.findViewById<RecyclerView>(R.id.episodes_all_rv).apply {
+            layoutManager= allViewManager
+            adapter = allViewAdapter
         }
 
-
-
-
-
-
+        observe()
 
         return view
+    }
+
+    private fun observe() {
+        myaaViewModel.allWatchlistAnime.observe(this, Observer {
+            val wa = it?.firstOrNull { wa -> wa.id == animeId }
+            wa?.let {
+                allViewAdapter.setWatchlistAnime(wa)
+                wnViewAdapter.setWatchlistAnime(wa)
+            }
+        })
+    }
+
+    fun setEpisodes(video: Video) {
+        val episodes = video.episodes.mapIndexedTo(arrayListOf()) { index, episode -> EpisodesModel(episode, index) }
+        allViewAdapter.setEpisodes(episodes)
+        wnViewAdapter.setEpisodes(episodes)
     }
 }

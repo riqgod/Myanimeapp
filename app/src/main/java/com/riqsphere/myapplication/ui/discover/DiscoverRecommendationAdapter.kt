@@ -1,6 +1,6 @@
 package com.riqsphere.myapplication.ui.discover
 
-import android.content.Context
+import android.app.Activity
 import android.os.AsyncTask
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
@@ -15,13 +15,17 @@ import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
+import com.riqsphere.myapplication.room.MyaaViewModel
+import com.riqsphere.myapplication.ui.onClickListeners.OpenAnimeDetail
+import com.riqsphere.myapplication.ui.onClickListeners.WatchlistAdder
 import com.riqsphere.myapplication.utils.ImageHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-class DiscoverRecommendationAdapter (private val mContext:Context) : RecyclerView.Adapter<DiscoverRecommendationAdapter.ViewHolder>(){
+class DiscoverRecommendationAdapter(private val activity: Activity, private val myaaViewModel: MyaaViewModel) : RecyclerView.Adapter<DiscoverRecommendationAdapter.ViewHolder>(){
     private val mapIdIsInWatchlist = SparseBooleanArray()
+    private var originalRecList: List<Recommendation> = arrayListOf()
     private var recList: List<Recommendation> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,6 +35,7 @@ class DiscoverRecommendationAdapter (private val mContext:Context) : RecyclerVie
 
     fun setWatchlistData(list: List<WatchlistAnime>) {
         squashWatchlist(list)
+        recList = filterRecsInWatchlist(originalRecList)
         notifyDataSetChanged()
     }
 
@@ -42,8 +47,13 @@ class DiscoverRecommendationAdapter (private val mContext:Context) : RecyclerVie
     }
 
     fun setRecListData(list: List<Recommendation>) {
-        recList = list.filter { !mapIdIsInWatchlist[it.id] }
+        originalRecList = list
+        recList = filterRecsInWatchlist(list)
         notifyDataSetChanged()
+    }
+
+    private fun filterRecsInWatchlist(list: List<Recommendation>) = list.filter {
+        !mapIdIsInWatchlist[it.id]
     }
 
     override fun getItemCount(): Int {
@@ -63,9 +73,11 @@ class DiscoverRecommendationAdapter (private val mContext:Context) : RecyclerVie
         private val cardAnimeAdded: ImageView = itemView.findViewById(R.id.dc_add_to_list)
 
         fun preBind(recommendation: Recommendation) {
-            ImageHandler.getInstance(this@DiscoverRecommendationAdapter.mContext).load(recommendation.imageURL).into(cardAnimeImage)
+            ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(recommendation.imageURL).into(cardAnimeImage)
             cardAnimeTitle.text = recommendation.title
             cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
+            cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, recommendation.id, recommendation.title, false))
+            itemView.setOnClickListener(OpenAnimeDetail(this@DiscoverRecommendationAdapter.activity, recommendation.id))
         }
 
         fun bindView(anime: Anime) {
@@ -73,7 +85,7 @@ class DiscoverRecommendationAdapter (private val mContext:Context) : RecyclerVie
         }
 
         fun setLoading() {
-            ImageHandler.getInstance(this@DiscoverRecommendationAdapter.mContext).load(R.drawable.neko).into(cardAnimeImage)
+            ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(R.drawable.neko).into(cardAnimeImage)
             cardAnimeTitle.text = "Loading..."
             cardAnimeScore.text = ""
         }

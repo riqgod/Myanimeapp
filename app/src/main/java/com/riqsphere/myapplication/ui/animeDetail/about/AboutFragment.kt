@@ -8,35 +8,42 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.riqsphere.myapplication.R
-import com.riqsphere.myapplication.ui.animeDetail.AnimeDetailActivity
 
-class AboutFragment(anime: Anime) : Fragment(){
+class AboutFragment : Fragment(){
 
-    private val animus:Anime = anime
+    private lateinit var synopsis: TextView
+    private lateinit var aired: TextView
+    private var firstRun = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val view = inflater.inflate(R.layout.fragment_about,container,false)
 
         //setting content
-        val synopsis = view.findViewById<TextView>(R.id.synopsis)
-        val aired = view.findViewById<TextView>(R.id.aired)
+        synopsis = view.findViewById(R.id.synopsis)
+        aired = view.findViewById(R.id.aired)
 
         //feed
-        synopsis.setText(animus.synopsis)
-        aired.setText(getAired(animus))
+        if (firstRun) {
+            synopsis.text = "Loading..."
+            firstRun = false
+        }
 
         return view
     }
 
-    fun getAired(anime:Anime): String {
-        val aired = anime.aired.string
-        var processedAired: String = ""
-        var resultAppend: String = ""
+    fun setAnime(anime: Anime) {
+        synopsis.text = anime.synopsis
+        aired.text = getAired(anime)
+    }
+
+    private fun getAired(anime: Anime): String {
+        val aired = (anime.aired?.let { anime.aired.string }) ?: "Loading..."
+        var processedAired: String
+        var resultAppend = ""
 
         //treatment
         if (aired.length >= 15) {

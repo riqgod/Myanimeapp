@@ -22,34 +22,35 @@ import kotlinx.coroutines.withContext
 class SearchActivity: AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var list: ListView
     private lateinit var adapter: SearchAdapter
-    private lateinit var editsearch: SearchView
+    private lateinit var editSearch: SearchView
     private lateinit var resultText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_activity)
 
-        MyaaViewModel(application!!).allWatchlistAnime.observe(this, Observer {
-            adapter.setWatchlistData(it)
-        })
+        val myaaViewModel = MyaaViewModel(application!!).apply {
+            allWatchlistAnime.observe(this@SearchActivity, Observer {
+                adapter.setWatchlistData(it)
+            })
+        }
 
         resultText = findViewById(R.id.search_text2)
-        val getSearchText = intent.getStringExtra("searchText")
-        resultText.text = getSearchText
+        resultText.text = intent.getStringExtra("searchText")
 
         list = findViewById(R.id.search_list)
-        adapter = SearchAdapter(this)
+        adapter = SearchAdapter(this, myaaViewModel)
         list.adapter = adapter
 
-        editsearch = findViewById(R.id.search_view)
+        editSearch = findViewById(R.id.search_view)
         val searchInput = intent.getStringExtra("searchInput")
-        editsearch.setQuery(searchInput,false)
-        editsearch.isFocusable = true
-        editsearch.isIconified = false
-        editsearch.isIconifiedByDefault = false
+        editSearch.setQuery(searchInput,false)
+        editSearch.isFocusable = true
+        editSearch.isIconified = false
+        editSearch.isIconifiedByDefault = false
 
-        onQueryTextSubmit(editsearch.query.toString())
-        editsearch.setOnQueryTextListener(this)
+        onQueryTextSubmit(editSearch.query.toString())
+        editSearch.setOnQueryTextListener(this)
     }
 
     override fun onNewIntent(intent: Intent) {

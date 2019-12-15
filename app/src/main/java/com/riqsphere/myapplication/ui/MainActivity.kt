@@ -1,10 +1,7 @@
 package com.riqsphere.myapplication.ui
 
-import android.app.SearchManager
-import android.content.Intent
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -13,7 +10,6 @@ import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.tasks.WatchlistAlarm
-import com.riqsphere.myapplication.ui.animeDetail.AnimeDetailActivity
 import com.riqsphere.myapplication.ui.animes.AnimesFragment
 import com.riqsphere.myapplication.ui.animes.SettingsFragment
 import com.riqsphere.myapplication.ui.discover.DiscoverFragment
@@ -79,11 +75,6 @@ class MainActivity : AppCompatActivity(){
             temporaryFetch(22)
         )
         myaaViewModel.insert(rdm)
-    }
-
-    public fun animeClick(view: View){
-        val i = Intent(this, AnimeDetailActivity::class.java)
-        startActivity(i)
     }
 
     private fun temporaryFetch(id: Int) = JikanCacheHandler.getAnime(id)

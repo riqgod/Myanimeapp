@@ -114,7 +114,7 @@ class DiscoverFragment : Fragment() {
     }
 
     private fun initializeRecommendationsRecyclerView(recyclerViewID: Int): RecyclerView {
-        val adapt = DiscoverRecommendationAdapter(activity!!)
+        val adapt = DiscoverRecommendationAdapter(activity!!, myaaViewModel)
         val manager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         val rv = rootView.findViewById<RecyclerView>(recyclerViewID)
         rv.apply {
@@ -125,7 +125,7 @@ class DiscoverFragment : Fragment() {
     }
 
     private fun initializeDiscoverRecyclerView(recyclerViewID: Int): RecyclerView {
-        val adapt = DiscoverAdapter(activity!!)
+        val adapt = DiscoverAdapter(activity!!, myaaViewModel)
         val manager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         val rv = rootView.findViewById<RecyclerView>(recyclerViewID)
         rv.apply {

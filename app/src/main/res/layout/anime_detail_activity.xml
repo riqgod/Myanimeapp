@@ -46,7 +46,7 @@
                         android:src="@drawable/bokunoheroda" />
 
                     <TextView
-                        android:id="@+id/anime_bg_tittle"
+                        android:id="@+id/anime_bg_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"

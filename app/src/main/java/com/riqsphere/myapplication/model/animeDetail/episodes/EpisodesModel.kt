@@ -1,21 +1,17 @@
 package com.riqsphere.myapplication.model.animeDetail.episodes
 
-import com.github.doomsdayrs.jikan4java.types.main.anime.episodes.Episode
+import com.github.doomsdayrs.jikan4java.types.main.anime.videos.Episode as VideosEpisode
 
 class EpisodesModel (
-    val num:String,
-    val title:String,
-    val urlVideo:String?,
-    var watched: Boolean,
-    val imageUrl:String
+    val num: Int,
+    val title: String,
+    val urlVideo: String?,
+    val imageUrl: String
 ){
-    constructor(ep: Episode, imageUrl:String, watched:Boolean):this(
-        num = "Episode "+ ep.episode_id.toString(),
-        title = ep.title,
-        urlVideo = ep.video_url,
-        watched = watched,
-        imageUrl = imageUrl
-
-
+    constructor(vid: VideosEpisode, position: Int): this(
+        num = position,
+        title = vid.title,
+        urlVideo = vid.url,
+        imageUrl = vid.image_url
     )
 }

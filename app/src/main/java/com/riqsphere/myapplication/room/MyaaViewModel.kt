@@ -39,12 +39,15 @@ class MyaaViewModel(application: Application) : AndroidViewModel(application) {
         WatchlistAnime(anime)
     )
 
+    fun delete(id: Int) = viewModelScope.launch { repo.delete(id) }
+
     @Transaction
     fun addEpisodeWatched(watchlistAnime: WatchlistAnime, episodeToAdd: Int): Boolean {
-        val success = watchlistAnime.episodesWatched.add(episodeToAdd)
-        if (!success) {
+        if (watchlistAnime.episodesWatched.any { it == episodeToAdd }) {
             return false
         }
+
+        watchlistAnime.episodesWatched = watchlistAnime.episodesWatched.plus(episodeToAdd)
         viewModelScope.launch {
             repo.updateEpisodesWatched(watchlistAnime.id, watchlistAnime.episodesWatched)
         }
@@ -53,9 +56,17 @@ class MyaaViewModel(application: Application) : AndroidViewModel(application) {
 
     @Transaction
     fun removeEpisodeWatched(watchlistAnime: WatchlistAnime, episodeToRemove: Int): Boolean {
-        val success = watchlistAnime.episodesWatched.remove(episodeToRemove)
-        if (!success) {
+        if (watchlistAnime.episodesWatched.any { it == episodeToRemove }) {
             return false
+        }
+
+        val newWatched = IntArray(watchlistAnime.episodesWatched.size)
+        var index = 0
+        watchlistAnime.episodesWatched.forEach {
+            if (it != episodeToRemove) {
+                newWatched[index] = it
+                ++index
+            }
         }
         viewModelScope.launch {
             repo.updateEpisodesWatched(watchlistAnime.id, watchlistAnime.episodesWatched)

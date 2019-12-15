@@ -66,5 +66,11 @@ class SearchModel(
                 SearchModel(it)
             })
         }
+
+        fun arrayListFromRecommend(other: ArrayList<Recommend>): ArrayList<SearchModel> {
+            return other.mapTo(arrayListOf(), {
+                SearchModel(it)
+            })
+        }
     }
 }

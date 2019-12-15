@@ -2,6 +2,7 @@ package com.riqsphere.myapplication.model.recommendations
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.github.doomsdayrs.jikan4java.types.support.recommendations.Recommend
 
 @Entity(
@@ -20,6 +21,14 @@ data class Recommendation (
         recommend.image_url,
         recommend.title
     )
+
+    fun toAnime(): Anime {
+        return Anime().apply {
+            mal_id = this@Recommendation.id
+            imageURL = this@Recommendation.imageURL
+            title = this@Recommendation.title
+        }
+    }
 
     companion object {
         fun arrayListFrom(other: ArrayList<Recommend>) = other.mapTo(arrayListOf(), { Recommendation(it) })

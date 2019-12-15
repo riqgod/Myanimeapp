@@ -1,6 +1,6 @@
 package com.riqsphere.myapplication.ui.discover
 
-import android.content.Context
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +11,12 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
+import com.riqsphere.myapplication.room.MyaaViewModel
+import com.riqsphere.myapplication.ui.onClickListeners.OpenAnimeDetail
+import com.riqsphere.myapplication.ui.onClickListeners.WatchlistAdder
 import com.riqsphere.myapplication.utils.ImageHandler
 
-class DiscoverAdapter (private val mContext:Context) : RecyclerView.Adapter<DiscoverAdapter.ViewHolder>(){
+class DiscoverAdapter(private val activity: Activity, private val myaaViewModel: MyaaViewModel) : RecyclerView.Adapter<DiscoverAdapter.ViewHolder>(){
 
     private var searchList = ArrayList<SearchModel>()
     private var watchlist: List<WatchlistAnime> = arrayListOf()
@@ -51,20 +54,24 @@ class DiscoverAdapter (private val mContext:Context) : RecyclerView.Adapter<Disc
         fun bindView(position:Int) {
             val dcCard = searchList[position]
             if (dcCard.imageURL != "") {
-                ImageHandler.getInstance(this@DiscoverAdapter.mContext).load(dcCard.imageURL).into(cardAnimeImage)
+                ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).into(cardAnimeImage)
             }
             cardAnimeTitle.text = dcCard.animeTitle
             cardAnimeScore.text = dcCard.score
 
             if (watchlist.any { it.id == dcCard.id }) {
                 cardAnimeAdded.setImageResource(R.drawable.ic_added_to_list)
-            }else{
+                cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, dcCard.id, dcCard.animeTitle, true))
+            } else {
                 cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
+                cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, dcCard.id, dcCard.animeTitle, false))
             }
+
+            itemView.setOnClickListener(OpenAnimeDetail(this@DiscoverAdapter.activity, dcCard.id))
         }
 
         fun setLoading() {
-            ImageHandler.getInstance(this@DiscoverAdapter.mContext).load(R.drawable.neko).into(cardAnimeImage)
+            ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko).into(cardAnimeImage)
             cardAnimeTitle.text = "Loading..."
             cardAnimeScore.text = ""
         }

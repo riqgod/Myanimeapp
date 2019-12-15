@@ -3,6 +3,7 @@ package com.riqsphere.myapplication.room
 import android.content.Context
 import androidx.room.*
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 
@@ -31,15 +32,25 @@ abstract class MyaaDatabase : RoomDatabase() {
                 return instance
             }
         }
+
+        val dataConverter = DataConverter()
     }
 
     class DataConverter {
         private val gson = Gson()
 
         @TypeConverter
-        public fun arrayListFromString(s: String): ArrayList<Int> = gson.fromJson<ArrayList<Int>>(s, java.util.ArrayList::class.java)
+        public fun arrayListFromString(s: String): IntArray {
+            val type = object: TypeToken<IntArray>(){}.type!!
+            return gson.fromJson<IntArray>(s, type)
+        }
 
         @TypeConverter
-        public fun stringFromArrayList(arrayList: ArrayList<Int>): String = gson.toJson(arrayList)
+        public fun stringFromArrayList(arr: IntArray): String {
+            return when (arr.size) {
+                1 -> gson.toJson(arr)
+                else -> gson.toJson(arr)
+            }
+        }
     }
 }

@@ -48,7 +48,7 @@ class UpcomingFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_upcoming, container, false)
         val upcomingAdapter =
-            UpcomingAdapter(activity!!.applicationContext)
+            UpcomingAdapter(activity!!)
 
         viewManager = LinearLayoutManager(activity)
         viewAdapter = upcomingAdapter

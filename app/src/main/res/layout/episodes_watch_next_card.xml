@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/episode_image"
+                android:id="@+id/watch_next_episode_image"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
@@ -30,7 +30,7 @@
                 app:riv_corner_radius="4dp" />
 
             <TextView
-                android:id="@+id/episode_num"
+                android:id="@+id/watch_next_episode_num"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -40,24 +40,24 @@
                 android:maxLines="1"
                 android:text="S01 | E01"
                 android:textSize="14dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintStart_toEndOf="@+id/episode_image"
+                app:layout_constraintEnd_toStartOf="@+id/watch_next_guideline"
+                app:layout_constraintStart_toEndOf="@+id/watch_next_episode_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/episode_name"
+                android:id="@+id/watch_next_episode_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:maxLines="2"
                 android:text="Izuku Midoriya: Origin"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintStart_toEndOf="@+id/episode_image"
-                app:layout_constraintTop_toBottomOf="@+id/episode_num" />
+                app:layout_constraintEnd_toStartOf="@+id/watch_next_guideline"
+                app:layout_constraintStart_toEndOf="@+id/watch_next_episode_image"
+                app:layout_constraintTop_toBottomOf="@+id/watch_next_episode_num" />
 
             <ImageButton
-                android:id="@+id/episode_check_as_watched"
+                android:id="@+id/watch_next_episode_check_as_watched"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -68,7 +68,7 @@
                 app:srcCompat="@drawable/ic_button_check_as_watched" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
+                android:id="@+id/watch_next_guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

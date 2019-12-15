@@ -1,6 +1,6 @@
 package com.riqsphere.myapplication.ui.animes.upcoming
 
-import android.content.Context
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.makeramen.roundedimageview.RoundedImageView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
+import com.riqsphere.myapplication.ui.onClickListeners.OpenAnimeDetail
 import com.riqsphere.myapplication.utils.ImageHandler
 import java.util.*
 
-class UpcomingAdapter(private val mContext: Context): RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {
+class UpcomingAdapter(private val activity: Activity): RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {
     private var upcoming = ArrayList<WatchlistAnime>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,10 +40,12 @@ class UpcomingAdapter(private val mContext: Context): RecyclerView.Adapter<Upcom
 
         fun bindView(position: Int) {
             val up = upcoming[position]
-            ImageHandler.getInstance(this@UpcomingAdapter.mContext).load(up.imgURL).into(cardAnimeImage)
+            ImageHandler.getInstance(this@UpcomingAdapter.activity).load(up.imgURL).into(cardAnimeImage)
             cardAnimeTitle.text = up.title
             cardEpNum.text = (up.episodesOut + 1).toString()
             cardTime.text = up.broadcast
+
+            itemView.setOnClickListener(OpenAnimeDetail(this@UpcomingAdapter.activity, up.id))
         }
     }
 }
