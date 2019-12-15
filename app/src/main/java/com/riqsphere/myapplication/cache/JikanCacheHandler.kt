@@ -19,7 +19,6 @@ import com.github.doomsdayrs.jikan4java.types.main.top.Top
 import com.github.doomsdayrs.jikan4java.types.support.recommendations.Recommend
 import com.github.doomsdayrs.jikan4java.types.support.recommendations.RecommendationPage
 import com.riqsphere.myapplication.utils.Singletons
-import com.riqsphere.myapplication.utils.getEpisodesOut
 import com.riqsphere.myapplication.utils.jikanSeason
 import java.util.*
 import com.github.doomsdayrs.jikan4java.types.main.anime.videos.Episode as VideoEpisode
@@ -55,12 +54,29 @@ object JikanCacheHandler {
         return Cache.get(fetch, hash)
     }
 
+    private const val EPS_PER_PAGE = 100
     private const val EPISODES_OUT_REQ = 1
-    private const val defaultEpisodesOut = 100
+    private const val defaultEpisodesOut = -1
     fun getEpisodesOutCount(anime: Anime): Int {
         val fetch = {
             try {
-                anime.getEpisodesOut().get() ?: defaultEpisodesOut
+                var eps = anime.getEpisodes().get()
+                if (eps == null) {
+                    defaultEpisodesOut
+                } else {
+                    val lastPage = eps.episodes_last_page
+                    if (lastPage == 1) {
+                        eps.episodes.size
+                    } else {
+                        eps = anime.getEpisodes(lastPage).get()
+                        if (eps == null) {
+                            defaultEpisodesOut
+                        } else {
+                            val previousPagesCount = (lastPage - 1) * EPS_PER_PAGE
+                            previousPagesCount + eps.episodes.size
+                        }
+                    }
+                }
             } catch (e: Error) {
                 e.printStackTrace()
                 defaultEpisodesOut
