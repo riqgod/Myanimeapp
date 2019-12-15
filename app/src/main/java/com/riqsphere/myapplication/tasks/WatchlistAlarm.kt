@@ -6,8 +6,8 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.room.MyaaViewModel
-import com.riqsphere.myapplication.utils.getEpisodesOut
 import java.util.*
 import kotlin.random.Random
 
@@ -46,7 +46,7 @@ object WatchlistAlarm : BroadcastReceiver() {
     private fun updateAllEpisodes(myaaViewModel: MyaaViewModel) {
         myaaViewModel.allWatchlistAnime.value.let {
             it?.forEach { watchlistAnime ->
-                val updatedEpisodesOut = watchlistAnime.getEpisodesOut().get()
+                val updatedEpisodesOut = JikanCacheHandler.getEpisodesOutCount(watchlistAnime.toAnime())
                 myaaViewModel.updateEpisodesOut(watchlistAnime.id, updatedEpisodesOut)
             }
         }

@@ -14,18 +14,31 @@ class MyaaRepository(private val watchlistAnimeDao: WatchlistAnimeDao, private v
     val allRecommendation: LiveData<List<Recommendation>> = recommendationDao.getRecommendations()
 
     @Transaction
-    suspend fun insert(watchlistAnime: WatchlistAnime) {
-        watchlistAnimeDao.insert(watchlistAnime)
-        recommendationDao.delete(watchlistAnime.id)
+    suspend fun insert(watchlistAnime: WatchlistAnime): Boolean {
         val anime = watchlistAnime.toAnime()
+        val epsOut = withContext(Dispatchers.Unconfined) {
+            JikanCacheHandler.getEpisodesOutCount(anime)
+        }
+        if (epsOut < 0) {
+            return false
+        }
+
         val recommend = withContext(Dispatchers.Unconfined) {
             JikanCacheHandler.getRecommendationPage(anime)
         }
+        if (recommend.recommends[0]?.title == JikanCacheHandler.INTERNET_UNAVAILABLE) {
+            return false
+        }
+
+        watchlistAnimeDao.insert(watchlistAnime)
+        recommendationDao.delete(watchlistAnime.id)
+
         val recommendation = Recommendation.arrayListFrom(recommend.recommends)
         recommendation.forEach {
             insertRecWithCountZero(it)
             recommendationDao.addCount(it.id, it.count)
         }
+        return true
     }
 
     private suspend fun insertRecWithCountZero(recommendation: Recommendation) {
@@ -43,13 +56,13 @@ class MyaaRepository(private val watchlistAnimeDao: WatchlistAnimeDao, private v
     suspend fun updateEpisodesOut(id: Int, episodesOut: Int) = watchlistAnimeDao.updateEpisodesOut(id, episodesOut)
 
     @Transaction
-    suspend fun delete(id: Int) {
+    suspend fun delete(id: Int): Boolean {
         val anime = Anime().apply { mal_id = id }
         val page = withContext(Dispatchers.Unconfined) {
             JikanCacheHandler.getRecommendationPage(anime)
         }
         if (page.request_hash == "") {
-            return
+            return false
         }
 
         watchlistAnimeDao.delete(id)
@@ -59,6 +72,7 @@ class MyaaRepository(private val watchlistAnimeDao: WatchlistAnimeDao, private v
                 recommendationDao.delete(it.mal_id)
             }
         }
+        return true
     }
 
     suspend fun deleteAll() {
