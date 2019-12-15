@@ -25,7 +25,7 @@ import java.util.*
 import com.github.doomsdayrs.jikan4java.types.main.anime.videos.Episode as VideoEpisode
 
 object JikanCacheHandler {
-    private const val INTERNET_UNAVAILABLE = "Internet unavailable!"
+    const val INTERNET_UNAVAILABLE = "Internet unavailable!"
 
     private const val ANIME_REQ = 0
     private val defaultAnime by lazy {
