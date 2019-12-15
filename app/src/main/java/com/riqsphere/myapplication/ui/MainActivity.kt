@@ -1,13 +1,10 @@
 package com.riqsphere.myapplication.ui
 
-import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceManager
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.riqsphere.myapplication.BuildConfig
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
@@ -31,7 +28,7 @@ class MainActivity : AppCompatActivity(){
         }
       */
 
-        val p = PreferenceManager.getDefaultSharedPreferences(this)
+        val p = getDefaultSharedPreferences(this)
         if (p.getBoolean(PREFERENCE_FIRST_RUN, true)) {
             installTasks()
             p.edit().putBoolean(PREFERENCE_FIRST_RUN, false).apply()

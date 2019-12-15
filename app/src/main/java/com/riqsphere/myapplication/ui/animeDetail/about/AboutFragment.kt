@@ -11,6 +11,8 @@ import com.riqsphere.myapplication.R
 
 class AboutFragment : Fragment(){
 
+    private var setSynposisTo: String? = null
+    private var setAiredTo: String? = null
     private lateinit var synopsis: TextView
     private lateinit var aired: TextView
     private var firstRun = true
@@ -32,12 +34,22 @@ class AboutFragment : Fragment(){
             firstRun = false
         }
 
+        displayData()
+
         return view
     }
 
     fun setAnime(anime: Anime) {
-        synopsis.text = anime.synopsis
-        aired.text = getAired(anime)
+        setSynposisTo = anime.synopsis
+        setAiredTo = getAired(anime)
+        displayData()
+    }
+
+    private fun displayData() {
+        if (::synopsis.isInitialized) {
+            synopsis.text = setSynposisTo
+            aired.text = setAiredTo
+        }
     }
 
     private fun getAired(anime: Anime): String {
