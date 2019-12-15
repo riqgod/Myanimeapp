@@ -22,7 +22,7 @@ class RecsFragment(anime: Anime) : Fragment(){
     private val animus:Anime = anime
 
     private lateinit var rv:RecyclerView
-    private lateinit var adapter: RecsAdapter
+    private lateinit var viewAdapter: RecsAdapter
     private lateinit var model:ArrayList<RecsModel>
     private lateinit var viewManager: LinearLayoutManager
 
@@ -36,12 +36,12 @@ class RecsFragment(anime: Anime) : Fragment(){
 
         val recsList = JikanCacheHandler.getRecommendationPage(animus)
         model = insertList(recsList.recommends)
-        adapter = RecsAdapter(activity!!)
-        adapter.setData(model)
+        viewAdapter = RecsAdapter(activity!!.applicationContext)
+        viewAdapter.setData(model)
         viewManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         rv = view.findViewById<RecyclerView>(R.id.recs_rv).apply {
             layoutManager = viewManager
-            adapter = adapter
+            adapter = viewAdapter
         }
 
         return view
