@@ -41,6 +41,7 @@ class WatchlistAdapter(private val activity: Activity) : RecyclerView.Adapter<Wa
         fun bindView(position: Int) {
             val watchlistAnime = watchlistAnimes[position]
             ImageHandler.getInstance(activity).load(watchlistAnime.imgURL).into(cardAnimeImage)
+            cardAnimeImage.contentDescription = watchlistAnime.id.toString()
             cardAnimeTitle.text = watchlistAnime.title
             cardAnimeProgress.max = watchlistAnime.episodes
             cardAnimeProgress.progress = watchlistAnime.episodesWatched.size // just a placeholder.

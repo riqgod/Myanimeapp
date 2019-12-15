@@ -4,20 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.doomsdayrs.jikan4java.types.support.recommendations.RecommendationPage
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.room.MyaaViewModel
-import com.riqsphere.myapplication.ui.discover.search.SearchAdapter
 
 class RecsFragment : Fragment(){
 
-    private lateinit var list: ListView
-    private lateinit var adapter: SearchAdapter
     private var dataToSet: RecommendationPage? = null
+
+    private lateinit var rv:RecyclerView
+    private lateinit var viewAdapter: RecsAdapter
+    private lateinit var viewManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,14 +27,15 @@ class RecsFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_recs, container, false)
-        //locate the list view in recs
-            list = view.findViewById(R.id.recs_listview)
 
         val myaaViewModel = MyaaViewModel(activity!!.application)
-        adapter = SearchAdapter(activity!!, myaaViewModel)
 
-        //binds the adapter to the list view
-        list.adapter = adapter
+        viewAdapter = RecsAdapter(activity!!, myaaViewModel)
+        viewManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        rv = view.findViewById<RecyclerView>(R.id.recs_rv).apply {
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
 
         observeWatchlist(myaaViewModel)
         dataToSet?.let { setRecs(it) }
@@ -42,14 +45,14 @@ class RecsFragment : Fragment(){
 
     private fun observeWatchlist(myaaViewModel: MyaaViewModel) {
         myaaViewModel.allWatchlistAnime.observe(this, Observer {
-            adapter.setWatchlistData(it)
+            viewAdapter.setWatchlistData(it)
         })
     }
 
     fun setRecs(recommendationPage: RecommendationPage) {
         dataToSet = recommendationPage
-        if(::adapter.isInitialized) {
-            adapter.setData(SearchModel.arrayListFromRecommend(recommendationPage.recommends))
+        if(::viewAdapter.isInitialized) {
+            viewAdapter.setData(RecsModel.arrayListFromRecommend(recommendationPage.recommends))
         }
     }
 }

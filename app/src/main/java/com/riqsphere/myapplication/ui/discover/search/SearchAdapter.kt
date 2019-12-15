@@ -46,6 +46,8 @@ class SearchAdapter(private val act: Activity, private val myaaViewModel: MyaaVi
             ImageHandler.getInstance(this@SearchAdapter.act).load(R.drawable.neko).into(searchImage)
         }
 
+        ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).into(searchImage)
+        searchImage.contentDescription = sm.id.toString()
         searchScore.text = sm.score
 
         val added = watchlist.any { it.id == sm.id }

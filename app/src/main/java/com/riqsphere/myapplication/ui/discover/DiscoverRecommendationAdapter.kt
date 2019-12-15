@@ -74,6 +74,7 @@ class DiscoverRecommendationAdapter(private val activity: Activity, private val 
 
         fun preBind(recommendation: Recommendation) {
             ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(recommendation.imageURL).into(cardAnimeImage)
+            cardAnimeImage.contentDescription = recommendation.id.toString()
             cardAnimeTitle.text = recommendation.title
             cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
             cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, recommendation.id, recommendation.title, false))

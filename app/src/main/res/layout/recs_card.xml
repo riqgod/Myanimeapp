@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/lv_image"
+            android:id="@+id/rec_image"
             android:layout_width="75dp"
             android:layout_height="120dp"
             android:layout_marginStart="16dp"
@@ -22,7 +22,7 @@
             app:srcCompat="@drawable/a102113" />
 
         <TextView
-            android:id="@+id/lv_anime_title"
+            android:id="@+id/rec_anime_title"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -34,54 +34,54 @@
             android:textAlignment="center"
             android:textColor="#979797"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/lv_rectangle_score"
-            app:layout_constraintEnd_toStartOf="@+id/lv_add_to_list"
+            app:layout_constraintBottom_toTopOf="@+id/rec_rectangle_score"
+            app:layout_constraintEnd_toStartOf="@+id/rec_add_to_list"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/lv_image"
+            app:layout_constraintStart_toEndOf="@+id/rec_image"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/lv_rectangle_score"
+            android:id="@+id/rec_rectangle_score"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/lv_score"
-            app:layout_constraintEnd_toEndOf="@+id/lv_score"
-            app:layout_constraintStart_toStartOf="@+id/lv_score"
-            app:layout_constraintTop_toTopOf="@+id/lv_score"
+            app:layout_constraintBottom_toBottomOf="@+id/rec_score"
+            app:layout_constraintEnd_toEndOf="@+id/rec_score"
+            app:layout_constraintStart_toStartOf="@+id/rec_score"
+            app:layout_constraintTop_toTopOf="@+id/rec_score"
             app:srcCompat="@drawable/rectangle_score" />
 
         <TextView
-            android:id="@+id/lv_score"
+            android:id="@+id/rec_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:fontFamily="sans-serif-black"
-            android:paddingLeft="24dp"
+            android:paddingLeft="30dp"
             android:paddingEnd="10dp"
-            android:text="8,00"
+            android:text="999+"
             android:textColor="#ffffff"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/lv_add_to_list"
-            app:layout_constraintStart_toEndOf="@+id/lv_image" />
+            app:layout_constraintEnd_toStartOf="@+id/rec_add_to_list"
+            app:layout_constraintStart_toEndOf="@+id/rec_image" />
 
         <ImageView
-            android:id="@+id/lv_star"
+            android:id="@+id/rec_recomendations"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/lv_score"
-            app:layout_constraintStart_toStartOf="@+id/lv_score"
-            app:layout_constraintTop_toTopOf="@+id/lv_score"
-            app:srcCompat="@drawable/ic_star_1" />
+            app:layout_constraintBottom_toBottomOf="@+id/rec_score"
+            app:layout_constraintStart_toStartOf="@+id/rec_score"
+            app:layout_constraintTop_toTopOf="@+id/rec_score"
+            app:srcCompat="@drawable/ic_comercio_e_compras_1" />
 
         <ImageButton
-            android:id="@+id/lv_add_to_list"
+            android:id="@+id/rec_add_to_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:background="@android:color/transparent"
             android:onClick="addToWatchListClick"
+            android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

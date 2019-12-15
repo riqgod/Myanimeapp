@@ -44,6 +44,7 @@ class EpisodesFragment(private val animeId: Int) : Fragment(){
             adapter = wnViewAdapter
         }
 
+
         //all episodes [to com sono]
         val allViewManager = LinearLayoutManager(activity)
         allViewAdapter = EpisodesAllAdapter(activity!!.applicationContext, myaaViewModel)

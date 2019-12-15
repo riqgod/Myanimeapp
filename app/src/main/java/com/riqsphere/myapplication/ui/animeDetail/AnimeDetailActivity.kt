@@ -1,7 +1,9 @@
 package com.riqsphere.myapplication.ui.animeDetail
 
 import android.os.AsyncTask
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-class AnimeDetailActivity : AppCompatActivity(){
+class AnimeDetailActivity : AppCompatActivity() {
 
     private lateinit var myaaViewModel: MyaaViewModel
 
@@ -102,7 +104,7 @@ class AnimeDetailActivity : AppCompatActivity(){
         var genresText = ""
         for ((count, genre) in genres.withIndex()){
             genresText += if(count+1 >= genres.size){
-                genre.name + "."
+                genresText += genre.name+"."
             }else{
                 genre.name + ", "
             }

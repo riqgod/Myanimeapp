@@ -56,6 +56,7 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
             if (dcCard.imageURL != "") {
                 ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).into(cardAnimeImage)
             }
+            cardAnimeImage.contentDescription = dcCard.id.toString()
             cardAnimeTitle.text = dcCard.animeTitle
             cardAnimeScore.text = dcCard.score
 

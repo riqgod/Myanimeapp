@@ -17,6 +17,7 @@ import com.riqsphere.myapplication.ui.discover.DiscoverFragment
 
 private const val PREFERENCE_FIRST_RUN = "first_run"
 
+
 class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
