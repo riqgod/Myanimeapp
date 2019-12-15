@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.github.doomsdayrs.jikan4java.types.main.anime.animePage.AnimePageAnime
 import com.github.doomsdayrs.jikan4java.types.support.recommendations.Recommend
@@ -19,9 +21,10 @@ class RecsFragment(anime: Anime) : Fragment(){
 
     private val animus:Anime = anime
 
-    private lateinit var list:ListView
-    private lateinit var adapter: SearchAdapter
-    private lateinit var model:ArrayList<SearchModel>
+    private lateinit var rv:RecyclerView
+    private lateinit var adapter: RecsAdapter
+    private lateinit var model:ArrayList<RecsModel>
+    private lateinit var viewManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,32 +34,23 @@ class RecsFragment(anime: Anime) : Fragment(){
 
         val view = inflater.inflate(R.layout.fragment_recs,container,false)
 
-
-        //generate sample data
-
         val recsList = JikanCacheHandler.getRecommendationPage(animus)
         model = insertList(recsList.recommends)
-
-
-        //locate the listview in recs
-        list = view.findViewById<ListView>(R.id.recs_listview)
-
-        //pass results to ListViewAdapter
-        adapter = SearchAdapter(activity!!)
+        adapter = RecsAdapter(activity!!)
         adapter.setData(model)
-
-        //binds the adapter to the list view
-        list.adapter = adapter
-
-
+        viewManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        rv = view.findViewById<RecyclerView>(R.id.recs_rv).apply {
+            layoutManager = viewManager
+            adapter = adapter
+        }
 
         return view
     }
 
-    private fun insertList(result: ArrayList<Recommend>): ArrayList<SearchModel> {
-        var model = ArrayList<SearchModel>(0)
+    private fun insertList(result: ArrayList<Recommend>): ArrayList<RecsModel> {
+        var model = ArrayList<RecsModel>(0)
         for (i in result) {
-            model.add(SearchModel(i))
+            model.add(RecsModel(i,false))
         }
         return model
     }
