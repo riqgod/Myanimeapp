@@ -2,9 +2,11 @@ package com.riqsphere.myapplication.ui
 
 import android.app.SearchManager
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,6 +22,7 @@ import com.riqsphere.myapplication.ui.discover.DiscoverFragment
 
 
 private const val PREFERENCE_FIRST_RUN = "first_run"
+
 
 class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +86,15 @@ class MainActivity : AppCompatActivity(){
 
     public fun animeClick(view: View){
         val i = Intent(this, AnimeDetailActivity::class.java)
+        val mal_id = view.contentDescription
+        i.putExtra("mal_id",mal_id)
         startActivity(i)
+    }
+
+    public fun addToWatchListClick(view:View){
+        //just a test
+        val image:ImageView = view as ImageView
+        image.setImageResource(R.drawable.ic_added_to_list)
     }
 
     private fun temporaryFetch(id: Int) = JikanCacheHandler.getAnime(id)

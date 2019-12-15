@@ -1,14 +1,20 @@
 package com.riqsphere.myapplication.ui.animeDetail.recs
 
 import android.content.Context
+import android.content.Intent
+import android.media.Image
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
+import com.riqsphere.myapplication.ui.animeDetail.AnimeDetailActivity
 import com.riqsphere.myapplication.utils.ImageHandler
 
 class RecsAdapter(private val context:Context) : RecyclerView.Adapter<RecsAdapter.ViewHolder>() {
@@ -43,6 +49,7 @@ class RecsAdapter(private val context:Context) : RecyclerView.Adapter<RecsAdapte
         fun bindView(position:Int){
             val item = list[position]
             ImageHandler.getInstance(context).load(item.urlImage).into(recsImage)
+            recsImage.contentDescription = item.mal_id.toString()
             recsCount.setText(item.animeRecsNum)
             recsTitle.setText(item.animeTitle)
 

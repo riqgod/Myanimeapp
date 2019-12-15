@@ -28,9 +28,10 @@
                 android:id="@+id/dc_image"
                 android:layout_width="175dp"
                 android:layout_height="250dp"
-                android:foreground="@drawable/gradient_effect_corner"
+                android:foreground="@drawable/image_button_feedback_corner"
                 android:scaleType="centerCrop"
                 android:src="@drawable/a102113"
+                android:onClick="animeClick"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -57,12 +58,14 @@
                 app:layout_constraintTop_toTopOf="@+id/dc_rectangle_score"
                 app:srcCompat="@drawable/ic_star_1" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/dc_add_to_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:onClick="addToWatchListClick"
+                android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dc_rectangle_score"
                 app:srcCompat="@drawable/ic_add_to_list" />

@@ -64,6 +64,7 @@ class DiscoverRecommendationAdapter (private val mContext:Context) : RecyclerVie
 
         fun preBind(recommendation: Recommendation) {
             ImageHandler.getInstance(this@DiscoverRecommendationAdapter.mContext).load(recommendation.imageURL).into(cardAnimeImage)
+            cardAnimeImage.contentDescription = recommendation.id.toString()
             cardAnimeTitle.text = recommendation.title
             cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
         }

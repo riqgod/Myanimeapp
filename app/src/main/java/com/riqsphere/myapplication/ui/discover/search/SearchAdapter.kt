@@ -39,6 +39,7 @@ class SearchAdapter(private val act: Activity) : BaseAdapter() {
 
         searchAnimeTitle.text = sm.animeTitle
         ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).into(searchImage)
+        searchImage.contentDescription = sm.id.toString()
         searchScore.text = sm.score
 
         val resource = if (watchlist.any { it.id == sm.id }) {

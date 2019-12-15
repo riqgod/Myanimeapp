@@ -1,7 +1,9 @@
 package com.riqsphere.myapplication.ui.animeDetail
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +23,8 @@ class AnimeDetailActivity : AppCompatActivity(){
         setContentView(R.layout.anime_detail_activity)
 
         //get temporary anime to pass to another fragments...
-        temporaryAnime = temporaryFetch(37520)
+        val mal_id = intent.getStringExtra("mal_id")
+        temporaryAnime = temporaryFetch(mal_id.toInt())
 
         val fragmentPagerAdapter = AnimeDetailFragmentPagerAdapter(this,supportFragmentManager,temporaryAnime)
         val viewPager: ViewPager = findViewById(R.id.anime_view_pager)
@@ -47,6 +50,25 @@ class AnimeDetailActivity : AppCompatActivity(){
 
     fun temporaryFetch(id:Int): Anime {
         return JikanCacheHandler.getAnime(id)
+    }
+
+    public fun animeClick(view: View){
+        val i = Intent(this, AnimeDetailActivity::class.java)
+        val mal_id = view.contentDescription
+        i.putExtra("mal_id",mal_id)
+        startActivity(i)
+    }
+
+    public fun addToWatchListClick(view:View){
+        //just a test
+        val image:ImageView = view as ImageView
+        image.setImageResource(R.drawable.ic_added_to_list)
+    }
+
+    public fun epWatchedClick(view:View){
+        //just a test
+        val image:ImageView = view as ImageView
+        image.setImageResource(R.drawable.ic_button_checked_as_watched)
     }
 
     fun getGenres(anime:Anime): String{
