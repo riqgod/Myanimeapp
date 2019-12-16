@@ -26,7 +26,6 @@ import kotlinx.coroutines.withContext
 class AnimeDetailActivity : AppCompatActivity() {
 
     private var added:Boolean = false
-    private var menuExpanded:Boolean = false
     private lateinit var toolbar:androidx.appcompat.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
