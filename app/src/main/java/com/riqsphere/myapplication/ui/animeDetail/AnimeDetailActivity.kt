@@ -156,7 +156,7 @@ class AnimeDetailActivity : AppCompatActivity() {
         }).execute()
     }
     private fun setActivityData(anime: Anime, imageBg: ImageView, animeTitle: TextView, animeSubtitle: TextView, animeScore: TextView) {
-        ImageHandler.getInstance(this).load(R.drawable.neko).placeholder(R.drawable.neko).into(imageBg)
+        ImageHandler.getInstance(this).load(R.drawable.neko2).placeholder(R.drawable.neko2).into(imageBg)
         GoogleSearchAsyncTask(imageBg,applicationContext).execute(anime.title)
 
         animeTitle.text = anime.title

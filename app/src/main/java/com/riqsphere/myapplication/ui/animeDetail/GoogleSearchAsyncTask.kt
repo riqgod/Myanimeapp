@@ -77,11 +77,11 @@ class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context:
 
     override fun onPostExecute(result: String) {
         if (!ImageHandler.shouldLoad()) {
-            ImageHandler.getInstance(context).load(R.drawable.neko).placeholder(R.drawable.neko).into(imageBg)
+            ImageHandler.getInstance(context).load(R.drawable.neko2).placeholder(R.drawable.neko2).into(imageBg)
             return
         }
         val result2 = parseJSon(result)
-        ImageHandler.getInstance(context).load(result2).placeholder(R.drawable.neko).into(imageBg)
+        ImageHandler.getInstance(context).load(result2).placeholder(R.drawable.neko2).into(imageBg)
     }
 
     private fun parseJSon(string:String):String{
