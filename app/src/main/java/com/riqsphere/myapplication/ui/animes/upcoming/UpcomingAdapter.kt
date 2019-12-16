@@ -48,7 +48,7 @@ class UpcomingAdapter(private val activity: Activity): RecyclerView.Adapter<Upco
                 cardAnimeImage.contentDescription = "a car placeholder of anime loading image"
             }
             cardAnimeTitle.text = up.title
-            cardEpNum.text = (up.episodesOut + 1).toString()
+            cardEpNum.text = "Episode "+(up.episodesOut + 1).toString()
             cardTime.text = up.broadcast
 
             itemView.setOnClickListener(OpenAnimeDetail(this@UpcomingAdapter.activity, up.id))
