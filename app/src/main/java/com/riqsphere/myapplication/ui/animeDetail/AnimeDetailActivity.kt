@@ -1,8 +1,10 @@
 package com.riqsphere.myapplication.ui.animeDetail
 
+import android.content.Context
 import android.os.AsyncTask
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,11 +19,17 @@ import com.riqsphere.myapplication.utils.ImageHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
 
 class AnimeDetailActivity : AppCompatActivity() {
 
     private lateinit var myaaViewModel: MyaaViewModel
-
+     private var TAG = "google api cse"
     private var id = -1
     private lateinit var fragmentPagerAdapter: AnimeDetailFragmentPagerAdapter
 
@@ -29,7 +37,7 @@ class AnimeDetailActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager
     private lateinit var tabs: TabLayout
-    private lateinit var imageBg: ImageView
+    public lateinit var imageBg: ImageView
     private lateinit var animeTitle: TextView
     private lateinit var animeSubtitle: TextView
     private lateinit var animeScore: TextView
@@ -93,11 +101,133 @@ class AnimeDetailActivity : AppCompatActivity() {
     }
 
     private fun setActivityData(anime: Anime) {
-        ImageHandler.getInstance(this).load(R.drawable.dororo).into(imageBg)
+        val apiKey:String = "AIzaSyCDygTKwzesUMdO0QNbnGWbNGJ7PM9Pnpc"
+        val keyCse:String = "013948103287608180558:zyl5sbvqbkk"
+
+        var animeSearch:String = anime.title+""
+        animeSearch =  animeSearch.replace(" ", "+");
+
+        var urlString:String = "https://www.googleapis.com/customsearch/v1?q="+animeSearch+"&cx="+keyCse+"&imgSize=huge&num=1&searchType=image&key="+apiKey;
+
+                var url:URL? = null;
+                try {
+                    url = URL(urlString);
+                } catch (e: MalformedURLException) {
+                    Log.e(TAG, "ERROR converting String to URL " + e.toString());
+                }
+                Log.d(TAG, "Url = "+  urlString);
+
+        // start AsyncTask
+        val searchTask:GoogleSearchAsyncTask = GoogleSearchAsyncTask(imageBg,applicationContext);
+        searchTask.execute(url);
+
         animeTitle.text = anime.title
         animeSubtitle.text = getGenres(anime)
         animeScore.text = anime.score.toString()
     }
+
+     private class GoogleSearchAsyncTask(var imageBg:ImageView, var context:Context) : AsyncTask<URL, Integer, String>() {
+
+         /*
+        protected override fun onPreExecute(){
+            Log.d(TAG, "AsyncTask - onPreExecute");
+            // show progressbar
+            progressBar.setVisibility(View.VISIBLE);
+        }
+            */
+
+        @Override
+        protected override fun doInBackground(vararg urls: URL?): String {
+
+            val url = urls[0];
+            val TAG = "google api cse"
+            Log.d(TAG, "AsyncTask - doInBackground, url=" + url);
+
+            // Http connection
+            var conn: HttpURLConnection? = null;
+            try {
+                conn = url!!.openConnection() as HttpURLConnection?
+            } catch (e: IOException) {
+                Log.e(TAG, "Http connection ERROR " + e.toString());
+            }
+            var responseCode:Int = 0
+            var responseMessage:String = ""
+            try {
+               responseCode = conn!!.getResponseCode();
+               responseMessage = conn!!.getResponseMessage();
+            } catch (e: IOException) {
+                Log.e(TAG, "Http getting response code ERROR " + e.toString());
+            }
+
+            Log.d(TAG, "Http response code =" + responseCode + " message=" + responseMessage);
+
+            try {
+
+                if(responseCode == 200) {
+
+                    // response OK
+
+                    var rd:BufferedReader = BufferedReader(InputStreamReader(conn!!.getInputStream()));
+                    var sb: StringBuilder = StringBuilder();
+                    var line:String? = rd.readLine();
+
+                    while ( line != null) {
+                        sb.append(line + "\n");
+                        line = rd.readLine();
+                    }
+                    rd.close();
+
+                    conn.disconnect();
+
+                    var result = sb.toString();
+
+                    return result;
+
+                }else{
+
+                    // response problem
+
+                    var errorMsg = "Http ERROR response " + responseMessage + "\n" + "Make sure to replace in code your own Google API key and Search Engine ID";
+                    Log.e(TAG, errorMsg);
+                    var result = errorMsg;
+                    return  result;
+
+                }
+            } catch (e: IOException ) {
+                Log.e(TAG, "Http Response ERROR " + e.toString());
+            }
+
+
+            return "";
+        }
+
+        /*
+        protected fun onProgressUpdate(Integer... progress) {
+            Log.d(TAG, "AsyncTask - onProgressUpdate, progress=" + progress);
+
+        }
+        */
+        protected override fun onPostExecute(result:String) {
+
+            //Log.d("funfou google api cse", result);
+
+            // hide progressbar
+           // progressBar.setVisibility(View.GONE);
+            var result2 = parseJSon(result)
+            Log.d("image url download",result2)
+            ImageHandler.getInstance(context).load(result2).into(imageBg)
+
+        }
+
+        fun parseJSon(string:String):String{
+            var processedString = string.substringAfter("items")
+            processedString = processedString.substringAfter("\"link\": \"")
+            processedString = processedString.substringBefore("\"")
+            processedString.substringBefore("\"")
+            return processedString
+        }
+
+     }
 
     private fun getGenres(anime: Anime): String{
         val genres = anime.genres ?: return "Loading..."
