@@ -10,7 +10,7 @@ import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
-import com.riqsphere.myapplication.ui.onClickListeners.WatchlistAdder
+import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
 import com.riqsphere.myapplication.utils.ImageHandler
 
 class SearchAdapter(private val act: Activity, private val myaaViewModel: MyaaViewModel) : BaseAdapter() {

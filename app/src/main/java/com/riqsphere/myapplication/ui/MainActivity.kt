@@ -11,8 +11,8 @@ import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.tasks.WatchlistAlarm
 import com.riqsphere.myapplication.ui.animes.AnimesFragment
-import com.riqsphere.myapplication.ui.animes.SettingsFragment
 import com.riqsphere.myapplication.ui.discover.DiscoverFragment
+import com.riqsphere.myapplication.ui.settings.SettingsFragment
 import java.io.OutputStream
 import java.io.PrintStream
 import java.util.*

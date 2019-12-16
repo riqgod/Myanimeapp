@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
-import com.riqsphere.myapplication.ui.onClickListeners.OpenAnimeDetail
+import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
 import com.riqsphere.myapplication.utils.ImageHandler
 
 class WatchlistAdapter(private val activity: Activity) : RecyclerView.Adapter<WatchlistAdapter.WatchlistAnimeViewHolder>() {

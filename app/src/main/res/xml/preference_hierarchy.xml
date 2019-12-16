@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <SwitchPreferenceCompat
+        android:key="images_over_mobile"
+        android:title="Enable thumbnails on mobile data"
+        android:defaultValue="true"
+        />
+
+</PreferenceScreen>

@@ -13,7 +13,7 @@ import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.animeDetail.episodes.EpisodesModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
-import com.riqsphere.myapplication.ui.onClickListeners.EpisodeWatchedListener
+import com.riqsphere.myapplication.utils.onClickListeners.EpisodeWatchedListener
 import com.riqsphere.myapplication.utils.ImageHandler
 
 
