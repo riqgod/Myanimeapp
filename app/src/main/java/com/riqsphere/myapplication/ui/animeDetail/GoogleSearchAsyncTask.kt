@@ -2,7 +2,6 @@ package com.riqsphere.myapplication.ui.animeDetail
 
 import android.content.Context
 import android.os.AsyncTask
-import android.util.Log
 import android.widget.ImageView
 import com.riqsphere.myapplication.utils.ImageHandler
 import java.io.BufferedReader
@@ -28,14 +27,12 @@ class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context:
         } catch (e: MalformedURLException) {
         }
         val tag = "google api cse"
-        Log.d(tag, "AsyncTask - doInBackground, url=$url")
 
         // Http connection
         var conn: HttpURLConnection? = null
         try {
             conn = url!!.openConnection() as HttpURLConnection?
         } catch (e: IOException) {
-            Log.e(tag, "Http connection ERROR $e")
         }
         var responseCode = 0
         var responseMessage = ""
@@ -43,10 +40,8 @@ class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context:
             responseCode = conn!!.responseCode
             responseMessage = conn.responseMessage
         } catch (e: IOException) {
-            Log.e(tag, "Http getting response code ERROR $e")
         }
 
-        Log.d(tag, "Http response code =$responseCode message=$responseMessage")
 
         try {
 
@@ -65,13 +60,9 @@ class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context:
                 return sb.toString()
 
             } else {
-                val errorMsg =
-                    "Http ERROR response $responseMessage\nMake sure to replace in code your own Google API key and Search Engine ID"
-                Log.e(tag, errorMsg)
-                return errorMsg
+                return "Http ERROR response $responseMessage\nMake sure to replace in code your own Google API key and Search Engine ID"
             }
         } catch (e: IOException) {
-            Log.e(tag, "Http Response ERROR $e")
         }
         conn?.disconnect()
 
@@ -81,7 +72,6 @@ class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context:
 
     override fun onPostExecute(result:String) {
         val result2 = parseJSon(result)
-        Log.d("image url download",result2)
         ImageHandler.getInstance(context).load(result2).into(imageBg)
     }
 

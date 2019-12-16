@@ -43,7 +43,6 @@ object JikanCacheHandler {
             try {
                 Singletons.connector.retrieveAnime(id).get() ?: defaultAnime
             } catch (e: Exception) {
-                e.printStackTrace()
                 defaultAnime
             }
         }
@@ -78,7 +77,6 @@ object JikanCacheHandler {
                     }
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
                 defaultEpisodesOut
             }
         }
@@ -110,7 +108,6 @@ object JikanCacheHandler {
             try {
                 Singletons.connector.currentSchedule.get() ?: defaultSchedule
             } catch (e: Exception) {
-                e.printStackTrace()
                 defaultSchedule
             }
         }
@@ -143,7 +140,6 @@ object JikanCacheHandler {
             try {
                 Singletons.connector.seasonSearch(currentYear, calendar.jikanSeason()).get() ?: defaultSeason
             } catch (e: Exception) {
-                e.printStackTrace()
                 defaultSeason
             }
         }
@@ -162,7 +158,6 @@ object JikanCacheHandler {
             try {
                 TopSearch().searchTop(Tops.ANIME, AnimeTops.UPCOMING).get() ?: defaultUpcoming
             } catch (e: Exception) {
-                e.printStackTrace()
                 defaultUpcoming
             }
         }
@@ -188,7 +183,6 @@ object JikanCacheHandler {
             try {
                 specifier(AnimeSearch()).get().get() ?: defaultAnimePage
             } catch (e: Exception) {
-                e.printStackTrace()
                 defaultAnimePage
             }
         }
@@ -229,7 +223,6 @@ object JikanCacheHandler {
             try {
                 anime.recommendationPage.get() ?: defaultRecPage
             } catch (e: Exception) {
-                e.printStackTrace()
                 defaultRecPage
             }
         }
@@ -251,7 +244,6 @@ object JikanCacheHandler {
             try {
                 anime.getEpisodes().get() ?: defaultEpisodes
             } catch (e: Exception) {
-                e.printStackTrace()
                 defaultEpisodes
             }
         }
@@ -276,7 +268,6 @@ object JikanCacheHandler {
             try {
                 anime.videos.get() ?: defaultVideo
             } catch (e: Exception) {
-                e.printStackTrace()
                 defaultVideo
             }
         }
