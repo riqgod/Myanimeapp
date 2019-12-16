@@ -6,9 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.riqsphere.myapplication.R
-import com.riqsphere.myapplication.cache.JikanCacheHandler
-import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
-import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.tasks.WatchlistAlarm
 import com.riqsphere.myapplication.ui.animes.AnimesFragment
 import com.riqsphere.myapplication.ui.discover.DiscoverFragment
@@ -55,34 +52,14 @@ class MainActivity : AppCompatActivity(){
 
     private fun navigateTo(it: Fragment) = supportFragmentManager.beginTransaction().replace(R.id.bottom_navigation_fragment_container, it).commit()
 
-    private fun navigateToDefaultPage() = navigateToAnimes()
+    private fun navigateToDefaultPage() = navigateToDiscover()
 
     private fun navigateToAnimes() = supportFragmentManager.beginTransaction().replace(R.id.bottom_navigation_fragment_container, AnimesFragment()).commit()
 
+    private fun navigateToDiscover() = supportFragmentManager.beginTransaction().replace(R.id.bottom_navigation_fragment_container, DiscoverFragment()).commit()
+
     private fun installTasks() {
         WatchlistAlarm.setAlarm(application)
-
-        val myaaViewModel = MyaaViewModel(application)
-        val naruto = WatchlistAnime(
-            temporaryFetch(20)
-        )
-        myaaViewModel.insert(naruto) //naruto
-        val hero4 = WatchlistAnime(
-            temporaryFetch(38408)
-        )
-        myaaViewModel.insert(hero4) //boku no hero academia 4
-        val nrt = WatchlistAnime(
-            temporaryFetch(20)
-        )
-        myaaViewModel.insert(nrt) //naruto
-        val random = WatchlistAnime(
-            temporaryFetch(21)
-        )
-        myaaViewModel.insert(random) //random id
-        val rdm = WatchlistAnime(
-            temporaryFetch(22)
-        )
-        myaaViewModel.insert(rdm)
     }
 
     private fun disableSystemOut() {
@@ -150,6 +127,4 @@ class MainActivity : AppCompatActivity(){
             }
         })
     }
-
-    private fun temporaryFetch(id: Int) = JikanCacheHandler.getAnime(id)
 }
