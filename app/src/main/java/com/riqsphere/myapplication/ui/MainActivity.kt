@@ -46,85 +46,83 @@ class MainActivity : AppCompatActivity(){
             true
         }
 
-        navigateToDefaultPage()
+        navigateToDefaultPage(bottomNav)
     }
 
 
     private fun navigateTo(it: Fragment) = supportFragmentManager.beginTransaction().replace(R.id.bottom_navigation_fragment_container, it).commit()
 
-    private fun navigateToDefaultPage() = navigateToDiscover()
-
-    private fun navigateToAnimes() = supportFragmentManager.beginTransaction().replace(R.id.bottom_navigation_fragment_container, AnimesFragment()).commit()
-
-    private fun navigateToDiscover() = supportFragmentManager.beginTransaction().replace(R.id.bottom_navigation_fragment_container, DiscoverFragment()).commit()
+    private fun navigateToDefaultPage(bottomNav: BottomNavigationView) {
+        bottomNav.selectedItemId = R.id.nav_discover
+    }
 
     private fun installTasks() {
         WatchlistAlarm.setAlarm(application)
     }
 
     private fun disableSystemOut() {
-        System.setOut(object : PrintStream(object : OutputStream() {
-            override fun write(b: Int) {}
-        }) {
-            override fun flush() {}
-            override fun close() {}
-            override fun write(b: Int) {}
-            override fun write(b: ByteArray) {}
-            override fun write(buf: ByteArray, off: Int, len: Int) {}
-            override fun print(b: Boolean) {}
-            override fun print(c: Char) {}
-            override fun print(i: Int) {}
-            override fun print(l: Long) {}
-            override fun print(f: Float) {}
-            override fun print(d: Double) {}
-            override fun print(s: CharArray) {}
-            override fun print(s: String) {}
-            override fun print(obj: Any) {}
-            override fun println() {}
-            override fun println(x: Boolean) {}
-            override fun println(x: Char) {}
-            override fun println(x: Int) {}
-            override fun println(x: Long) {}
-            override fun println(x: Float) {}
-            override fun println(x: Double) {}
-            override fun println(x: CharArray) {}
-            override fun println(x: String) {}
-            override fun println(x: Any) {}
-            override fun printf(format: String, vararg args: Any): PrintStream {
-                return this
-            }
+            System.setOut(object : PrintStream(object : OutputStream() {
+                override fun write(b: Int) {}
+            }) {
+                override fun flush() {}
+                override fun close() {}
+                override fun write(b: Int) {}
+                override fun write(b: ByteArray) {}
+                override fun write(buf: ByteArray, off: Int, len: Int) {}
+                override fun print(b: Boolean) {}
+                override fun print(c: Char) {}
+                override fun print(i: Int) {}
+                override fun print(l: Long) {}
+                override fun print(f: Float) {}
+                override fun print(d: Double) {}
+                override fun print(s: CharArray) {}
+                override fun print(s: String) {}
+                override fun print(obj: Any) {}
+                override fun println() {}
+                override fun println(x: Boolean) {}
+                override fun println(x: Char) {}
+                override fun println(x: Int) {}
+                override fun println(x: Long) {}
+                override fun println(x: Float) {}
+                override fun println(x: Double) {}
+                override fun println(x: CharArray) {}
+                override fun println(x: String) {}
+                override fun println(x: Any) {}
+                override fun printf(format: String, vararg args: Any): PrintStream {
+                    return this
+                }
 
-            override fun printf(
-                l: Locale,
-                format: String,
-                vararg args: Any
-            ): PrintStream {
-                return this
-            }
+                override fun printf(
+                    l: Locale,
+                    format: String,
+                    vararg args: Any
+                ): PrintStream {
+                    return this
+                }
 
-            override fun format(format: String, vararg args: Any): PrintStream {
-                return this
-            }
+                override fun format(format: String, vararg args: Any): PrintStream {
+                    return this
+                }
 
-            override fun format(
-                l: Locale,
-                format: String,
-                vararg args: Any
-            ): PrintStream {
-                return this
-            }
+                override fun format(
+                    l: Locale,
+                    format: String,
+                    vararg args: Any
+                ): PrintStream {
+                    return this
+                }
 
-            override fun append(csq: CharSequence?): PrintStream {
-                return this
-            }
+                override fun append(csq: CharSequence?): PrintStream {
+                    return this
+                }
 
-            override fun append(csq: CharSequence?, start: Int, end: Int): PrintStream {
-                return this
-            }
+                override fun append(csq: CharSequence?, start: Int, end: Int): PrintStream {
+                    return this
+                }
 
-            override fun append(c: Char): PrintStream {
-                return this
-            }
-        })
-    }
+                override fun append(c: Char): PrintStream {
+                    return this
+                }
+            })
+        }
 }
