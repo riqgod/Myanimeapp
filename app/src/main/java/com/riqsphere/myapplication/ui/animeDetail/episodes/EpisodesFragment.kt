@@ -1,6 +1,7 @@
 package com.riqsphere.myapplication.ui.animeDetail.episodes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ class EpisodesFragment(private val animeId: Int) : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("hello", "helo from eps")
         val view = inflater.inflate(R.layout.fragment_episodes,container,false)
         if (activity == null) {
             return view

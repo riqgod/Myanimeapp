@@ -1,6 +1,7 @@
 package com.riqsphere.myapplication.ui.animeDetail.about
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class AboutFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("hello", "helo from about")
         val view = inflater.inflate(R.layout.fragment_about,container,false)
 
         //setting content

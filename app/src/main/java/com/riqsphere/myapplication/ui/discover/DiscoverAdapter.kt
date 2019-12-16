@@ -69,12 +69,13 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
 
             if (watchlist[dcCard.id]) {
                 cardAnimeAdded.setImageResource(R.drawable.ic_added_to_list)
-                cardAnimeAdded.contentDescription = "remove "+dcCard.animeTitle+" from your watchlist"
-                cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, dcCard.id, dcCard.animeTitle, true))
+                cardAnimeAdded.contentDescription = dcCard.animeTitle + " is in your watchlist"
+                //cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, dcCard.id, dcCard.animeTitle, true))
             } else {
-                cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
-                cardAnimeAdded.contentDescription = "add "+dcCard.animeTitle+" to your watchlist"
-                cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, dcCard.id, dcCard.animeTitle, false))
+                cardAnimeAdded.visibility = View.GONE
+                //cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
+                //cardAnimeAdded.contentDescription = "add " + dcCard.animeTitle + " to your watchlist"
+                //cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, dcCard.id, dcCard.animeTitle, false))
             }
 
             itemView.setOnClickListener(OpenAnimeDetail(this@DiscoverAdapter.activity, dcCard.id))

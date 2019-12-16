@@ -12,4 +12,5 @@
     <string name="settings_title">Settings</string>
     <string name="discover_title">Discover</string>
     <string name="animes_title">Animes</string>
+    <string name="no_recs">This show doesn\'t have any recommendations yet!</string>
 </resources>

@@ -34,6 +34,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recs_title" />
 
+        <ProgressBar
+            android:id="@+id/recs_pb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/recs_title"/>
+
+        <TextView
+            android:id="@+id/recs_no_recs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/no_recs"
+            app:layout_constraintTop_toBottomOf="@+id/recs_title"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

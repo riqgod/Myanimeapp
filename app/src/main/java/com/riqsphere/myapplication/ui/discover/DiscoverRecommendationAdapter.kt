@@ -68,9 +68,11 @@ class DiscoverRecommendationAdapter(private val activity: Activity, private val 
             cardAnimeImage.contentDescription = recommendation.id.toString()
             cardAnimeTitle.text = recommendation.title
             cardAnimeScore.text = recommendation.count.toString()
-            cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
-            cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, recommendation.id, recommendation.title, false))
-            itemView.setOnClickListener(OpenAnimeDetail(this@DiscoverRecommendationAdapter.activity, recommendation.id))
+
+            cardAnimeImage.setOnClickListener(OpenAnimeDetail(this@DiscoverRecommendationAdapter.activity, recommendation.id))
+            cardAnimeAdded.visibility = View.GONE
+            //cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
+            //cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, recommendation.id, recommendation.title, false))
         }
 
         fun setLoading() {
