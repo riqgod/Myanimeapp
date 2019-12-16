@@ -11,10 +11,10 @@ import com.riqsphere.myapplication.R
 
 class AboutFragment : Fragment(){
 
-    private var setSynposisTo: String? = null
+    private var setSynopsisTo: String? = null
     private var setAiredTo: String? = null
-    private lateinit var synopsis: TextView
-    private lateinit var aired: TextView
+    private var synopsis: TextView? = null
+    private var aired: TextView? = null
     private var firstRun = true
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class AboutFragment : Fragment(){
 
         //feed
         if (firstRun) {
-            synopsis.text = "Loading..."
+            synopsis!!.text = "Loading..."
             firstRun = false
         }
 
@@ -39,17 +39,35 @@ class AboutFragment : Fragment(){
         return view
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        release()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        release()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        release()
+    }
+
+    private fun release() {
+        synopsis = null
+        aired = null
+    }
+
     fun setAnime(anime: Anime) {
-        setSynposisTo = anime.synopsis
+        setSynopsisTo = anime.synopsis
         setAiredTo = getAired(anime)
         displayData()
     }
 
     private fun displayData() {
-        if (::synopsis.isInitialized) {
-            synopsis.text = setSynposisTo
-            aired.text = setAiredTo
-        }
+        synopsis?.text = setSynopsisTo
+        aired?.text = setAiredTo
     }
 
     private fun getAired(anime: Anime): String {
@@ -59,24 +77,22 @@ class AboutFragment : Fragment(){
 
         //treatment
         if (aired.length >= 15) {
+            resultAppend += aired.substring(0, 3) + ", " //get the month letter
+            processedAired = aired.substringAfter(", ") //ignore the day plus comma
 
-        resultAppend += aired.substring(0, 3) + ", " //get the month letter
-        processedAired = aired.substringAfter(", ") //ignore the day plus comma
+            resultAppend += processedAired.substring(0, 4) + " - " //get the year
 
-        resultAppend += processedAired.substring(0, 4) + " - " //get the year
+            processedAired = processedAired.substringAfter("to ") //ignore o "to "
 
-        processedAired = processedAired.substringAfter("to ") //ignore o "to "
+            if (processedAired.length > 2) { //checks if the next element is a "? "
+                resultAppend += processedAired.substring(0, 3)+", "
+                processedAired = processedAired.substringAfter(", ")
 
-        if (processedAired.length > 2) { //checks if the next element is a "? "
-            resultAppend += processedAired.substring(0, 3)+", "
-            processedAired = processedAired.substringAfter(", ")
-
-            resultAppend += processedAired.substring(0, 4)
+                resultAppend += processedAired.substring(0, 4)
+            } else {
+                resultAppend += "Present"
+            }
         } else {
-            resultAppend += "Present"
-        }
-        }else {
-
             resultAppend = aired
         }
 
