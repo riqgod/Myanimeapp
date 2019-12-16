@@ -3,12 +3,16 @@ package com.riqsphere.myapplication.ui.animeDetail
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Group
 import androidx.viewpager.widget.ViewPager
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.google.android.material.tabs.TabLayout
@@ -22,10 +26,16 @@ import kotlinx.coroutines.withContext
 class AnimeDetailActivity : AppCompatActivity() {
 
     private var added:Boolean = false
+    private var menuExpanded:Boolean = false
+    private lateinit var toolbar:androidx.appcompat.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.anime_detail_activity)
+        toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false);
+        supportActionBar?.hide()
 
         val id = intent.getIntExtra("id", -1)
         if (id == -1) {
@@ -55,6 +65,31 @@ class AnimeDetailActivity : AppCompatActivity() {
         fetchRecs(fragmentPagerAdapter, partialAnime)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean{
+        menuInflater.inflate(R.menu.menu_anime_detail,menu)
+        return true;
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val id = item.itemId
+
+        if(id == R.id.remove){
+            //hide the toolbar
+            supportActionBar?.hide()
+            //enable the add button again
+            val floatingButton = this.findViewById<ConstraintLayout>(R.id.floatingButton)
+            floatingButton.visibility = View.VISIBLE
+
+            //call the method the remove anime form the watchlist method
+            //[here]
+
+            return true;
+       }
+
+        return super.onOptionsItemSelected(item)
+    }
+
     public fun floatingAddButton(view: View){
         //disable this button
         if(!added){
@@ -72,6 +107,7 @@ class AnimeDetailActivity : AppCompatActivity() {
             //disappear in 2 seg
             val handler = Handler()
             val floatingButton = this.findViewById<ConstraintLayout>(R.id.floatingButton)
+
             handler.postDelayed({
                 Disappear(floatingButton,text,icon)
                 //disable floatingButton
@@ -84,12 +120,14 @@ class AnimeDetailActivity : AppCompatActivity() {
     private fun Disappear(floatingButton:ConstraintLayout,text:TextView,icon:ImageView){
         //disappear button
         floatingButton.visibility = View.GONE
+        supportActionBar?.show() // showing the menu, so, remove option be able to click
 
-        //change back the content
+        //change back the content, reset
         text.setText("ADD TO WATCH LIST")
         icon.setImageResource(R.drawable.ic_add_1simple_add)
 
-        //enabling btn
+
+        //enabling btn, reset
         added = false
     }
 
