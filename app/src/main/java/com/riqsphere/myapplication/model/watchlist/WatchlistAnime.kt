@@ -10,8 +10,6 @@ data class WatchlistAnime(
     @PrimaryKey
     val id: Int,
     val title: String,
-    val title_english: String,
-    val title_japanese: String,
     val imgURL: String,
     val episodes: Int,
     var episodesWatched: IntArray,
@@ -23,8 +21,6 @@ data class WatchlistAnime(
     constructor(anime: Anime) : this(
         id = anime.mal_id,
         title = anime.title,
-        title_english = anime.title_english,
-        title_japanese = anime.title_japanese,
         imgURL = anime.imageURL,
         episodes = anime.episodes,
         episodesWatched = IntArray(0),
@@ -36,8 +32,6 @@ data class WatchlistAnime(
         val anime = Anime()
         anime.mal_id = id
         anime.title = title
-        anime.title_english = title_english
-        anime.title_japanese = title_japanese
         anime.imageURL = imgURL
         anime.episodes = episodes
         anime.broadcast = broadcast
