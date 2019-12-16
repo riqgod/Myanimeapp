@@ -4,11 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.postDelayed
 import com.riqsphere.myapplication.R
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private val splashTime= 3000L
+    private val splashTime= 3000
     private lateinit var handler: Handler
 
 
@@ -20,11 +21,12 @@ class SplashScreenActivity : AppCompatActivity() {
 
         handler.postDelayed({
             goToMainActivity()
-        },splashTime)
+        }, splashTime.toLong())
+
     }
 
     private fun goToMainActivity(){
-        val mainActivityIntent = Intent(applicationContext,MainActivity::class.java)
+        val mainActivityIntent = Intent(this,MainActivity::class.java)
         startActivity(mainActivityIntent)
         finish()
     }

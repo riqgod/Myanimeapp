@@ -35,6 +35,8 @@ class AnimeDetailActivity : AppCompatActivity() {
 
     private lateinit var partialAnime: Anime
 
+    private var segredo:String = "SmNkssGijWOK4"
+    private var q = "h1c6L4PR77BLIFUv"
     private lateinit var viewPager: ViewPager
     private lateinit var tabs: TabLayout
     public lateinit var imageBg: ImageView
@@ -101,13 +103,15 @@ class AnimeDetailActivity : AppCompatActivity() {
     }
 
     private fun setActivityData(anime: Anime) {
-        val apiKey:String = "AIzaSyCDygTKwzesUMdO0QNbnGWbNGJ7PM9Pnpc"
-        val keyCse:String = "013948103287608180558:zyl5sbvqbkk"
+
+        val foin:String = "AIzaSyAcr"
+        val dale:String = "01394810328760818055"
+        val ahn= "8:qacwtjfwy55"
 
         var animeSearch:String = anime.title+""
         animeSearch =  animeSearch.replace(" ", "+");
 
-        var urlString:String = "https://www.googleapis.com/customsearch/v1?q="+animeSearch+"&cx="+keyCse+"&imgSize=huge&num=1&searchType=image&key="+apiKey;
+        var urlString:String = "https://www.googleapis.com/customsearch/v1?q="+animeSearch+"&cx="+dale+ahn+"&imgSize=huge&num=1&searchType=image&key="+foin+q+segredo;
 
                 var url:URL? = null;
                 try {
