@@ -10,21 +10,17 @@ data class WatchlistAnime(
     @PrimaryKey
     val id: Int,
     val title: String,
-    val title_english: String,
-    val title_japanese: String,
     val imgURL: String,
     val episodes: Int,
     var episodesWatched: IntArray,
     var episodesOut: Int,
-    val broadcast: String
+    val broadcast: String?
 ){
-    constructor() : this(0, "", "", "", "", 0, IntArray(0), 0, "")
+    constructor() : this(0, "", "", 0, IntArray(0), 0, "")
 
     constructor(anime: Anime) : this(
         id = anime.mal_id,
         title = anime.title,
-        title_english = anime.title_english,
-        title_japanese = anime.title_japanese,
         imgURL = anime.imageURL,
         episodes = anime.episodes,
         episodesWatched = IntArray(0),
@@ -36,8 +32,6 @@ data class WatchlistAnime(
         val anime = Anime()
         anime.mal_id = id
         anime.title = title
-        anime.title_english = title_english
-        anime.title_japanese = title_japanese
         anime.imageURL = imgURL
         anime.episodes = episodes
         anime.broadcast = broadcast
@@ -53,8 +47,6 @@ data class WatchlistAnime(
 
         if (id != other.id) return false
         if (title != other.title) return false
-        if (title_english != other.title_english) return false
-        if (title_japanese != other.title_japanese) return false
         if (imgURL != other.imgURL) return false
         if (episodes != other.episodes) return false
         if (!episodesWatched.contentEquals(other.episodesWatched)) return false
@@ -67,8 +59,6 @@ data class WatchlistAnime(
     override fun hashCode(): Int {
         var result = id
         result = 31 * result + title.hashCode()
-        result = 31 * result + title_english.hashCode()
-        result = 31 * result + title_japanese.hashCode()
         result = 31 * result + imgURL.hashCode()
         result = 31 * result + episodes
         result = 31 * result + episodesWatched.contentHashCode()

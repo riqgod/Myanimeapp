@@ -41,8 +41,12 @@ class SearchAdapter(private val act: Activity, private val myaaViewModel: MyaaVi
 
         searchAnimeTitle.text = sm.animeTitle
         if (sm.imageURL != "" && ImageHandler.shouldLoad()) {
+<<<<<<< HEAD
             ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).placeholder(R.drawable.neko).into(searchImage)
             searchImage.contentDescription = "The image of the anime "+sm.animeTitle
+=======
+            ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).into(searchImage)
+>>>>>>> 1906c585f6474ba20fdece92c2514ad169bfd2b9
         } else {
             ImageHandler.getInstance(this@SearchAdapter.act).load(R.drawable.neko).placeholder(R.drawable.neko).into(searchImage)
             searchImage.contentDescription = "A cat placeholder of a anime loading image"

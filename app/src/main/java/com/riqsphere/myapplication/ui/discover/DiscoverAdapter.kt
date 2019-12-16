@@ -56,8 +56,12 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
         fun bindView(position:Int) {
             val dcCard = searchList[position]
             if (dcCard.imageURL != "" && ImageHandler.shouldLoad()) {
+<<<<<<< HEAD
                 ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).placeholder(R.drawable.neko).into(cardAnimeImage)
                 cardAnimeImage.contentDescription = "A image of the anime "+dcCard.animeTitle
+=======
+                ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).into(cardAnimeImage)
+>>>>>>> 1906c585f6474ba20fdece92c2514ad169bfd2b9
             } else {
                 ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
                 cardAnimeImage.contentDescription = "A cat in the placeholder to a loading anime image"

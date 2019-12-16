@@ -137,33 +137,44 @@ class DiscoverFragment : Fragment() {
     }
 
     private fun observeRecommendation(vararg params: RecyclerView) {
-        params.forEach { recyclerView ->
-            allRecommendation.observe(this, Observer {
-                when {
-                    (recyclerView.adapter is DiscoverRecommendationAdapter) -> {
-                        val adapt = recyclerView.adapter as DiscoverRecommendationAdapter
-                        adapt.setRecListData(it)
-                    }
-                }
-            })
+        val draParams = params.mapNotNull {
+            if (it.adapter is DiscoverRecommendationAdapter) {
+                it.adapter as DiscoverRecommendationAdapter
+            } else {
+                null
+            }
         }
+        allRecommendation.observe(this, Observer {
+            draParams.forEach { dra ->
+                dra.setRecListData(it)
+            }
+        })
     }
 
     private fun observeWatchlist(vararg params: RecyclerView) {
-        params.forEach { recyclerView ->
-            allWatchlistAnime.observe(this, Observer {
-                when {
-                    (recyclerView.adapter is DiscoverAdapter) -> {
-                        val adapt = recyclerView.adapter as DiscoverAdapter
-                        adapt.setWatchlistData(it)
-                    }
-                    (recyclerView.adapter is DiscoverRecommendationAdapter) -> {
-                        val adapt = recyclerView.adapter as DiscoverRecommendationAdapter
-                        adapt.setWatchlistData(it)
-                    }
-                }
-            })
+        val draParams = params.mapNotNull {
+            if (it.adapter is DiscoverRecommendationAdapter) {
+                it.adapter as DiscoverRecommendationAdapter
+            } else {
+                null
+            }
         }
+
+        val daParams = params.mapNotNull {
+            if (it.adapter is DiscoverAdapter) {
+                it.adapter as DiscoverAdapter
+            } else {
+                null
+            }
+        }
+        allWatchlistAnime.observe(this, Observer {
+            draParams.forEach { dra ->
+                dra.setWatchlistData(it)
+            }
+            daParams.forEach { da ->
+                da.setWatchlistData(it)
+            }
+        })
     }
 
     private class AsyncDataSetter: AsyncTask<Pair<RecyclerView, () -> ArrayList<SearchModel>>, Void, Void>() {
