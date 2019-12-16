@@ -11,8 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
-import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
 import com.riqsphere.myapplication.utils.ImageHandler
+import com.riqsphere.myapplication.utils.NetworkState
+import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
 
 class WatchlistAdapter(private val activity: Activity) : RecyclerView.Adapter<WatchlistAdapter.WatchlistAnimeViewHolder>() {
     private var watchlistAnimes = emptyList<WatchlistAnime>()
@@ -40,7 +41,9 @@ class WatchlistAdapter(private val activity: Activity) : RecyclerView.Adapter<Wa
 
         fun bindView(position: Int) {
             val watchlistAnime = watchlistAnimes[position]
-            ImageHandler.getInstance(activity).load(watchlistAnime.imgURL).into(cardAnimeImage)
+            if (NetworkState.shouldLoad()) {
+                ImageHandler.getInstance(activity).load(watchlistAnime.imgURL).into(cardAnimeImage)
+            }
             cardAnimeImage.contentDescription = watchlistAnime.id.toString()
             cardAnimeTitle.text = watchlistAnime.title
             cardAnimeProgress.max = watchlistAnime.episodes

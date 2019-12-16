@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.AsyncTask
 import android.widget.ImageView
 import com.riqsphere.myapplication.utils.ImageHandler
+import com.riqsphere.myapplication.utils.NetworkState
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -15,6 +16,9 @@ import java.net.URL
 class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context: Context) : AsyncTask<String, Int, String>() {
     @Override
     override fun doInBackground(vararg strings: String?): String? {
+        if (!NetworkState.shouldLoad()) {
+            return null
+        }
 
         var animeSearch = strings[0]!!
         animeSearch =  animeSearch.replace(" ", "+")
@@ -71,7 +75,10 @@ class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context:
         return null
     }
 
-    override fun onPostExecute(result:String) {
+    override fun onPostExecute(result: String) {
+        if (!NetworkState.shouldLoad()) {
+            return
+        }
         val result2 = parseJSon(result)
         ImageHandler.getInstance(context).load(result2).into(imageBg)
     }

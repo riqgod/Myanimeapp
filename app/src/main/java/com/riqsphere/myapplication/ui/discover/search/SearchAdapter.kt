@@ -10,8 +10,9 @@ import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
-import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
 import com.riqsphere.myapplication.utils.ImageHandler
+import com.riqsphere.myapplication.utils.NetworkState
+import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
 
 class SearchAdapter(private val act: Activity, private val myaaViewModel: MyaaViewModel) : BaseAdapter() {
     private var watchlist: List<WatchlistAnime> = arrayListOf()
@@ -40,13 +41,12 @@ class SearchAdapter(private val act: Activity, private val myaaViewModel: MyaaVi
         val searchScoreBg: ImageView = view.findViewById(R.id.lv_rectangle_score)
 
         searchAnimeTitle.text = sm.animeTitle
-        if (sm.imageURL != "") {
-            ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).into(searchImage)
+        if (sm.imageURL != "" && NetworkState.shouldLoad()) {
+            ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).placeholder(R.drawable.neko).into(searchImage)
         } else {
             ImageHandler.getInstance(this@SearchAdapter.act).load(R.drawable.neko).into(searchImage)
         }
 
-        ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).into(searchImage)
         searchImage.contentDescription = sm.id.toString()
         searchScore.text = sm.score
 

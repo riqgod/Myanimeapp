@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
+import com.riqsphere.myapplication.utils.ImageHandler
+import com.riqsphere.myapplication.utils.NetworkState
 import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
 import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
-import com.riqsphere.myapplication.utils.ImageHandler
 
 class RecsAdapter(private val activity: Activity, private val myaaViewModel: MyaaViewModel) : RecyclerView.Adapter<RecsAdapter.ViewHolder>() {
 
@@ -54,7 +55,10 @@ class RecsAdapter(private val activity: Activity, private val myaaViewModel: Mya
 
         fun bindView(position:Int){
             val item = recList[position]
-            ImageHandler.getInstance(activity).load(item.urlImage).into(recsImage)
+
+            if (NetworkState.shouldLoad()) {
+                ImageHandler.getInstance(activity).load(item.urlImage).into(recsImage)
+            }
             recsImage.contentDescription = item.mal_id.toString()
             recsCount.text = item.animeRecsNum
             recsTitle.text = item.animeTitle

@@ -13,8 +13,9 @@ import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.animeDetail.episodes.EpisodesModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
-import com.riqsphere.myapplication.utils.onClickListeners.EpisodeWatchedListener
 import com.riqsphere.myapplication.utils.ImageHandler
+import com.riqsphere.myapplication.utils.NetworkState
+import com.riqsphere.myapplication.utils.onClickListeners.EpisodeWatchedListener
 
 
 class EpisodesAllAdapter(
@@ -63,7 +64,7 @@ class EpisodesAllAdapter(
 
         fun bindView(position:Int) {
             val epCard = epList[position]
-            if (epCard.imageUrl != "") {
+            if (epCard.imageUrl != "" && NetworkState.shouldLoad()) {
                 ImageHandler.getInstance(context).load(epCard.imageUrl).into(cardEpImage)
             }
 

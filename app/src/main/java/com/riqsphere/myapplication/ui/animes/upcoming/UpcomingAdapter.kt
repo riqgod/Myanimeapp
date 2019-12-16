@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.makeramen.roundedimageview.RoundedImageView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
-import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
 import com.riqsphere.myapplication.utils.ImageHandler
+import com.riqsphere.myapplication.utils.NetworkState
+import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
 import java.util.*
 
 class UpcomingAdapter(private val activity: Activity): RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {
@@ -40,7 +41,9 @@ class UpcomingAdapter(private val activity: Activity): RecyclerView.Adapter<Upco
 
         fun bindView(position: Int) {
             val up = upcoming[position]
-            ImageHandler.getInstance(this@UpcomingAdapter.activity).load(up.imgURL).into(cardAnimeImage)
+            if (NetworkState.shouldLoad()) {
+                ImageHandler.getInstance(this@UpcomingAdapter.activity).load(up.imgURL).into(cardAnimeImage)
+            }
             cardAnimeTitle.text = up.title
             cardEpNum.text = (up.episodesOut + 1).toString()
             cardTime.text = up.broadcast

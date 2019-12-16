@@ -13,9 +13,10 @@ import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
+import com.riqsphere.myapplication.utils.ImageHandler
+import com.riqsphere.myapplication.utils.NetworkState
 import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
 import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
-import com.riqsphere.myapplication.utils.ImageHandler
 
 class DiscoverRecommendationAdapter(private val activity: Activity, private val myaaViewModel: MyaaViewModel) : RecyclerView.Adapter<DiscoverRecommendationAdapter.ViewHolder>(){
     private val watchlist = SparseBooleanArray()
@@ -60,7 +61,10 @@ class DiscoverRecommendationAdapter(private val activity: Activity, private val 
         private val cardAnimeAdded: ImageView = itemView.findViewById(R.id.dc_add_to_list)
 
         fun preBind(recommendation: Recommendation) {
-            ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(recommendation.imageURL).into(cardAnimeImage)
+            if (NetworkState.shouldLoad()) {
+                ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity)
+                    .load(recommendation.imageURL).into(cardAnimeImage)
+            }
             cardAnimeImage.contentDescription = recommendation.id.toString()
             cardAnimeTitle.text = recommendation.title
             cardAnimeScore.text = recommendation.count.toString()

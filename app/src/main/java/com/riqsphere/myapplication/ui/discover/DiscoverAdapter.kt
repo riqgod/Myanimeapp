@@ -13,9 +13,10 @@ import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
+import com.riqsphere.myapplication.utils.ImageHandler
+import com.riqsphere.myapplication.utils.NetworkState
 import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
 import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
-import com.riqsphere.myapplication.utils.ImageHandler
 
 class DiscoverAdapter(private val activity: Activity, private val myaaViewModel: MyaaViewModel) : RecyclerView.Adapter<DiscoverAdapter.ViewHolder>(){
 
@@ -55,7 +56,7 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
 
         fun bindView(position:Int) {
             val dcCard = searchList[position]
-            if (dcCard.imageURL != "") {
+            if (dcCard.imageURL != "" && NetworkState.shouldLoad()) {
                 ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).into(cardAnimeImage)
             }
             cardAnimeImage.contentDescription = dcCard.id.toString()
