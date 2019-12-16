@@ -57,18 +57,23 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
             val dcCard = searchList[position]
             if (dcCard.imageURL != "" && ImageHandler.shouldLoad()) {
                 ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).placeholder(R.drawable.neko).into(cardAnimeImage)
+                cardAnimeImage.contentDescription = "A image of the anime "+dcCard.animeTitle
             } else {
                 ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
+                cardAnimeImage.contentDescription = "A cat in the placeholder to a loading anime image"
             }
             cardAnimeImage.contentDescription = dcCard.id.toString()
             cardAnimeTitle.text = dcCard.animeTitle
             cardAnimeScore.text = dcCard.score
+            cardAnimeScore.contentDescription = "the score of "+dcCard.animeTitle+" if "+dcCard.score
 
             if (watchlist[dcCard.id]) {
                 cardAnimeAdded.setImageResource(R.drawable.ic_added_to_list)
+                cardAnimeAdded.contentDescription = "remove "+dcCard.animeTitle+" from your watchlist"
                 cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, dcCard.id, dcCard.animeTitle, true))
             } else {
                 cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
+                cardAnimeAdded.contentDescription = "add "+dcCard.animeTitle+" to your watchlist"
                 cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, dcCard.id, dcCard.animeTitle, false))
             }
 

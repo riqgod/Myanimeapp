@@ -42,8 +42,10 @@ class UpcomingAdapter(private val activity: Activity): RecyclerView.Adapter<Upco
             val up = upcoming[position]
             if (ImageHandler.shouldLoad()) {
                 ImageHandler.getInstance(this@UpcomingAdapter.activity).load(up.imgURL).placeholder(R.drawable.neko).into(cardAnimeImage)
+                cardAnimeImage.contentDescription = "A image of the anime "+up.title
             } else {
                 ImageHandler.getInstance(this@UpcomingAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
+                cardAnimeImage.contentDescription = "a car placeholder of anime loading image"
             }
             cardAnimeTitle.text = up.title
             cardEpNum.text = (up.episodesOut + 1).toString()

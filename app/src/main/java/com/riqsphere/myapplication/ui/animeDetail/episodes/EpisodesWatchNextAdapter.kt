@@ -70,8 +70,10 @@ class EpisodesWatchNextAdapter(
             val epCard = epList[position]
             if (epCard.imageUrl != "" && ImageHandler.shouldLoad()) {
                 ImageHandler.getInstance(context).load(epCard.imageUrl).placeholder(R.drawable.neko).into(cardEpImage)
+                cardEpImage.contentDescription = "a image of the anime: "+ epCard.title
             } else {
                 ImageHandler.getInstance(context).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardEpImage)
+                cardEpImage.contentDescription = "a car placeholder of anime loading image"
             }
 
             cardEpTitle.text = epCard.title

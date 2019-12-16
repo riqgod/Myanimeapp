@@ -91,6 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
+            android:contentDescription="mark the all season as watched"
             android:onClick="epWatchedClick"
             app:layout_constraintBottom_toBottomOf="@+id/episodes_all_rect"
             app:layout_constraintEnd_toEndOf="@+id/episodes_all_rect"

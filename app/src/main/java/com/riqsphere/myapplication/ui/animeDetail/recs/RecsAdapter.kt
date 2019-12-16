@@ -57,11 +57,14 @@ class RecsAdapter(private val activity: Activity, private val myaaViewModel: Mya
 
             if (ImageHandler.shouldLoad()) {
                 ImageHandler.getInstance(activity).load(item.urlImage).into(recsImage)
+                recsImage.contentDescription = "A image of the anime "+item.animeTitle
             } else {
                 ImageHandler.getInstance(activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(recsImage)
+                recsImage.contentDescription = "a cat placeholder of anime loading image"
             }
             recsImage.contentDescription = item.mal_id.toString()
             recsCount.text = item.animeRecsNum
+            recsCount.contentDescription = "The recomendation number for you is "+ recsCount
             recsTitle.text = item.animeTitle
 
             val added = watchlist[item.mal_id]

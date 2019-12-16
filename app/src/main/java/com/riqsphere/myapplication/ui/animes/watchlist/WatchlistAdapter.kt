@@ -42,8 +42,10 @@ class WatchlistAdapter(private val activity: Activity) : RecyclerView.Adapter<Wa
             val watchlistAnime = watchlistAnimes[position]
             if (ImageHandler.shouldLoad()) {
                 ImageHandler.getInstance(activity).load(watchlistAnime.imgURL).placeholder(R.drawable.neko).into(cardAnimeImage)
+                cardAnimeImage.contentDescription = "A image of the anime "+ watchlistAnime.title
             } else {
                 ImageHandler.getInstance(activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
+                cardAnimeImage.contentDescription = "A cat placeholder of anime loading image"
             }
             cardAnimeImage.contentDescription = watchlistAnime.id.toString()
             cardAnimeTitle.text = watchlistAnime.title
