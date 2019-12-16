@@ -76,22 +76,27 @@ class DiscoverFragment : Fragment() {
 
     private fun setRecyclerViews() {
         val top4uRecyclerView = initializeRecommendationsRecyclerView(R.id.dc_rv_top4u)
-        observeRecommendation(top4uRecyclerView)
+        val top4uLoadingView = rootView.findViewById<View>(R.id.dc_loading_top4u)
+        observeRecommendation(Pair(top4uRecyclerView, top4uLoadingView))
 
         val seasonalRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_seasonal)
-        val seasonalPair = Pair(seasonalRecyclerView, fetchCurrentSeason)
+        val seasonalLoadingView = rootView.findViewById<View>(R.id.dc_loading_seasonal)
+        val seasonalTriple = Triple(seasonalRecyclerView, seasonalLoadingView, fetchCurrentSeason)
 
         val topUpcomingRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_top_upcoming)
-        val topUpcomingPair = Pair(topUpcomingRecyclerView, fetchTopUpcoming)
+        val topUpcomingLoadingView = rootView.findViewById<View>(R.id.dc_loading_top_upcoming)
+        val topUpcomingTriple = Triple(topUpcomingRecyclerView, topUpcomingLoadingView, fetchTopUpcoming)
 
         val mostPoplarRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_mp)
-        val mostPoplarPair = Pair(mostPoplarRecyclerView, fetchMostPoplar)
+        val mostPoplarLoadingView = rootView.findViewById<View>(R.id.dc_loading_mp)
+        val mostPoplarTriple = Triple(mostPoplarRecyclerView, mostPoplarLoadingView, fetchMostPoplar)
 
         val topScoreRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_score)
-        val topScorePair = Pair(topScoreRecyclerView, fetchTopScore)
+        val topScoreLoadingView = rootView.findViewById<View>(R.id.dc_loading_score)
+        val topScoreTriple = Triple(topScoreRecyclerView, topScoreLoadingView, fetchTopScore)
 
-        val pairs = arrayOf(seasonalPair, topUpcomingPair, mostPoplarPair, topScorePair)
-        AsyncDataSetter().execute(*pairs)
+        val triples = arrayOf(seasonalTriple, topUpcomingTriple, mostPoplarTriple, topScoreTriple)
+        AsyncDataSetter().execute(*triples)
 
         val recyclers = arrayOf(top4uRecyclerView, seasonalRecyclerView, topUpcomingRecyclerView, mostPoplarRecyclerView, topScoreRecyclerView)
         observeWatchlist(*recyclers)
@@ -136,17 +141,21 @@ class DiscoverFragment : Fragment() {
         return rv
     }
 
-    private fun observeRecommendation(vararg params: RecyclerView) {
+    private fun observeRecommendation(vararg params: Pair<RecyclerView, View>) {
         val draParams = params.mapNotNull {
-            if (it.adapter is DiscoverRecommendationAdapter) {
-                it.adapter as DiscoverRecommendationAdapter
+            val recyclerView = it.first
+            if (recyclerView.adapter is DiscoverRecommendationAdapter) {
+                Pair(recyclerView.adapter as DiscoverRecommendationAdapter, it.second)
             } else {
                 null
             }
         }
         allRecommendation.observe(this, Observer {
-            draParams.forEach { dra ->
+            draParams.forEach { pair ->
+                val dra = pair.first
+                val loadingView = pair.second
                 dra.setRecListData(it)
+                loadingView.visibility = View.GONE
             }
         })
     }
@@ -177,15 +186,19 @@ class DiscoverFragment : Fragment() {
         })
     }
 
-    private class AsyncDataSetter: AsyncTask<Pair<RecyclerView, () -> ArrayList<SearchModel>>, Void, Void>() {
-        override fun doInBackground(vararg params: Pair<RecyclerView, () -> ArrayList<SearchModel>>?): Void? {
+    private class AsyncDataSetter: AsyncTask<Triple<RecyclerView, View, () -> ArrayList<SearchModel>>, Void, Void>() {
+        override fun doInBackground(vararg params: Triple<RecyclerView, View, () -> ArrayList<SearchModel>>?): Void? {
             runBlocking {
-                params.forEach { pair ->
+                params.forEach { triple ->
                     launch {
-                        if (pair != null) {
-                            val recyclerView = pair.first
-                            val data = withContext(Dispatchers.Unconfined) { fetchData(pair.second) }
-                            recyclerView.setData(data)
+                        if (triple != null) {
+                            val recyclerView = triple.first
+                            val loadingView = triple.second
+                            val data = withContext(Dispatchers.Unconfined) { fetchData(triple.third) }
+                            withContext(Dispatchers.Main) {
+                                recyclerView.setData(data)
+                                loadingView.visibility = View.GONE
+                            }
                         }
                     }
                 }

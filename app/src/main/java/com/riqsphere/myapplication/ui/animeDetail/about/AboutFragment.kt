@@ -23,7 +23,6 @@ class AboutFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("hello", "helo from about")
         val view = inflater.inflate(R.layout.fragment_about,container,false)
 
         //setting content
