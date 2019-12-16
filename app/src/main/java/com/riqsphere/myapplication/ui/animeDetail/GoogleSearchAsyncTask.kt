@@ -24,7 +24,7 @@ class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context:
         animeSearch =  animeSearch.replace(" ", "+")
 
         val urlString =
-            "https://www.googleapis.com/customsearch/v1?q=$animeSearch&cx=$dale$ahn&imgSize=huge&num=1&searchType=image&key=$foin$q$segredo"
+            "https://www.googleapis.com/customsearch/v1?q=$animeSearch&cx=$dale$ahn&imgSize=huge&num=1&searchType=image&key=AIzaSyDfBZWs4_gxDn_4UuMmIYZY17dTTPi5Huw"
 
         var url:URL? = null
         try {
@@ -93,12 +93,6 @@ class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context:
     }
 
     companion object {
-        private const val apiKey = "AIzaSyCDygTKwzesUMdO0QNbnGWbNGJ7PM9Pnpc"
-        private const val keyCse = "013948103287608180558:zyl5sbvqbkk"
-
-        private const val segredo = "SmNkssGijWOK4"
-        private const val q = "h1c6L4PR77BLIFUv"
-        private const val foin = "AIzaSyAcr"
         private const val dale = "01394810328760818055"
         private const val ahn= "8:qacwtjfwy55"
     }
