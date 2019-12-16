@@ -18,10 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/watch_next_episode_image"
                 android:layout_width="110dp"
-                android:layout_height="wrap_content"
+                android:layout_height="85dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/episode_image"
                 app:layout_constraintBottom_toBottomOf="parent"
