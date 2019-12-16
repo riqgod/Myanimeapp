@@ -30,7 +30,6 @@ class EpisodesFragment(private val animeId: Int) : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("hello", "helo from eps")
         val view = inflater.inflate(R.layout.fragment_episodes,container,false)
         if (activity == null) {
             return view

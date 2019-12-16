@@ -37,7 +37,6 @@ class RecsFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("hello", "helo from recs$firstRun")
         val view = inflater.inflate(R.layout.fragment_recs, container, false)
 
         if (firstRun) {
@@ -48,11 +47,9 @@ class RecsFragment : Fragment(){
         }
 
         rv = view.findViewById(R.id.recs_rv)
-
         noRecsText = view.findViewById(R.id.recs_no_recs)
         noRecsText?.visibility = View.GONE
         pb = view.findViewById(R.id.recs_pb)
-
 
         if (!dataHasBeenSet) {
             dataToSet?.let { setRecs(it) }
@@ -61,7 +58,6 @@ class RecsFragment : Fragment(){
                 pb?.visibility = View.GONE
             }
         }
-
 
         return view
     }

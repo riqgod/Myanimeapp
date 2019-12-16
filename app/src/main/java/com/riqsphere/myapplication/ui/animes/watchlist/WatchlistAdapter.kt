@@ -50,7 +50,7 @@ class WatchlistAdapter(private val activity: Activity) : RecyclerView.Adapter<Wa
             cardAnimeImage.contentDescription = watchlistAnime.id.toString()
             cardAnimeTitle.text = watchlistAnime.title
             cardAnimeProgress.max = watchlistAnime.episodes
-            cardAnimeProgress.progress = watchlistAnime.episodesWatched.size // just a placeholder.
+            cardAnimeProgress.progress = watchlistAnime.episodesWatched.size
 
             cardAnimeImage.setOnClickListener(OpenAnimeDetail(activity, watchlistAnime.id))
         }

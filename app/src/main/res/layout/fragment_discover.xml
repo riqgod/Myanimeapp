@@ -76,10 +76,27 @@
                         android:id="@+id/dc_rv_top4u"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/dc_rv_top4u_text" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dc_loading_top4u"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dc_rv_top4u_text" >
+
+                        <ProgressBar
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
                         android:id="@+id/dc_rv_top4u_text"
@@ -125,6 +142,22 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/dc_rv_seasonal_text" />
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dc_loading_seasonal"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dc_rv_seasonal_text" >
+
+                        <ProgressBar
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <TextView
                         android:id="@+id/dc_rv_seasonal_text"
                         android:layout_width="wrap_content"
@@ -158,7 +191,7 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/topScore">
+                    app:layout_constraintTop_toBottomOf="@+id/seasonalAnimes">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/dc_rv_top_upcoming"
@@ -168,6 +201,22 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/dc_rv_top_upcoming_text" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dc_loading_top_upcoming"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dc_rv_top_upcoming_text" >
+
+                        <ProgressBar
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
                         android:id="@+id/dc_rv_top_upcoming_text"
@@ -202,7 +251,7 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/seasonalAnimes">
+                    app:layout_constraintTop_toBottomOf="@+id/topUpcomingAnimes">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/dc_rv_mp"
@@ -212,6 +261,22 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/dc_rv_mp_text" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dc_loading_mp"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dc_rv_mp_text" >
+
+                        <ProgressBar
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
                         android:id="@+id/dc_rv_mp_text"
@@ -269,6 +334,22 @@
                         android:textSize="20sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dc_loading_score"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dc_rv_score_text" >
+
+                        <ProgressBar
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <Button
                         android:id="@+id/dc_rv_score_sa_btn"
