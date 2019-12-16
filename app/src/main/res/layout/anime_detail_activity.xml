@@ -45,6 +45,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="sans-serif-medium"
+                    android:maxLength="41"
                     android:maxLines="2"
                     android:text="Loading..."
                     android:textAlignment="viewStart"
