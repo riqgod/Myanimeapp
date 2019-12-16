@@ -18,7 +18,7 @@ object ImageHandler {
         tempInstance?.let { return it }
 
         synchronized(this) {
-            val instance = Picasso.Builder(context).executor(Executors.newSingleThreadExecutor()).memoryCache(Cache.NONE).build()
+            val instance = Picasso.Builder(context).executor(Executors.newSingleThreadExecutor()).build()
             INSTANCE = instance
             return instance
         }

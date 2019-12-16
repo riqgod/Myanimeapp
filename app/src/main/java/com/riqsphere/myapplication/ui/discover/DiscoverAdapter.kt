@@ -59,7 +59,7 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
                 cardAnimeImage.contentDescription = "A image of the anime "+dcCard.animeTitle
                 ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).into(cardAnimeImage)
             } else {
-                ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
+                ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko2).placeholder(R.drawable.neko2).into(cardAnimeImage)
                 cardAnimeImage.contentDescription = "A cat in the placeholder to a loading anime image"
             }
             cardAnimeImage.contentDescription = dcCard.id.toString()
@@ -82,7 +82,7 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
         }
 
         fun setLoading() {
-            ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
+            ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko2).placeholder(R.drawable.neko2).into(cardAnimeImage)
             cardAnimeTitle.text = "Loading..."
             cardAnimeScore.text = ""
         }

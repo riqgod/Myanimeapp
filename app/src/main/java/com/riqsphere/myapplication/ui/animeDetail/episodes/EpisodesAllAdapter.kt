@@ -68,7 +68,7 @@ class EpisodesAllAdapter(
                 cardEpImage.contentDescription = "a image of the anime: "+ epCard.title
                 ImageHandler.getInstance(context).load(epCard.imageUrl).into(cardEpImage)
             } else {
-                ImageHandler.getInstance(context).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardEpImage)
+                ImageHandler.getInstance(context).load(R.drawable.neko2).placeholder(R.drawable.neko2).into(cardEpImage)
                 cardEpImage.contentDescription = "a cat placeholder of anime loading image"
             }
 

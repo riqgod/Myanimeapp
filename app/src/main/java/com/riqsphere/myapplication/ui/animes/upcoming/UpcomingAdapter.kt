@@ -44,7 +44,7 @@ class UpcomingAdapter(private val activity: Activity): RecyclerView.Adapter<Upco
                 cardAnimeImage.contentDescription = "A image of the anime "+up.title
                 ImageHandler.getInstance(this@UpcomingAdapter.activity).load(up.imgURL).into(cardAnimeImage)
             } else {
-                ImageHandler.getInstance(this@UpcomingAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
+                ImageHandler.getInstance(this@UpcomingAdapter.activity).load(R.drawable.neko2).placeholder(R.drawable.neko2).into(cardAnimeImage)
                 cardAnimeImage.contentDescription = "a car placeholder of anime loading image"
             }
             cardAnimeTitle.text = up.title

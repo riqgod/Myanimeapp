@@ -59,7 +59,7 @@ class RecsAdapter(private val activity: Activity, private val myaaViewModel: Mya
                 ImageHandler.getInstance(activity).load(item.urlImage).into(recsImage)
                 recsImage.contentDescription = "A image of the anime "+item.animeTitle
             } else {
-                ImageHandler.getInstance(activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(recsImage)
+                ImageHandler.getInstance(activity).load(R.drawable.neko2).placeholder(R.drawable.neko2).into(recsImage)
                 recsImage.contentDescription = "a cat placeholder of anime loading image"
             }
             recsImage.contentDescription = item.mal_id.toString()
