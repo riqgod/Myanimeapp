@@ -14,7 +14,6 @@ import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.utils.ImageHandler
-import com.riqsphere.myapplication.utils.NetworkState
 import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
 import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
 
@@ -56,8 +55,10 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
 
         fun bindView(position:Int) {
             val dcCard = searchList[position]
-            if (dcCard.imageURL != "" && NetworkState.shouldLoad()) {
-                ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).into(cardAnimeImage)
+            if (dcCard.imageURL != "" && ImageHandler.shouldLoad()) {
+                ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).placeholder(R.drawable.neko).into(cardAnimeImage)
+            } else {
+                ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
             }
             cardAnimeImage.contentDescription = dcCard.id.toString()
             cardAnimeTitle.text = dcCard.animeTitle
@@ -75,7 +76,7 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
         }
 
         fun setLoading() {
-            ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko).into(cardAnimeImage)
+            ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
             cardAnimeTitle.text = "Loading..."
             cardAnimeScore.text = ""
         }

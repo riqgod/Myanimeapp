@@ -13,7 +13,7 @@ import com.riqsphere.myapplication.tasks.WatchlistAlarm
 import com.riqsphere.myapplication.ui.animes.AnimesFragment
 import com.riqsphere.myapplication.ui.discover.DiscoverFragment
 import com.riqsphere.myapplication.ui.settings.SettingsFragment
-import com.riqsphere.myapplication.utils.NetworkState
+import com.riqsphere.myapplication.utils.ImageHandler
 import java.io.OutputStream
 import java.io.PrintStream
 import java.util.*
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
 
         disableSystemOut()
-        NetworkState.init(this)
+        ImageHandler.init(this)
 
         val p = getDefaultSharedPreferences(this)
         if (p.getBoolean(PREFERENCE_FIRST_RUN, true)) {

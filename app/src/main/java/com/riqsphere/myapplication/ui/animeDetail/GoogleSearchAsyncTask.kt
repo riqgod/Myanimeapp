@@ -3,8 +3,8 @@ package com.riqsphere.myapplication.ui.animeDetail
 import android.content.Context
 import android.os.AsyncTask
 import android.widget.ImageView
+import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.utils.ImageHandler
-import com.riqsphere.myapplication.utils.NetworkState
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -16,7 +16,7 @@ import java.net.URL
 class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context: Context) : AsyncTask<String, Int, String>() {
     @Override
     override fun doInBackground(vararg strings: String?): String? {
-        if (!NetworkState.shouldLoad()) {
+        if (!ImageHandler.shouldLoad()) {
             return null
         }
 
@@ -76,11 +76,12 @@ class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context:
     }
 
     override fun onPostExecute(result: String) {
-        if (!NetworkState.shouldLoad()) {
+        if (!ImageHandler.shouldLoad()) {
+            ImageHandler.getInstance(context).load(R.drawable.neko).placeholder(R.drawable.neko).into(imageBg)
             return
         }
         val result2 = parseJSon(result)
-        ImageHandler.getInstance(context).load(result2).into(imageBg)
+        ImageHandler.getInstance(context).load(result2).placeholder(R.drawable.neko).into(imageBg)
     }
 
     private fun parseJSon(string:String):String{

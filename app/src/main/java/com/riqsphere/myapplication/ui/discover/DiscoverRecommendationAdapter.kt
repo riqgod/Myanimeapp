@@ -14,7 +14,6 @@ import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.utils.ImageHandler
-import com.riqsphere.myapplication.utils.NetworkState
 import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
 import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
 
@@ -61,9 +60,10 @@ class DiscoverRecommendationAdapter(private val activity: Activity, private val 
         private val cardAnimeAdded: ImageView = itemView.findViewById(R.id.dc_add_to_list)
 
         fun preBind(recommendation: Recommendation) {
-            if (NetworkState.shouldLoad()) {
-                ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity)
-                    .load(recommendation.imageURL).into(cardAnimeImage)
+            if (ImageHandler.shouldLoad()) {
+                ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(recommendation.imageURL).placeholder(R.drawable.neko).into(cardAnimeImage)
+            } else {
+                ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
             }
             cardAnimeImage.contentDescription = recommendation.id.toString()
             cardAnimeTitle.text = recommendation.title
@@ -74,7 +74,7 @@ class DiscoverRecommendationAdapter(private val activity: Activity, private val 
         }
 
         fun setLoading() {
-            ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(R.drawable.neko).into(cardAnimeImage)
+            ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
             cardAnimeTitle.text = "Loading..."
             cardAnimeScore.text = ""
         }

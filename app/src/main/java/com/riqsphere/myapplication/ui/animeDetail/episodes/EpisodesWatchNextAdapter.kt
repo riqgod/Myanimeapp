@@ -14,7 +14,6 @@ import com.riqsphere.myapplication.model.animeDetail.episodes.EpisodesModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.utils.ImageHandler
-import com.riqsphere.myapplication.utils.NetworkState
 import com.riqsphere.myapplication.utils.onClickListeners.EpisodeWatchedListener
 
 
@@ -69,8 +68,10 @@ class EpisodesWatchNextAdapter(
 
         fun bindView(position:Int) {
             val epCard = epList[position]
-            if (epCard.imageUrl != "" && NetworkState.shouldLoad()) {
-                ImageHandler.getInstance(context).load(epCard.imageUrl).into(cardEpImage)
+            if (epCard.imageUrl != "" && ImageHandler.shouldLoad()) {
+                ImageHandler.getInstance(context).load(epCard.imageUrl).placeholder(R.drawable.neko).into(cardEpImage)
+            } else {
+                ImageHandler.getInstance(context).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardEpImage)
             }
 
             cardEpTitle.text = epCard.title
