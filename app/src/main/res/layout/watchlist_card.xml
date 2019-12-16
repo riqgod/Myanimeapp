@@ -25,7 +25,6 @@
                 android:layout_height="190dp"
                 android:background="@android:color/transparent"
                 android:foreground="@drawable/image_button_feedback"
-                android:onClick="animeClick"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

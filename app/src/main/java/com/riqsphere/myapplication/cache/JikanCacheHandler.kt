@@ -42,7 +42,7 @@ object JikanCacheHandler {
         val fetch = {
             try {
                 Singletons.connector.retrieveAnime(id).get() ?: defaultAnime
-            } catch (e: Error) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 defaultAnime
             }
@@ -77,7 +77,7 @@ object JikanCacheHandler {
                         }
                     }
                 }
-            } catch (e: Error) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 defaultEpisodesOut
             }
@@ -109,7 +109,7 @@ object JikanCacheHandler {
         val fetch = {
             try {
                 Singletons.connector.currentSchedule.get() ?: defaultSchedule
-            } catch (e: Error) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 defaultSchedule
             }
@@ -142,7 +142,7 @@ object JikanCacheHandler {
         val fetch = {
             try {
                 Singletons.connector.seasonSearch(currentYear, calendar.jikanSeason()).get() ?: defaultSeason
-            } catch (e: Error) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 defaultSeason
             }
@@ -161,7 +161,7 @@ object JikanCacheHandler {
         val fetch = {
             try {
                 TopSearch().searchTop(Tops.ANIME, AnimeTops.UPCOMING).get() ?: defaultUpcoming
-            } catch (e: Error) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 defaultUpcoming
             }
@@ -187,7 +187,7 @@ object JikanCacheHandler {
         val fetch = {
             try {
                 specifier(AnimeSearch()).get().get() ?: defaultAnimePage
-            } catch (e: Error) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 defaultAnimePage
             }
@@ -228,7 +228,7 @@ object JikanCacheHandler {
         val fetch = {
             try {
                 anime.recommendationPage.get() ?: defaultRecPage
-            } catch (e: Error) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 defaultRecPage
             }
@@ -250,7 +250,7 @@ object JikanCacheHandler {
         val fetch = {
             try {
                 anime.getEpisodes().get() ?: defaultEpisodes
-            } catch (e: Error) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 defaultEpisodes
             }
@@ -275,7 +275,7 @@ object JikanCacheHandler {
         val fetch = {
             try {
                 anime.videos.get() ?: defaultVideo
-            } catch (e: Error) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 defaultVideo
             }

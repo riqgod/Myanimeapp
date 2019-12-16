@@ -16,12 +16,12 @@ import com.riqsphere.myapplication.room.MyaaViewModel
 
 class EpisodesFragment(private val animeId: Int) : Fragment(){
 
-    private lateinit var myaaViewModel: MyaaViewModel
+    private var myaaViewModel: MyaaViewModel? = null
 
-    private lateinit var epTotal: TextView
-    private lateinit var wnRecyclerView: RecyclerView
-    private lateinit var wnViewAdapter: EpisodesWatchNextAdapter
-    private lateinit var allViewAdapter: EpisodesAllAdapter
+    private var epTotal: TextView? = null
+    private var wnRecyclerView: RecyclerView? = null
+    private var wnViewAdapter: EpisodesWatchNextAdapter? = null
+    private var allViewAdapter: EpisodesAllAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +38,7 @@ class EpisodesFragment(private val animeId: Int) : Fragment(){
         epTotal = view.findViewById(R.id.episodes_all_total_text)
 
         val wnViewManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        wnViewAdapter = EpisodesWatchNextAdapter(activity!!.applicationContext, myaaViewModel)
+        wnViewAdapter = EpisodesWatchNextAdapter(activity!!.applicationContext, myaaViewModel!!)
         wnRecyclerView = view.findViewById<RecyclerView>(R.id.episodes_watch_next_rv).apply {
             layoutManager = wnViewManager
             adapter = wnViewAdapter
@@ -47,10 +47,10 @@ class EpisodesFragment(private val animeId: Int) : Fragment(){
 
         //all episodes [to com sono]
         val allViewManager = LinearLayoutManager(activity)
-        allViewAdapter = EpisodesAllAdapter(activity!!.applicationContext, myaaViewModel)
+        allViewAdapter = EpisodesAllAdapter(activity!!.applicationContext, myaaViewModel!!)
         view.findViewById<RecyclerView>(R.id.episodes_all_rv).apply {
             layoutManager= allViewManager
-            adapter = allViewAdapter
+            adapter = allViewAdapter!!
         }
 
         observe()
@@ -58,19 +58,28 @@ class EpisodesFragment(private val animeId: Int) : Fragment(){
         return view
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        myaaViewModel = null
+        epTotal = null
+        wnRecyclerView = null
+        wnViewAdapter = null
+        allViewAdapter = null
+    }
+
     private fun observe() {
-        myaaViewModel.allWatchlistAnime.observe(this, Observer {
+        myaaViewModel?.allWatchlistAnime?.observe(this, Observer {
             val wa = it?.firstOrNull { wa -> wa.id == animeId }
             wa?.let {
-                allViewAdapter.setWatchlistAnime(wa)
-                wnViewAdapter.setWatchlistAnime(wa)
+                allViewAdapter?.setWatchlistAnime(wa)
+                wnViewAdapter?.setWatchlistAnime(wa)
             }
         })
     }
 
     fun setEpisodes(video: Video) {
         val episodes = video.episodes.mapIndexedTo(arrayListOf()) { index, episode -> EpisodesModel(episode, index) }
-        allViewAdapter.setEpisodes(episodes)
-        wnViewAdapter.setEpisodes(episodes)
+        allViewAdapter?.setEpisodes(episodes)
+        wnViewAdapter?.setEpisodes(episodes)
     }
 }

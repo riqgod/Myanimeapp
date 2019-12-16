@@ -1,6 +1,7 @@
 package com.riqsphere.myapplication.ui.animeDetail.recs
 
 import android.app.Activity
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,7 @@ import com.riqsphere.myapplication.utils.ImageHandler
 class RecsAdapter(private val activity: Activity, private val myaaViewModel: MyaaViewModel) : RecyclerView.Adapter<RecsAdapter.ViewHolder>() {
 
     private var recList = ArrayList<RecsModel>()
-    private var watchlist: List<WatchlistAnime> = arrayListOf()
+    private var watchlist = SparseBooleanArray()
 
     fun setData(list: ArrayList<RecsModel>){
         this.recList = list
@@ -26,11 +27,12 @@ class RecsAdapter(private val activity: Activity, private val myaaViewModel: Mya
     }
 
     fun setWatchlistData(list: List<WatchlistAnime>) {
-        watchlist = list
+        watchlist.clear()
+        list.forEach { watchlist.put(it.id, true) }
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recs_card,parent,false)
         return ViewHolder(view)
     }
@@ -39,7 +41,7 @@ class RecsAdapter(private val activity: Activity, private val myaaViewModel: Mya
         return recList.size
     }
 
-    override fun onBindViewHolder(holder: RecsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindView(position)
     }
 
@@ -57,7 +59,7 @@ class RecsAdapter(private val activity: Activity, private val myaaViewModel: Mya
             recsCount.text = item.animeRecsNum
             recsTitle.text = item.animeTitle
 
-            val added = watchlist.any { it.id == item.mal_id }
+            val added = watchlist[item.mal_id]
             val resource = if (added) {
                 R.drawable.ic_added_to_list
             } else {

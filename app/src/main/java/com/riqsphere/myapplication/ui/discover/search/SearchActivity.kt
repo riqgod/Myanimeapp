@@ -5,8 +5,6 @@ import android.app.SearchManager
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
 import android.widget.ListView
 import android.widget.SearchView
 import android.widget.TextView
@@ -17,7 +15,6 @@ import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.room.MyaaViewModel
-import com.riqsphere.myapplication.ui.animeDetail.AnimeDetailActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -98,18 +95,5 @@ class SearchActivity: AppCompatActivity(), SearchView.OnQueryTextListener {
         val arr = animePage.animes ?: arrayListOf()
         adapter.setData(SearchModel.arrayListFromAnimePageAnime(arr))
         resultText.text = "Results:"
-    }
-
-    public fun animeClick(view: View){
-        val i = Intent(this, AnimeDetailActivity::class.java)
-        val mal_id = view.contentDescription
-        i.putExtra("mal_id",mal_id)
-        startActivity(i)
-    }
-
-    public fun addToWatchListClick(view:View){
-        //just a test
-        val image: ImageView = view as ImageView
-        image.setImageResource(R.drawable.ic_added_to_list)
     }
 }

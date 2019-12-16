@@ -10,16 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.doomsdayrs.jikan4java.types.support.recommendations.RecommendationPage
 import com.riqsphere.myapplication.R
-import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.room.MyaaViewModel
 
 class RecsFragment : Fragment(){
 
     private var dataToSet: RecommendationPage? = null
-
-    private lateinit var rv:RecyclerView
     private lateinit var viewAdapter: RecsAdapter
-    private lateinit var viewManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,19 +27,19 @@ class RecsFragment : Fragment(){
         val myaaViewModel = MyaaViewModel(activity!!.application)
 
         viewAdapter = RecsAdapter(activity!!, myaaViewModel)
-        viewManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        rv = view.findViewById<RecyclerView>(R.id.recs_rv).apply {
+        val viewManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        view.findViewById<RecyclerView>(R.id.recs_rv).apply {
             layoutManager = viewManager
             adapter = viewAdapter
         }
 
-        observeWatchlist(myaaViewModel)
+        observeWatchlist(myaaViewModel, viewAdapter)
         dataToSet?.let { setRecs(it) }
 
         return view
     }
 
-    private fun observeWatchlist(myaaViewModel: MyaaViewModel) {
+    private fun observeWatchlist(myaaViewModel: MyaaViewModel, viewAdapter: RecsAdapter) {
         myaaViewModel.allWatchlistAnime.observe(this, Observer {
             viewAdapter.setWatchlistData(it)
         })

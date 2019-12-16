@@ -1,7 +1,6 @@
 package com.riqsphere.myapplication.ui.discover
 
 import android.app.Activity
-import android.os.AsyncTask
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
@@ -9,22 +8,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.makeramen.roundedimageview.RoundedImageView
 import com.riqsphere.myapplication.R
-import com.riqsphere.myapplication.cache.JikanCacheHandler
 import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.ui.onClickListeners.OpenAnimeDetail
 import com.riqsphere.myapplication.ui.onClickListeners.WatchlistAdder
 import com.riqsphere.myapplication.utils.ImageHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 
 class DiscoverRecommendationAdapter(private val activity: Activity, private val myaaViewModel: MyaaViewModel) : RecyclerView.Adapter<DiscoverRecommendationAdapter.ViewHolder>(){
-    private val mapIdIsInWatchlist = SparseBooleanArray()
+    private val watchlist = SparseBooleanArray()
     private var originalRecList: List<Recommendation> = arrayListOf()
     private var recList: List<Recommendation> = arrayListOf()
 
@@ -34,16 +28,10 @@ class DiscoverRecommendationAdapter(private val activity: Activity, private val 
     }
 
     fun setWatchlistData(list: List<WatchlistAnime>) {
-        squashWatchlist(list)
+        watchlist.clear()
+        list.forEach { watchlist.put(it.id, true) }
         recList = filterRecsInWatchlist(originalRecList)
         notifyDataSetChanged()
-    }
-
-    private fun squashWatchlist(list: List<WatchlistAnime>) {
-        mapIdIsInWatchlist.clear()
-        list.forEach {
-            mapIdIsInWatchlist.put(it.id, true)
-        }
     }
 
     fun setRecListData(list: List<Recommendation>) {
@@ -53,7 +41,7 @@ class DiscoverRecommendationAdapter(private val activity: Activity, private val 
     }
 
     private fun filterRecsInWatchlist(list: List<Recommendation>) = list.filter {
-        !mapIdIsInWatchlist[it.id]
+        !watchlist[it.id]
     }
 
     override fun getItemCount(): Int {
@@ -63,7 +51,6 @@ class DiscoverRecommendationAdapter(private val activity: Activity, private val 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.setLoading()
         holder.preBind(recList[position])
-        BindAsync(holder, recList[position].id).execute()
     }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -76,31 +63,16 @@ class DiscoverRecommendationAdapter(private val activity: Activity, private val 
             ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(recommendation.imageURL).into(cardAnimeImage)
             cardAnimeImage.contentDescription = recommendation.id.toString()
             cardAnimeTitle.text = recommendation.title
+            cardAnimeScore.text = recommendation.count.toString()
             cardAnimeAdded.setImageResource(R.drawable.ic_add_to_list)
             cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, recommendation.id, recommendation.title, false))
             itemView.setOnClickListener(OpenAnimeDetail(this@DiscoverRecommendationAdapter.activity, recommendation.id))
-        }
-
-        fun bindView(anime: Anime) {
-            cardAnimeScore.text = anime.score.toString()
         }
 
         fun setLoading() {
             ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(R.drawable.neko).into(cardAnimeImage)
             cardAnimeTitle.text = "Loading..."
             cardAnimeScore.text = ""
-        }
-    }
-
-    private class BindAsync(private val holder: ViewHolder, private val animeId: Int): AsyncTask<Void, Void, Void>() {
-        override fun doInBackground(vararg params: Void?): Void? = runBlocking {
-            val anime = withContext(Dispatchers.Unconfined) {
-                JikanCacheHandler.getAnime(animeId)
-            }
-            withContext(Dispatchers.Main) {
-                holder.bindView(anime)
-            }
-            null
         }
     }
 }
