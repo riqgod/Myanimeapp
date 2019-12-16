@@ -1,6 +1,7 @@
 package com.riqsphere.myapplication.ui.discover
 
 import android.app.Activity
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ import com.riqsphere.myapplication.utils.ImageHandler
 class DiscoverAdapter(private val activity: Activity, private val myaaViewModel: MyaaViewModel) : RecyclerView.Adapter<DiscoverAdapter.ViewHolder>(){
 
     private var searchList = ArrayList<SearchModel>()
-    private var watchlist: List<WatchlistAnime> = arrayListOf()
+    private var watchlist = SparseBooleanArray()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.discover_card,parent,false)
@@ -32,7 +33,8 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
     }
 
     fun setWatchlistData(list: List<WatchlistAnime>) {
-        watchlist = list
+        watchlist.clear()
+        list.forEach { watchlist.put(it.id, true) }
         notifyDataSetChanged()
     }
 
@@ -60,7 +62,7 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
             cardAnimeTitle.text = dcCard.animeTitle
             cardAnimeScore.text = dcCard.score
 
-            if (watchlist.any { it.id == dcCard.id }) {
+            if (watchlist[dcCard.id]) {
                 cardAnimeAdded.setImageResource(R.drawable.ic_added_to_list)
                 cardAnimeAdded.setOnClickListener(WatchlistAdder(myaaViewModel, dcCard.id, dcCard.animeTitle, true))
             } else {

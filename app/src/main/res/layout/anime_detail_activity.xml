@@ -30,7 +30,7 @@
                     android:layout_height="250dp"
                     android:foreground="@drawable/gradient_effect_no_corners_bigger"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/bokunoheroda"
+                    android:src="@drawable/neko"
                     app:layout_collapseMode="parallax"
                     app:layout_collapseParallaxMultiplier="0.5"
                     app:layout_constraintEnd_toEndOf="parent"
