@@ -16,7 +16,7 @@ data class WatchlistAnime(
     val episodes: Int,
     var episodesWatched: IntArray,
     var episodesOut: Int,
-    val broadcast: String
+    val broadcast: String?
 ){
     constructor() : this(0, "", "", "", "", 0, IntArray(0), 0, "")
 

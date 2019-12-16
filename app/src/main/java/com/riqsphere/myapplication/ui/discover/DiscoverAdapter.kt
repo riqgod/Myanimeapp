@@ -56,7 +56,7 @@ class DiscoverAdapter(private val activity: Activity, private val myaaViewModel:
         fun bindView(position:Int) {
             val dcCard = searchList[position]
             if (dcCard.imageURL != "" && ImageHandler.shouldLoad()) {
-                ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).placeholder(R.drawable.neko).into(cardAnimeImage)
+                ImageHandler.getInstance(this@DiscoverAdapter.activity).load(dcCard.imageURL).into(cardAnimeImage)
             } else {
                 ImageHandler.getInstance(this@DiscoverAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
             }

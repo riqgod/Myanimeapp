@@ -41,7 +41,7 @@ class SearchAdapter(private val act: Activity, private val myaaViewModel: MyaaVi
 
         searchAnimeTitle.text = sm.animeTitle
         if (sm.imageURL != "" && ImageHandler.shouldLoad()) {
-            ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).placeholder(R.drawable.neko).into(searchImage)
+            ImageHandler.getInstance(this@SearchAdapter.act).load(sm.imageURL).into(searchImage)
         } else {
             ImageHandler.getInstance(this@SearchAdapter.act).load(R.drawable.neko).placeholder(R.drawable.neko).into(searchImage)
         }

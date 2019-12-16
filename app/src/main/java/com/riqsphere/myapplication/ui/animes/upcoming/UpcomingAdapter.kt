@@ -41,7 +41,7 @@ class UpcomingAdapter(private val activity: Activity): RecyclerView.Adapter<Upco
         fun bindView(position: Int) {
             val up = upcoming[position]
             if (ImageHandler.shouldLoad()) {
-                ImageHandler.getInstance(this@UpcomingAdapter.activity).load(up.imgURL).placeholder(R.drawable.neko).into(cardAnimeImage)
+                ImageHandler.getInstance(this@UpcomingAdapter.activity).load(up.imgURL).into(cardAnimeImage)
             } else {
                 ImageHandler.getInstance(this@UpcomingAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
             }

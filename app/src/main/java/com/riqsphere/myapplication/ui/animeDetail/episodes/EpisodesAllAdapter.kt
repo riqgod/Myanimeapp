@@ -64,7 +64,7 @@ class EpisodesAllAdapter(
         fun bindView(position:Int) {
             val epCard = epList[position]
             if (epCard.imageUrl != "" && ImageHandler.shouldLoad()) {
-                ImageHandler.getInstance(context).load(epCard.imageUrl).placeholder(R.drawable.neko).into(cardEpImage)
+                ImageHandler.getInstance(context).load(epCard.imageUrl).into(cardEpImage)
             } else {
                 ImageHandler.getInstance(context).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardEpImage)
             }

@@ -61,7 +61,7 @@ class DiscoverRecommendationAdapter(private val activity: Activity, private val 
 
         fun preBind(recommendation: Recommendation) {
             if (ImageHandler.shouldLoad()) {
-                ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(recommendation.imageURL).placeholder(R.drawable.neko).into(cardAnimeImage)
+                ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(recommendation.imageURL).into(cardAnimeImage)
             } else {
                 ImageHandler.getInstance(this@DiscoverRecommendationAdapter.activity).load(R.drawable.neko).placeholder(R.drawable.neko).into(cardAnimeImage)
             }
