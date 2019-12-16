@@ -17,6 +17,25 @@ import kotlinx.coroutines.withContext
 
 class AnimeDetailActivity : AppCompatActivity() {
 
+<<<<<<< HEAD
+    private lateinit var myaaViewModel: MyaaViewModel
+     private var TAG = "google api cse"
+    private var id = -1
+    private lateinit var fragmentPagerAdapter: AnimeDetailFragmentPagerAdapter
+
+    private lateinit var partialAnime: Anime
+
+    private var segredo:String = "SmNkssGijWOK4"
+    private var q = "h1c6L4PR77BLIFUv"
+    private lateinit var viewPager: ViewPager
+    private lateinit var tabs: TabLayout
+    public lateinit var imageBg: ImageView
+    private lateinit var animeTitle: TextView
+    private lateinit var animeSubtitle: TextView
+    private lateinit var animeScore: TextView
+
+=======
+>>>>>>> 7567bf1685142eea68fc8fc078f9a3e74a0e7e7b
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.anime_detail_activity)
@@ -76,7 +95,32 @@ class AnimeDetailActivity : AppCompatActivity() {
     private fun setActivityData(anime: Anime, imageBg: ImageView, animeTitle: TextView, animeSubtitle: TextView, animeScore: TextView) {
         ImageHandler.getInstance(this).load(R.drawable.neko).into(imageBg)
 
+<<<<<<< HEAD
+    private fun setActivityData(anime: Anime) {
+
+        val foin:String = "AIzaSyAcr"
+        val dale:String = "01394810328760818055"
+        val ahn= "8:qacwtjfwy55"
+
+        var animeSearch:String = anime.title+""
+        animeSearch =  animeSearch.replace(" ", "+");
+
+        var urlString:String = "https://www.googleapis.com/customsearch/v1?q="+animeSearch+"&cx="+dale+ahn+"&imgSize=huge&num=1&searchType=image&key="+foin+q+segredo;
+
+                var url:URL? = null;
+                try {
+                    url = URL(urlString);
+                } catch (e: MalformedURLException) {
+                    Log.e(TAG, "ERROR converting String to URL " + e.toString());
+                }
+                Log.d(TAG, "Url = "+  urlString);
+
+        // start AsyncTask
+        val searchTask:GoogleSearchAsyncTask = GoogleSearchAsyncTask(imageBg,applicationContext);
+        searchTask.execute(url);
+=======
         GoogleSearchAsyncTask(imageBg,applicationContext).execute(anime.title)
+>>>>>>> 7567bf1685142eea68fc8fc078f9a3e74a0e7e7b
 
         animeTitle.text = anime.title
         animeSubtitle.text = getGenres(anime)

@@ -14,10 +14,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.SplashScreenActivity"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.SplashScreen">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.caregory.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
@@ -29,9 +30,6 @@
             android:name=".ui.animeDetail.AnimeDetailActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
         </activity>
         <activity android:name="com.riqsphere.myapplication.ui.discover.search.SearchActivity"
             android:label="@string/app_name"
