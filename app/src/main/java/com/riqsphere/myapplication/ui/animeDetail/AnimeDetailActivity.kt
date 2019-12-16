@@ -2,9 +2,13 @@ package com.riqsphere.myapplication.ui.animeDetail
 
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.ViewPager
 import com.github.doomsdayrs.jikan4java.types.main.anime.Anime
 import com.google.android.material.tabs.TabLayout
@@ -16,6 +20,9 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class AnimeDetailActivity : AppCompatActivity() {
+
+    private var added:Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.anime_detail_activity)
@@ -47,6 +54,45 @@ class AnimeDetailActivity : AppCompatActivity() {
         fetchVideo(fragmentPagerAdapter, partialAnime)
         fetchRecs(fragmentPagerAdapter, partialAnime)
     }
+
+    public fun floatingAddButton(view: View){
+        //disable this button
+        if(!added){
+            //change the text and icon
+
+            val text = this.findViewById<TextView>(R.id.floating_text)
+            val icon = this.findViewById<ImageView>(R.id.floating_add)
+
+            text.setText("ADDED TO WATCH LIST")
+            icon.setImageResource(R.drawable.ic_addedsimple_added)
+
+            //add to the watchlist (call the real add watchlist function)
+            //[HERE]
+
+            //disappear in 2 seg
+            val handler = Handler()
+            val floatingButton = this.findViewById<ConstraintLayout>(R.id.floatingButton)
+            handler.postDelayed({
+                Disappear(floatingButton,text,icon)
+                //disable floatingButton
+                //when disapear change to the text and icon back
+                //when enable this button
+            },2000L)
+        }
+    }
+
+    private fun Disappear(floatingButton:ConstraintLayout,text:TextView,icon:ImageView){
+        //disappear button
+        floatingButton.visibility = View.GONE
+
+        //change back the content
+        text.setText("ADD TO WATCH LIST")
+        icon.setImageResource(R.drawable.ic_add_1simple_add)
+
+        //enabling btn
+        added = false
+    }
+
 
     private fun fetchAnime(fpa: AnimeDetailFragmentPagerAdapter, id: Int, imageBg: ImageView, animeTitle: TextView, animeSubtitle: TextView, animeScore: TextView) {
         AsyncFetcherSetter({
