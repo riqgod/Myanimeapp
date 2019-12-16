@@ -14,8 +14,8 @@ import com.riqsphere.myapplication.model.recommendations.Recommendation
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.utils.ImageHandler
-import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
-import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
+import com.riqsphere.myapplication.ui.onClickListeners.OpenAnimeDetail
+import com.riqsphere.myapplication.ui.onClickListeners.WatchlistAdder
 
 class DiscoverRecommendationAdapter(private val activity: Activity, private val myaaViewModel: MyaaViewModel) : RecyclerView.Adapter<DiscoverRecommendationAdapter.ViewHolder>(){
     private val watchlist = SparseBooleanArray()

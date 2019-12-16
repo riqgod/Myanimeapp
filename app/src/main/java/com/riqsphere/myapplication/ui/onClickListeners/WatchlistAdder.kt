@@ -1,7 +1,8 @@
-package com.riqsphere.myapplication.utils.onClickListeners
+package com.riqsphere.myapplication.ui.onClickListeners
 
 import android.os.AsyncTask
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
@@ -28,6 +29,9 @@ class WatchlistAdder(
                 .setIcon(R.drawable.neko)
                 .setPositiveButton("Yes") { _, _ ->
                     myaaViewModel.delete(id)
+                    if (v is ImageView) {
+                        v.setImageResource(R.drawable.ic_add_to_list)
+                    }
                 }
                 .setNegativeButton("No", null)
                 .show()
@@ -38,6 +42,9 @@ class WatchlistAdder(
                 .setIcon(R.drawable.neko)
                 .setPositiveButton("Yes") { _, _ ->
                     AsyncAddAnime(myaaViewModel, id).execute()
+                    if (v is ImageView) {
+                        v.setImageResource(R.drawable.ic_added_to_list)
+                    }
                 }
                 .setNegativeButton("No", null)
                 .show()

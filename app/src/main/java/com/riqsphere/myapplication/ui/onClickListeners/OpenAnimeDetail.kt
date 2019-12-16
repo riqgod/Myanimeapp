@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.utils.onClickListeners
+package com.riqsphere.myapplication.ui.onClickListeners
 
 import android.app.Activity
 import android.content.Intent

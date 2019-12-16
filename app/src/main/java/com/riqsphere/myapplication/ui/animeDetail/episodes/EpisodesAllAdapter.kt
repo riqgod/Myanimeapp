@@ -13,8 +13,8 @@ import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.animeDetail.episodes.EpisodesModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
+import com.riqsphere.myapplication.ui.onClickListeners.EpisodeWatchedListener
 import com.riqsphere.myapplication.utils.ImageHandler
-import com.riqsphere.myapplication.utils.onClickListeners.EpisodeWatchedListener
 
 
 class EpisodesAllAdapter(
@@ -73,7 +73,7 @@ class EpisodesAllAdapter(
             }
 
             cardEpTitle.text = epCard.title
-            cardEpNum.text = "Episode " + epCard.num
+            cardEpNum.text = "Episode " + (epCard.num + 1)
 
             val watched = watchedList[epCard.num]
             val resource = if(watched){

@@ -32,7 +32,10 @@ class MyaaViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun insert(watchlistAnime: WatchlistAnime) = viewModelScope.launch {
-        repo.insert(watchlistAnime)
+        val succeeded = repo.insert(watchlistAnime)
+        if (!succeeded) {
+
+        }
     }
 
     fun insert(anime: Anime) = insert(

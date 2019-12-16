@@ -11,7 +11,7 @@ import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.utils.ImageHandler
-import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
+import com.riqsphere.myapplication.ui.onClickListeners.WatchlistAdder
 
 class SearchAdapter(private val act: Activity, private val myaaViewModel: MyaaViewModel) : BaseAdapter() {
     private var watchlist: List<WatchlistAnime> = arrayListOf()

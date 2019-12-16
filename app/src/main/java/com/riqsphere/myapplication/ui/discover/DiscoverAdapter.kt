@@ -14,8 +14,8 @@ import com.riqsphere.myapplication.model.search.SearchModel
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.room.MyaaViewModel
 import com.riqsphere.myapplication.utils.ImageHandler
-import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
-import com.riqsphere.myapplication.utils.onClickListeners.WatchlistAdder
+import com.riqsphere.myapplication.ui.onClickListeners.OpenAnimeDetail
+import com.riqsphere.myapplication.ui.onClickListeners.WatchlistAdder
 
 class DiscoverAdapter(private val activity: Activity, private val myaaViewModel: MyaaViewModel) : RecyclerView.Adapter<DiscoverAdapter.ViewHolder>(){
 

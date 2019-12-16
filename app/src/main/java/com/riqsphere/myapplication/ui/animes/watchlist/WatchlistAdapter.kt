@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.utils.ImageHandler
-import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
+import com.riqsphere.myapplication.ui.onClickListeners.OpenAnimeDetail
 
 class WatchlistAdapter(private val activity: Activity) : RecyclerView.Adapter<WatchlistAdapter.WatchlistAnimeViewHolder>() {
     private var watchlistAnimes = emptyList<WatchlistAnime>()

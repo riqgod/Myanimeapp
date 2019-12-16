@@ -10,7 +10,7 @@ import com.makeramen.roundedimageview.RoundedImageView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.watchlist.WatchlistAnime
 import com.riqsphere.myapplication.utils.ImageHandler
-import com.riqsphere.myapplication.utils.onClickListeners.OpenAnimeDetail
+import com.riqsphere.myapplication.ui.onClickListeners.OpenAnimeDetail
 import java.util.*
 
 class UpcomingAdapter(private val activity: Activity): RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -34,6 +35,9 @@ class EpisodesFragment(private val animeId: Int) : Fragment(){
         }
 
         myaaViewModel = MyaaViewModel(activity!!.application)
+
+        val checkAll = view.findViewById<ImageButton>(R.id.episodes_all_check_as_watched)
+        checkAll.visibility = View.GONE
 
         epTotal = view.findViewById(R.id.episodes_all_total_text)
 
@@ -68,9 +72,10 @@ class EpisodesFragment(private val animeId: Int) : Fragment(){
     }
 
     private fun observe() {
-        myaaViewModel?.allWatchlistAnime?.observe(this, Observer {
-            val wa = it?.firstOrNull { wa -> wa.id == animeId }
+        myaaViewModel?.allWatchlistAnime?.observe(this, Observer { list ->
+            val wa = list?.firstOrNull { wa -> wa.id == animeId }
             wa?.let {
+                epTotal?.text = it.episodesWatched.size.toString() + "/" + it.episodes.toString()
                 allViewAdapter?.setWatchlistAnime(wa)
                 wnViewAdapter?.setWatchlistAnime(wa)
             }

@@ -1,4 +1,4 @@
-package com.riqsphere.myapplication.utils.onClickListeners
+package com.riqsphere.myapplication.ui.onClickListeners
 
 import android.view.View
 import android.widget.ImageView
