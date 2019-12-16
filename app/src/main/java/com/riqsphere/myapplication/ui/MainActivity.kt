@@ -1,9 +1,9 @@
 package com.riqsphere.myapplication.ui
 
 import android.os.Bundle
-import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager.getDefaultSharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.cache.JikanCacheHandler
@@ -13,6 +13,9 @@ import com.riqsphere.myapplication.tasks.WatchlistAlarm
 import com.riqsphere.myapplication.ui.animes.AnimesFragment
 import com.riqsphere.myapplication.ui.animes.SettingsFragment
 import com.riqsphere.myapplication.ui.discover.DiscoverFragment
+import java.io.OutputStream
+import java.io.PrintStream
+import java.util.*
 
 
 private const val PREFERENCE_FIRST_RUN = "first_run"
@@ -22,11 +25,7 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*
-        if (BuildConfig.DEBUG) {
-            AndroidDevMetrics.initWith(this);
-        }
-      */
+        disableSystemOut()
 
         val p = getDefaultSharedPreferences(this)
         if (p.getBoolean(PREFERENCE_FIRST_RUN, true)) {
@@ -82,6 +81,72 @@ class MainActivity : AppCompatActivity(){
             temporaryFetch(22)
         )
         myaaViewModel.insert(rdm)
+    }
+
+    private fun disableSystemOut() {
+        System.setOut(object : PrintStream(object : OutputStream() {
+            override fun write(b: Int) {}
+        }) {
+            override fun flush() {}
+            override fun close() {}
+            override fun write(b: Int) {}
+            override fun write(b: ByteArray) {}
+            override fun write(buf: ByteArray, off: Int, len: Int) {}
+            override fun print(b: Boolean) {}
+            override fun print(c: Char) {}
+            override fun print(i: Int) {}
+            override fun print(l: Long) {}
+            override fun print(f: Float) {}
+            override fun print(d: Double) {}
+            override fun print(s: CharArray) {}
+            override fun print(s: String) {}
+            override fun print(obj: Any) {}
+            override fun println() {}
+            override fun println(x: Boolean) {}
+            override fun println(x: Char) {}
+            override fun println(x: Int) {}
+            override fun println(x: Long) {}
+            override fun println(x: Float) {}
+            override fun println(x: Double) {}
+            override fun println(x: CharArray) {}
+            override fun println(x: String) {}
+            override fun println(x: Any) {}
+            override fun printf(format: String, vararg args: Any): PrintStream {
+                return this
+            }
+
+            override fun printf(
+                l: Locale,
+                format: String,
+                vararg args: Any
+            ): PrintStream {
+                return this
+            }
+
+            override fun format(format: String, vararg args: Any): PrintStream {
+                return this
+            }
+
+            override fun format(
+                l: Locale,
+                format: String,
+                vararg args: Any
+            ): PrintStream {
+                return this
+            }
+
+            override fun append(csq: CharSequence?): PrintStream {
+                return this
+            }
+
+            override fun append(csq: CharSequence?, start: Int, end: Int): PrintStream {
+                return this
+            }
+
+            override fun append(c: Char): PrintStream {
+                return this
+            }
+        })
     }
 
     private fun temporaryFetch(id: Int) = JikanCacheHandler.getAnime(id)
