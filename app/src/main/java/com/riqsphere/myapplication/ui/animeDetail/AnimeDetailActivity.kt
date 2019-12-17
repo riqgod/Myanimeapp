@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -26,8 +27,9 @@ import kotlinx.coroutines.withContext
 
 class AnimeDetailActivity : AppCompatActivity() {
 
-    private lateinit var floatingButton: View
-    private lateinit var toolbar: Toolbar
+    private var floatingButton: View? = null
+    private var toolbar: Toolbar? = null
+    private var progressBar: ProgressBar? = null
 
     private var myaaViewModel: MyaaViewModel? = null
 
@@ -69,9 +71,11 @@ class AnimeDetailActivity : AppCompatActivity() {
         val animeSubtitle = findViewById<TextView>(R.id.anime_bg_subtitle)
         val animeScore = findViewById<TextView>(R.id.anime_bg_score)
         floatingButton = findViewById(R.id.floatingButton)
-        floatingButton.visibility = View.GONE
+        floatingButton?.visibility = View.GONE
 
         myaaViewModel = MyaaViewModel(application!!)
+
+        progressBar = findViewById<ProgressBar>(R.id.anime_bg_progress_bar)
         observe(imageBg, animeTitle)
 
         fetchAnime(fragmentPagerAdapter, id, imageBg, animeTitle, animeSubtitle, animeScore)
@@ -86,6 +90,8 @@ class AnimeDetailActivity : AppCompatActivity() {
             added = wa != null
             if (added) {
                 setPartialActivityData(wa!!, imageBg, animeTitle)
+                progressBar?.max = wa.episodes
+                progressBar?.progress = wa.episodesWatched.size
                 showRemoveButton()
             } else if (fetchedAnime != null) {
                 showAddButton()
@@ -94,12 +100,12 @@ class AnimeDetailActivity : AppCompatActivity() {
     }
 
     private fun showAddButton() {
-        floatingButton.visibility = View.VISIBLE
+        floatingButton?.visibility = View.VISIBLE
         supportActionBar?.hide()
     }
 
     private fun showRemoveButton() {
-        floatingButton.visibility = View.GONE
+        floatingButton?.visibility = View.GONE
         supportActionBar?.show()
     }
 
@@ -116,6 +122,7 @@ class AnimeDetailActivity : AppCompatActivity() {
 
     private fun setActivityData(anime: Anime, imageBg: ImageView, animeTitle: TextView, animeSubtitle: TextView, animeScore: TextView) {
         fetchedAnime = anime
+        progressBar?.max = anime.episodes
         if (watchlistObserved && !added) {
             showAddButton()
         }
@@ -251,5 +258,12 @@ class AnimeDetailActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        floatingButton = null
+        toolbar = null
+        progressBar = null
     }
 }
