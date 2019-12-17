@@ -2,7 +2,7 @@
 
 ## Watchlist
 
-Nosso projeto faz uso extensivo de <i>Architecture Components</i>. A nossa motivação inicial em usar um banco de dados `Room` foi simplesmente armazenar a lista de animes que o usuário assiste, pretende assistir ou já assistiu - o que chamamos de <i>Watchlist</i>. A aplicação inteira faz uso da <i>Watchlist</i>, e acessa ela atravéz de uma ``ViewModel`` contendo um ``LiveData`` com toda a <i>Watchlist</i>, e várias funções para modificá-la.
+Nosso projeto faz uso extensivo de <i>Architecture Components</i>. A nossa motivação inicial em usar um banco de dados `Room` foi simplesmente armazenar a lista de animes que o usuário assiste, pretende assistir ou já assistiu - o que chamamos de <i>Watchlist</i>. A aplicação inteira faz uso dos dados presentes na <i>Watchlist</i>, e acessa ela atravéz de uma ``ViewModel`` contendo um ``LiveData`` com toda a <i>Watchlist</i>, e várias funções para modificá-la.
 
 ## Recommendation
 
