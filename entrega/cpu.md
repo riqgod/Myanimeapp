@@ -12,33 +12,41 @@ Devido ao acesso contínuo a recursos de rede que precisam ser carregados e ent�
 
 ```kotlin
 val seasonalRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_seasonal)
-val seasonalPair = Pair(seasonalRecyclerView, fetchCurrentSeason)
+val seasonalLoadingView = rootView.findViewById<View>(R.id.dc_loading_seasonal)
+val seasonalTriple = Triple(seasonalRecyclerView, seasonalLoadingView, fetchCurrentSeason)
 
 val topUpcomingRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_top_upcoming)
-val topUpcomingPair = Pair(topUpcomingRecyclerView, fetchTopUpcoming)
+val topUpcomingLoadingView = rootView.findViewById<View>(R.id.dc_loading_top_upcoming)
+val topUpcomingTriple = Triple(topUpcomingRecyclerView, topUpcomingLoadingView, fetchTopUpcoming)
 
 val mostPoplarRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_mp)
-val mostPoplarPair = Pair(mostPoplarRecyclerView, fetchMostPoplar)
+val mostPoplarLoadingView = rootView.findViewById<View>(R.id.dc_loading_mp)
+val mostPoplarTriple = Triple(mostPoplarRecyclerView, mostPoplarLoadingView, fetchMostPoplar)
 
 val topScoreRecyclerView = initializeDiscoverRecyclerView(R.id.dc_rv_score)
-val topScorePair = Pair(topScoreRecyclerView, fetchTopScore)
+val topScoreLoadingView = rootView.findViewById<View>(R.id.dc_loading_score)
+val topScoreTriple = Triple(topScoreRecyclerView, topScoreLoadingView, fetchTopScore)
 
-val pairs = arrayOf(seasonalPair, topUpcomingPair, mostPoplarPair, topScorePair)
-AsyncDataSetter().execute(*pairs)
+val triples = arrayOf(seasonalTriple, topUpcomingTriple, mostPoplarTriple, topScoreTriple)
+AsyncDataSetter().execute(*triples)
 ```
 
 A seguir, o código do respectivo `AsyncTask`:
 
 ```kotlin
-private class AsyncDataSetter: AsyncTask<Pair<RecyclerView, () -> ArrayList<SearchModel>>, Void, Void>() {
-    override fun doInBackground(vararg params: Pair<RecyclerView, () -> ArrayList<SearchModel>>?): Void? {
+private class AsyncDataSetter: AsyncTask<Triple<RecyclerView, View, () -> ArrayList<SearchModel>>, Void, Void>() {
+    override fun doInBackground(vararg params: Triple<RecyclerView, View, () -> ArrayList<SearchModel>>?): Void? {
         runBlocking {
-            params.forEach { pair ->
+            params.forEach { triple ->
                 launch {
-                    if (pair != null) {
-                        val recyclerView = pair.first
-                        val data = withContext(Dispatchers.Unconfined) { fetchData(pair.second) }
-                        recyclerView.setData(data)
+                    if (triple != null) {
+                        val recyclerView = triple.first
+                        val loadingView = triple.second
+                        val data = withContext(Dispatchers.Unconfined) { fetchData(triple.third) }
+                        withContext(Dispatchers.Main) {
+                            recyclerView.setData(data)
+                            loadingView.visibility = View.GONE
+                        }
                     }
                 }
             }
