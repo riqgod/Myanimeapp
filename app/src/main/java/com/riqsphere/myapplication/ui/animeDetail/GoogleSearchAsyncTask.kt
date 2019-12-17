@@ -24,7 +24,7 @@ class GoogleSearchAsyncTask(private val imageBg: ImageView, private val context:
         animeSearch =  animeSearch.replace(" ", "+")
 
         val urlString =
-            "https://www.googleapis.com/customsearch/v1?q=$animeSearch&cx=$dale$ahn&imgSize=huge&num=1&searchType=image&key=$no+$thisinhome+$repeatt"
+            "https://www.googleapis.com/customsearch/v1?q=$animeSearch&cx=$dale$ahn&imgSize=huge&num=1&searchType=image&key=$no$thisinhome$repeatt"
 
         var url:URL? = null
         try {
