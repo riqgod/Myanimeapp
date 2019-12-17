@@ -26,7 +26,7 @@ class MyaaRepository(private val watchlistAnimeDao: WatchlistAnimeDao, private v
         val recommend = withContext(Dispatchers.Unconfined) {
             JikanCacheHandler.getRecommendationPage(anime)
         }
-        if (recommend.recommends[0]?.title == JikanCacheHandler.INTERNET_UNAVAILABLE) {
+        if (recommend.recommends.size > 0 && recommend.recommends[0]?.title == JikanCacheHandler.INTERNET_UNAVAILABLE) {
             return false
         }
 
@@ -61,12 +61,9 @@ class MyaaRepository(private val watchlistAnimeDao: WatchlistAnimeDao, private v
         val page = withContext(Dispatchers.Unconfined) {
             JikanCacheHandler.getRecommendationPage(anime)
         }
-        if (page.request_hash == "") {
-            return false
-        }
 
         watchlistAnimeDao.delete(id)
-        page.recommends.forEach {
+        page.recommends?.forEach {
             recommendationDao.addCount(it.mal_id, -it.recommendation_count)
             if (recommendationDao.getCountFor(it.mal_id) <= 0) {
                 recommendationDao.delete(it.mal_id)
