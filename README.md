@@ -34,7 +34,7 @@ Acreditamos que nosso app se diferencia destes concorrentes por possuir uma UX m
 [Link para etapa de ideação e cores da logo](https://www.figma.com/file/KrbC9fFt5JWE12qM9lQkbA/Myaa-(Logo)-%2B-paleta?node-id=0%3A1)
 
 ### Desenvolvimento
-Henrique Mariz (@riqgod): foco em design e interface/experiência do usuário
+Henrique Mariz (@riqmariz): foco em design e interface/experiência do usuário
 
 Lucas Lin (@cubsphere): foco em interface com a API e gerenciamento dos dados
 
