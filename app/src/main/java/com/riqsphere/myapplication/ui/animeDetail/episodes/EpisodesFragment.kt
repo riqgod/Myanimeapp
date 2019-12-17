@@ -1,7 +1,7 @@
 package com.riqsphere.myapplication.ui.animeDetail.episodes
 
 import android.os.Bundle
-import android.util.Log
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +15,8 @@ import com.github.doomsdayrs.jikan4java.types.main.anime.videos.Video
 import com.riqsphere.myapplication.R
 import com.riqsphere.myapplication.model.animeDetail.episodes.EpisodesModel
 import com.riqsphere.myapplication.room.MyaaViewModel
+import com.riqsphere.myapplication.utils.MarginItemDecoration
+
 
 class EpisodesFragment(private val animeId: Int) : Fragment(){
 
@@ -35,6 +37,12 @@ class EpisodesFragment(private val animeId: Int) : Fragment(){
             return view
         }
 
+        val displayMetrics = DisplayMetrics()
+        activity!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+        val width:Float = displayMetrics.widthPixels/displayMetrics.density
+        val marginItem =  ((280/width) * width)
+
         myaaViewModel = MyaaViewModel(activity!!.application)
 
         val checkAll = view.findViewById<ImageButton>(R.id.episodes_all_check_as_watched)
@@ -47,6 +55,7 @@ class EpisodesFragment(private val animeId: Int) : Fragment(){
         wnRecyclerView = view.findViewById<RecyclerView>(R.id.episodes_watch_next_rv).apply {
             layoutManager = wnViewManager
             adapter = wnViewAdapter
+            addItemDecoration(MarginItemDecoration(marginItem.toInt()))
         }
 
 

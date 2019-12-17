@@ -21,7 +21,7 @@
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/watch_next_episode_image"
                 android:layout_width="110dp"
-                android:layout_height="85dp"
+                android:layout_height="90dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/episode_image"
                 app:layout_constraintBottom_toBottomOf="parent"
