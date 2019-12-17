@@ -21,6 +21,10 @@
         <item name="android:popupTheme">@style/PopupMenu</item>
     </style>
 
+    <style name="MyProgress" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">#797F99</item>
+    </style>
+
     <style name="OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
         <item name="android:popupBackground">#FF375F</item>
         <item name="android:itemBackground">#FF375F</item>

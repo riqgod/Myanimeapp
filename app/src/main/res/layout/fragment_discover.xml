@@ -93,8 +93,13 @@
                         app:layout_constraintTop_toBottomOf="@+id/dc_rv_top4u_text" >
 
                         <ProgressBar
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            app:theme="@style/MyProgress"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -153,8 +158,13 @@
                         app:layout_constraintTop_toBottomOf="@+id/dc_rv_seasonal_text" >
 
                         <ProgressBar
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            app:theme="@style/MyProgress"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -213,8 +223,13 @@
                         app:layout_constraintTop_toBottomOf="@+id/dc_rv_top_upcoming_text" >
 
                         <ProgressBar
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            app:theme="@style/MyProgress"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -273,8 +288,13 @@
                         app:layout_constraintTop_toBottomOf="@+id/dc_rv_mp_text" >
 
                         <ProgressBar
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            app:theme="@style/MyProgress"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -346,8 +366,13 @@
                         app:layout_constraintTop_toBottomOf="@+id/dc_rv_score_text" >
 
                         <ProgressBar
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            app:theme="@style/MyProgress"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
